@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("eoTouchDelivery.UWP")]
+[assembly: AssemblyTitle("eoTouch Delivery")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("eoTouchDelivery.UWP")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("Rutherford & Associates")]
+[assembly: AssemblyProduct("eoTouch Delivery")]
+[assembly: AssemblyCopyright("2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
