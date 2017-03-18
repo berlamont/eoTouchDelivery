@@ -1,5 +1,4 @@
 ﻿using eoTouchDelivery.Views;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,13 +23,13 @@ namespace eoTouchDelivery
                     new NavigationPage(new ItemsPage())
                     {
                         Title = "Browse",
-                        Icon = Device.OnPlatform<string>("tab_feed.png",null,null)
+                        Icon = Device.OnPlatform("tab_feed.png",null,null)
                     },
                     new NavigationPage(new AboutPage())
                     {
                         Title = "About",
-                        Icon = Device.OnPlatform<string>("tab_about.png",null,null)
-                    },
+                        Icon = Device.OnPlatform("tab_about.png",null,null)
+                    }
                 }
             };
         }

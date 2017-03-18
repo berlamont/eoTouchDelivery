@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Reflection;
 using System.Globalization;
+using eoTouchDelivery.Infrastructure.Behaviors;
 
 namespace eoTouchDelivery.Infrastructure
 {

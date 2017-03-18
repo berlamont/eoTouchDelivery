@@ -1,8 +1,8 @@
 ﻿using System;
-using Xamarin.Forms;
 using System.Diagnostics;
+using Xamarin.Forms;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.Behaviors
 {
     /// <summary>
     /// Provides a Behavior(Of T) which forwards the associated object's binding

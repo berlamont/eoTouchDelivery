@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using eoTouchDelivery.Infrastructure.Behaviors;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Infrastructure
