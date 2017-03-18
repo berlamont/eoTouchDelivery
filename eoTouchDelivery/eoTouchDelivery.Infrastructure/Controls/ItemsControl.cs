@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using Xamarin.Forms;
 using System.Collections.Specialized;
+using Xamarin.Forms;
 
-namespace eoTouchDelivery.Controls
+namespace eoTouchDelivery.Infrastructure.Controls
 {
     /// <summary>
     /// Simple ItemsControl to render a list of things in a stacked view using
@@ -121,7 +121,7 @@ namespace eoTouchDelivery.Controls
         {
             // Unsubscribe from the old collection
             if (oldValue != null) {
-                INotifyCollectionChanged ncc = oldValue as INotifyCollectionChanged;
+                var ncc = oldValue as INotifyCollectionChanged;
                 if (ncc != null)
                     ncc.CollectionChanged -= OnCollectionChanged;
             }
@@ -133,7 +133,7 @@ namespace eoTouchDelivery.Controls
             else {
                 Content = stack;
                 FillContainer (newValue);
-                INotifyCollectionChanged ncc = newValue as INotifyCollectionChanged;
+                var ncc = newValue as INotifyCollectionChanged;
                 if (ncc != null)
                     ncc.CollectionChanged += OnCollectionChanged;
             }
@@ -161,9 +161,9 @@ namespace eoTouchDelivery.Controls
             if (ItemTemplate != null)
                 return;
 
-            foreach (View view in stack.Children)
+            foreach (var view in stack.Children)
             {
-                Label label = view as Label;
+                var label = view as Label;
                 if (label != null) {
 
                     if (style == null)
@@ -186,7 +186,7 @@ namespace eoTouchDelivery.Controls
             var template = ItemTemplate;
             var visuals = stack.Children;
 
-            for (int i = 0; i < newValue.Count; i++) {
+            for (var i = 0; i < newValue.Count; i++) {
                 var dataItem = newValue [i];
 
                 if (visuals.Count > i)
@@ -198,7 +198,7 @@ namespace eoTouchDelivery.Controls
                     }    
                     else
                     {
-                        Label visualItem = (Label) visuals [i];
+                        var visualItem = (Label) visuals [i];
                         visualItem.Text = dataItem.ToString ();
                         if (itemStyle != null) {
                             visualItem.Style = itemStyle;

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Converters
+namespace eoTouchDelivery.Infrastructure.Converters
 {
     /// <summary>
     /// This is a converter which can be used with the EventToCommandBehavior to 

@@ -1,4 +1,4 @@
-﻿namespace eoTouchDelivery.Commands
+﻿namespace eoTouchDelivery.Infrastructure.Commands
 {
     /// <summary>
     /// Commands which perform common navigation 

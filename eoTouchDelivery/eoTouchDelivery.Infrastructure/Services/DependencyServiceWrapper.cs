@@ -1,14 +1,13 @@
 #define DEBUG
 
-using eoTouchDelivery.Interfaces;
-using Xamarin.Forms;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using eoTouchDelivery.Interfaces;
 
-namespace eoTouchDelivery.Services
+namespace eoTouchDelivery.Infrastructure.Services
 {
     /// <summary>
     /// Wrapper around static Xamarin.Forms DependencyService to allow it to
@@ -35,19 +34,19 @@ namespace eoTouchDelivery.Services
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public T Get<T>() where T : class
         {
-            Type targetType = typeof(T);
+            var targetType = typeof(T);
             if (DependencyInstances.ContainsKey(targetType))
                 return DependencyInstances[targetType] as T;
 
             // Try the underlying DependencyService.
-            T value = Xamarin.Forms.DependencyService.Get<T>();
+            var value = Xamarin.Forms.DependencyService.Get<T>();
             if (value != null)
                 return value;
 
             try
             {
                 // Try to create it ourselves.
-                TypeInfo typeInfo = targetType.GetTypeInfo();
+                var typeInfo = targetType.GetTypeInfo();
                 if (typeInfo.IsInterface || typeInfo.IsAbstract)
                     return null;
 

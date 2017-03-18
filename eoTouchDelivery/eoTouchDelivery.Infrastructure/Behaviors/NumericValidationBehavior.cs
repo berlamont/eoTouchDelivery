@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.Behaviors
 {
     /// <summary>
     /// A custom behavior for the Xamarin.Forms Entry control to 
@@ -80,7 +80,7 @@ namespace eoTouchDelivery.Infrastructure
         /// <param name="args">TextChanged event arguments</param>
         void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
-            bool isValid = false;
+            var isValid = false;
             if (AllowDecimal)
             {
                 double result;

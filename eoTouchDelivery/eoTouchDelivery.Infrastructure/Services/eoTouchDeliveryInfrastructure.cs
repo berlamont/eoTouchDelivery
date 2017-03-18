@@ -1,8 +1,8 @@
-﻿using eoTouchDelivery.Interfaces;
-using System;
+﻿using System;
 using System.Diagnostics;
+using eoTouchDelivery.Interfaces;
 
-namespace eoTouchDelivery.Services
+namespace eoTouchDelivery.Infrastructure.Services
 {
     /// <summary>
     /// Identifies which services you want to register during the Init call.

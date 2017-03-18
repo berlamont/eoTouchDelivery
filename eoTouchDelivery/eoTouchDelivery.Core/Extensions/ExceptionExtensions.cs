@@ -17,15 +17,15 @@ namespace eoTouchDelivery.Infrastructure
         /// <returns>String with Message and all InnerException messages appended together</returns>
         public static string Flatten(this Exception ex, string header = "", bool includeStackTrace = false)
         {
-            StringBuilder sb = new StringBuilder(header);
+            var sb = new StringBuilder(header);
 
             Exception current;
-            AggregateException aex = ex as AggregateException;
+            var aex = ex as AggregateException;
             if (aex != null)
             {
                 sb.AppendLine ("Aggregate Exception.");
                 aex = aex.Flatten ();               
-                for (int i = 0; i < aex.InnerExceptions.Count; i++) {
+                for (var i = 0; i < aex.InnerExceptions.Count; i++) {
                     current = aex.InnerExceptions [i];
                     sb.AppendLine (current.Flatten ($"{i}: ", includeStackTrace));
                 }

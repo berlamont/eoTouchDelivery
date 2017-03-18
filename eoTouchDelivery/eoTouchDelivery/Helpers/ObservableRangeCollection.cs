@@ -55,7 +55,7 @@ namespace eoTouchDelivery.Helpers
 				return;
 			}
 
-			int startIndex = Count;
+			var startIndex = Count;
 			var changedItems = collection is List<T> ? (List<T>)collection : new List<T>(collection);
 			foreach (var i in changedItems)
 			{

@@ -86,7 +86,7 @@ namespace eoTouchDelivery.Services
 				new Item { Id = Guid.NewGuid().ToString(), Text = "Finish a todo list", Description="Done"},
 			};
 
-			foreach (Item item in _items)
+			foreach (var item in _items)
 			{
 				items.Add(item);
 			}

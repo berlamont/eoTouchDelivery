@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using eoTouchDelivery.Infrastructure.Behaviors;
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.Behaviors
 {
     /// <summary>
     /// This Xamarin.Forms behavior enables data binding with the Picker control for MVVM.
@@ -117,7 +116,7 @@ namespace eoTouchDelivery.Infrastructure
         /// <param name="newValue">New value.</param>
         private void OnItemsChanged(IEnumerable oldValue, IEnumerable newValue)
         {
-            INotifyCollectionChanged ncc = oldValue as INotifyCollectionChanged;
+            var ncc = oldValue as INotifyCollectionChanged;
             if (ncc != null)
             {
                 ncc.CollectionChanged -= OnCollectionChanged;
@@ -163,7 +162,7 @@ namespace eoTouchDelivery.Infrastructure
             {
                 foreach (var item in e.OldItems)
                 {
-                    string value = (item ?? "").ToString();
+                    var value = (item ?? "").ToString();
                     AssociatedObject.Items.Remove(value);
                 }
             }
@@ -208,15 +207,15 @@ namespace eoTouchDelivery.Infrastructure
                 if (items == null)
                     return;
 
-                int index = -1;
-                IList itemList = items as IList;
+                var index = -1;
+                var itemList = items as IList;
                 if (itemList != null)
                 {
                     index = itemList.IndexOf(newValue);
                 }
                 else
                 {
-                    foreach (object testValue in items)
+                    foreach (var testValue in items)
                     {
                         index++;
                         if (Equals(testValue, newValue))
@@ -246,7 +245,7 @@ namespace eoTouchDelivery.Infrastructure
             if (items == null)
                 return;
 
-            int selectedIndex = AssociatedObject.SelectedIndex;
+            var selectedIndex = AssociatedObject.SelectedIndex;
             if (selectedIndex == -1)
             {
                 SelectedItem = null;
@@ -255,15 +254,15 @@ namespace eoTouchDelivery.Infrastructure
 
             object value = null;
 
-            IList itemList = items as IList;
+            var itemList = items as IList;
             if (itemList != null)
             {
                 value = itemList[selectedIndex];
             }
             else
             {
-                int index = 0;
-                foreach (object testValue in items)
+                var index = 0;
+                foreach (var testValue in items)
                 {
                     if (index == selectedIndex)
                     {

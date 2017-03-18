@@ -46,12 +46,12 @@ namespace eoTouchDelivery.Infrastructure
         /// <param name="reverse">True to reverse the collection</param>
         public static void BubbleSort<T> (this IList<T> collection, Func<T, T, int> comparer, bool reverse = false)
         {
-            for (int index = collection.Count - 1; index >= 0; index--) {
-                for (int child = 1; child <= index; child++) {
-                    T d1 = collection [child - 1];
-                    T d2 = collection [child];
+            for (var index = collection.Count - 1; index >= 0; index--) {
+                for (var child = 1; child <= index; child++) {
+                    var d1 = collection [child - 1];
+                    var d2 = collection [child];
 
-                    int result = (!reverse) ? comparer (d1, d2) : comparer (d2, d1);
+                    var result = (!reverse) ? comparer (d1, d2) : comparer (d2, d1);
                     if (result > 0) {
                         collection.Remove (d1);
                         collection.Insert (child, d1);
@@ -70,12 +70,12 @@ namespace eoTouchDelivery.Infrastructure
         /// <param name="reverse">True to reverse the collection</param>
         public static void BubbleSort (this IList collection, IComparer comparer, bool reverse = false)
         {
-            for (int index = collection.Count - 1; index >= 0; index--) {
-                for (int child = 1; child <= index; child++) {
-                    object d1 = collection [child - 1];
-                    object d2 = collection [child];
+            for (var index = collection.Count - 1; index >= 0; index--) {
+                for (var child = 1; child <= index; child++) {
+                    var d1 = collection [child - 1];
+                    var d2 = collection [child];
 
-                    int result = (!reverse)
+                    var result = (!reverse)
                         ? comparer.Compare (d1, d2)
                         : comparer.Compare (d2, d1);
 
@@ -163,7 +163,7 @@ namespace eoTouchDelivery.Infrastructure
         ///<returns>Index (zero based) of first element that passed test, -1 if none did</returns>
         public static int IndexOf<T> (this IEnumerable<T> collection, Predicate<T> test)
         {
-            int pos = 0;
+            var pos = 0;
             foreach (var item in collection) {
                 if (test (item))
                     return pos;
@@ -191,7 +191,7 @@ namespace eoTouchDelivery.Infrastructure
             if (sourceIndex == destIndex)
                 return;
 
-            T temp = collection [sourceIndex];
+            var temp = collection [sourceIndex];
             collection [sourceIndex] = collection [destIndex];
             collection [destIndex] = temp;
         }
@@ -230,10 +230,10 @@ namespace eoTouchDelivery.Infrastructure
                 range = range.Reverse ();
 
             foreach (var i in range) {
-                int start = startingIndex + i;
-                int dest = destIndex + i;
+                var start = startingIndex + i;
+                var dest = destIndex + i;
 
-                T item = collection [start];
+                var item = collection [start];
                 collection.RemoveAt (start);
                 collection.Insert (dest, item);
             }

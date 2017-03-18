@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Reflection;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.MarkupExtensions
 {
     /// <summary>
     /// XAML markup extension to load an image from embedded resources.

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using eoTouchDelivery.Interfaces;
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Services
+namespace eoTouchDelivery.Infrastructure.Services
 {
     /// <summary>
     /// Wrapper around Page.DisplayAlert to turn it into a Message Visualizer 

@@ -1,7 +1,7 @@
-﻿using Xamarin.Forms;
-using System;
+﻿using System;
+using Xamarin.Forms;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.Extensions
 {
     /// <summary>
     /// Extension methods for the Xamarin.Forms <c>Element</c> class.

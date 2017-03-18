@@ -3,7 +3,7 @@ using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Converters
+namespace eoTouchDelivery.Infrastructure.Converters
 {
     /// <summary>
     /// This converts an object value to a boolean
@@ -40,7 +40,7 @@ namespace eoTouchDelivery.Converters
             if (targetType != typeof(bool))
                 throw new ArgumentException("Bad type conversion for NullOrEmptyBooleanConverter");
 
-            string testValue = (value ?? "").ToString ();
+            var testValue = (value ?? "").ToString ();
             return (string.IsNullOrEmpty(testValue)) ? Empty : NotEmpty;
         }
 

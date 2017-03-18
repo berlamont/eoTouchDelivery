@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Converters
+namespace eoTouchDelivery.Infrastructure.Converters
 {
     /// <summary>
     /// This provides a debugging output for a binding converter

@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Converters
+namespace eoTouchDelivery.Infrastructure.Converters
 {
     /// <summary>
     /// Converts an integer value into a boolean true/false
@@ -49,7 +49,7 @@ namespace eoTouchDelivery.Converters
             if (value == null)
                 return ZeroOrNull;
 
-            int result = System.Convert.ToInt32 (value, culture);
+            var result = System.Convert.ToInt32 (value, culture);
             return result < 0 ? Negative 
                 : result == 0 
                     ? ZeroOrNull 

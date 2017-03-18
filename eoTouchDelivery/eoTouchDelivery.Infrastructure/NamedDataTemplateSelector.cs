@@ -1,4 +1,5 @@
 ﻿using System;
+using eoTouchDelivery.Infrastructure.Extensions;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Infrastructure
@@ -33,10 +34,10 @@ namespace eoTouchDelivery.Infrastructure
             if (item == null)
                 throw new Exception ("Cannot create template for null object.");
 
-            Type itemType = item.GetType ();
-            string typeName = (StripNamespace) ? itemType.Name : itemType.FullName;
+            var itemType = item.GetType ();
+            var typeName = (StripNamespace) ? itemType.Name : itemType.FullName;
 
-            VisualElement ve = container as VisualElement;
+            var ve = container as VisualElement;
             return ve.FindResource<DataTemplate> (typeName);
         }
    }

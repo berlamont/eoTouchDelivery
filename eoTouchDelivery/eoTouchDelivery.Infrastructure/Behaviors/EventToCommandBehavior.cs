@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
+using System.Reflection;
 using System.Windows.Input;
 using Xamarin.Forms;
-using System.Reflection;
-using System.Globalization;
-using eoTouchDelivery.Infrastructure.Behaviors;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.Behaviors
 {
     /// <summary>
     /// This behavior allows a ViewModel to turn any event exposed by a control into
@@ -134,7 +133,7 @@ namespace eoTouchDelivery.Infrastructure
             }
 
             // Wire up the event with reflection.
-            MethodInfo methodInfo = typeof (EventToCommandBehavior).GetTypeInfo ().GetDeclaredMethod ("OnEventRaised");
+            var methodInfo = typeof (EventToCommandBehavior).GetTypeInfo ().GetDeclaredMethod ("OnEventRaised");
             Debug.Assert (methodInfo != null);
             eventHandler = methodInfo.CreateDelegate (locatedEventInfo.EventHandlerType, this);
             locatedEventInfo.AddEventHandler (target, eventHandler);

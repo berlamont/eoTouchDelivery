@@ -164,8 +164,8 @@ namespace eoTouchDelivery.Infrastructure
         /// </exception>
         public bool Remove(TKey key)
         {
-            TValue local = underlyingDictionary[key];
-            bool flag = underlyingDictionary.Remove(key);
+            var local = underlyingDictionary[key];
+            var flag = underlyingDictionary.Remove(key);
             OnNotifyRemove(new KeyValuePair<TKey, TValue>(key, local));
             
             return flag;
@@ -182,7 +182,7 @@ namespace eoTouchDelivery.Infrastructure
         /// </exception>
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
         {
-            bool flag = underlyingDictionary.Remove(item);
+            var flag = underlyingDictionary.Remove(item);
             if (flag)
                 OnNotifyRemove(item);
             return flag;

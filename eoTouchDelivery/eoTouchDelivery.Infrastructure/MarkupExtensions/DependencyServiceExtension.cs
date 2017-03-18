@@ -3,7 +3,7 @@ using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.MarkupExtensions
 {
     /// <summary>
     /// This markup extension allows XAML to lookup dependencies 

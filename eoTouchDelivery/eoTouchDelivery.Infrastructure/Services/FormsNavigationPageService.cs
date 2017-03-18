@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using eoTouchDelivery.Interfaces;
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Services
+namespace eoTouchDelivery.Infrastructure.Services
 {
     /// <summary>
     /// Service to manage the Xamarin.Forms Stack navigation system.
@@ -168,7 +168,7 @@ namespace eoTouchDelivery.Services
             if (navPage == null)
             {
                 // Special case for Master/Detail page.
-                MasterDetailPage mdPage = Application.Current.MainPage as MasterDetailPage;
+                var mdPage = Application.Current.MainPage as MasterDetailPage;
                 if (mdPage != null)
                     // Should always have a NavigationPage as the Detail
                     navPage = mdPage.Detail as NavigationPage;

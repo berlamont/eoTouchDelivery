@@ -3,7 +3,7 @@ using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Converters
+namespace eoTouchDelivery.Infrastructure.Converters
 {
     /// <summary>
     /// This converter reverses a Boolean value (True == False, False == True).
@@ -22,7 +22,7 @@ namespace eoTouchDelivery.Converters
             if (targetType != typeof (bool))
                 throw new ArgumentException ("Bad type conversion for NotBooleanConverter");
 
-            bool flag = false;
+            var flag = false;
             if (value != null && value is bool)
             {
                 flag = (bool)value;

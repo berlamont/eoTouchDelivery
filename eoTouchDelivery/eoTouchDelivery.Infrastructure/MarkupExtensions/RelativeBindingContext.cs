@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Diagnostics;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.MarkupExtensions
 {
     /// <summary>
     /// This markup extension will locate the given element by name, grab the 

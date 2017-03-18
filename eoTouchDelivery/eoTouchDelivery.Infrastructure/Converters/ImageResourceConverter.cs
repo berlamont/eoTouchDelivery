@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Converters
+namespace eoTouchDelivery.Infrastructure.Converters
 {
     /// <summary>
     /// A custom IValueConverter which can be used with a {Binding} to convert
@@ -38,17 +38,12 @@ namespace eoTouchDelivery.Converters
             if (targetType != typeof (ImageSource))
                 throw new ArgumentException ("ImageResourceConverter should only be used with Image.Source");
 
-            string resourceId = (value ?? "").ToString ();
+            var resourceId = (value ?? "").ToString ();
             if (string.IsNullOrEmpty (resourceId))
                 return null;
 
-            string prefix;
-            prefix = parameter != null 
-                ? parameter.ToString () 
-                : Prefix != null 
-                           ? Prefix : "";
-            if (!string.IsNullOrEmpty (prefix) 
-                    && !prefix.EndsWith (".", StringComparison.Ordinal))
+            var prefix = parameter != null ? parameter.ToString () : Prefix ?? "";
+            if (!string.IsNullOrEmpty (prefix) && !prefix.EndsWith (".", StringComparison.Ordinal))
                 prefix += ".";
 
             return ResolvingType != null 
@@ -75,10 +70,7 @@ namespace eoTouchDelivery.Converters
         /// </summary>
         /// <returns>The Value Converter</returns>
         /// <param name="serviceProvider">Service provider.</param>
-        public object ProvideValue (IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-    }
+        public object ProvideValue (IServiceProvider serviceProvider) => this;
+	}
 }
 

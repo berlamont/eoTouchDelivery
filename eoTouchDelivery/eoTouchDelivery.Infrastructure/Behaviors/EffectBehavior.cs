@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Infrastructure.Behaviors
 {
 	/// <summary>
 	/// This behavior adds an Effect instance to a control when the behavior is attached to the control,

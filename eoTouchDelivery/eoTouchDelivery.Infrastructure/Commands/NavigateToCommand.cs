@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
+using eoTouchDelivery.Infrastructure.Services;
 using eoTouchDelivery.Interfaces;
-using eoTouchDelivery.Services;
 
-namespace eoTouchDelivery.Commands
+namespace eoTouchDelivery.Infrastructure.Commands
 {
     /// <summary>
     /// This class implements an ICommand which will use the registered INavigationService

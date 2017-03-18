@@ -54,7 +54,7 @@ namespace eoTouchDelivery
         /// <param name="e">PropertyChangedEventArgs</param>
         void OnSourcePropertyChanged (object sender, PropertyChangedEventArgs e)
         {
-            string propertyName = e.PropertyName;
+            var propertyName = e.PropertyName;
             var propertySource = (T)sender;
 
             Debug.Assert (propertySource == source);
@@ -62,7 +62,7 @@ namespace eoTouchDelivery
             // If there's no property, then notify ALL handlers.
             if (string.IsNullOrEmpty (propertyName)) {
                 // Get a safe copy of the list
-                List<Action<T>> entries = pcToHandlerMap.Values.ToList ();
+                var entries = pcToHandlerMap.Values.ToList ();
                 foreach (var entry in entries)
                     entry.Invoke (propertySource);
             }
@@ -90,7 +90,7 @@ namespace eoTouchDelivery
             if (expression == null)
                 throw new ArgumentNullException ("expression");
 
-            string propertyName = GetPropertyName (expression);
+            var propertyName = GetPropertyName (expression);
             if (String.IsNullOrEmpty (propertyName))
                 throw new ArgumentException ("'expression' did not provide a property name.");
 
@@ -113,7 +113,7 @@ namespace eoTouchDelivery
             if (expression == null)
                 throw new ArgumentNullException ("expression");
 
-            string propertyName = GetPropertyName (expression);
+            var propertyName = GetPropertyName (expression);
             if (String.IsNullOrEmpty (propertyName))
                 throw new ArgumentException ("'expression' did not provide a property name.");
 
