@@ -28,7 +28,7 @@ namespace eoTouchDelivery.Services
 		{
 			await InitializeAsync();
 
-			var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+			var _item = items.FirstOrDefault(arg => arg.Id == item.Id);
 			items.Remove(_item);
 			items.Add(item);
 
@@ -39,7 +39,7 @@ namespace eoTouchDelivery.Services
 		{
 			await InitializeAsync();
 
-			var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+			var _item = items.FirstOrDefault(arg => arg.Id == item.Id);
 			items.Remove(_item);
 
 			return await Task.FromResult(true);

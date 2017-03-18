@@ -1,4 +1,9 @@
-﻿using eoTouchDelivery.Helpers;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using eoTouchDelivery.Helpers;
 using eoTouchDelivery.Models;
 using eoTouchDelivery.Services;
 
@@ -13,7 +18,7 @@ namespace eoTouchDelivery.ViewModels
 		/// </summary>
 		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
-		bool isBusy = false;
+		bool isBusy;
 		public bool IsBusy
 		{
 			get { return isBusy; }
@@ -30,6 +35,50 @@ namespace eoTouchDelivery.ViewModels
 		{
 			get { return title; }
 			set { SetProperty(ref title, value); }
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+		protected void RaiseAllPropertiesChanged()
+		{
+			//empty string makes all properties invalid
+			PropertyChanged(this, new PropertyChangedEventArgs(string.Empty));
+		}
+
+		protected void RaisePropertyChanged<T>(Expression<Func<T>> propExpr)
+		{
+			var prop = (PropertyInfo)((MemberExpression)propExpr.Body).Member;
+			if (prop?.Name != null)
+				RaisePropertyChanged(prop.Name);
+		}
+
+		protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
+		{
+			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		protected bool SetPropertyValue<T>(ref T storageField, T newValue, Expression<Func<T>> propExpr)
+		{
+			if (Equals(storageField, newValue))
+				return false;
+
+			storageField = newValue;
+			var prop = (PropertyInfo)((MemberExpression)propExpr.Body).Member;
+			if (prop?.Name != null)
+				RaisePropertyChanged(prop.Name);
+
+			return true;
+		}
+
+		protected bool SetPropertyValue<T>(ref T storageField, T newValue, [CallerMemberName] string propertyName = "")
+		{
+			if (Equals(storageField, newValue))
+				return false;
+
+			storageField = newValue;
+			RaisePropertyChanged(propertyName);
+
+			return true;
 		}
 	}
 }
