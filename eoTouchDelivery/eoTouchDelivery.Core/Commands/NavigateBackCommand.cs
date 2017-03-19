@@ -6,16 +6,14 @@ using eoTouchDelivery.Core.Services;
 namespace eoTouchDelivery.Core.Commands
 {
     /// <summary>
-    /// This command uses the registered INavigationService to perform
-    /// a backwards navigation.
+    ///  Navigate backwards on registered INavigationService to perform
     /// </summary>
     public class NavigateBackCommand : ICommand
     {
-        bool monitorNavigationStack;
+        bool _monitorNavigationStack;
 
         /// <summary>
-        /// Protected ctor - only allow library to create command
-        /// unless you derive from it. Should alway use NavigationCommands.
+        /// Only allow library to create command unless you derive from it. Should use NavigationCommands otherwise.
         /// </summary>
         protected internal NavigateBackCommand ()
         {
@@ -27,26 +25,20 @@ namespace eoTouchDelivery.Core.Commands
         /// </summary>
         public bool MonitorNavigationStack
         {
-            get
-            {
-                return monitorNavigationStack;
-            }
-
+            get { return _monitorNavigationStack; }
             set
             {
-                monitorNavigationStack = value;
+                _monitorNavigationStack = value;
 
                 var ns = DependencyService.ServiceLocator.Get<INavigationService> ();
-                if (ns != null) {
-                    // Always unsubscribe to ensure we are never > 1.
-                    ns.Navigated -= OnUpdateCanExecuteChanged;
-                    ns.NavigatedBack -= OnUpdateCanExecuteChanged;
+                if (ns == null) return;
+                // Always unsubscribe to ensure we are never > 1.
+                ns.Navigated -= OnUpdateCanExecuteChanged;
+                ns.NavigatedBack -= OnUpdateCanExecuteChanged;
 
-                    if (monitorNavigationStack) {
-                        ns.Navigated += OnUpdateCanExecuteChanged;
-                        ns.NavigatedBack += OnUpdateCanExecuteChanged;
-                    }
-                }
+                if (!_monitorNavigationStack) return;
+                ns.Navigated += OnUpdateCanExecuteChanged;
+                ns.NavigatedBack += OnUpdateCanExecuteChanged;
             }
         }
 
@@ -61,10 +53,7 @@ namespace eoTouchDelivery.Core.Commands
         /// </summary>
         /// <param name="sender">this</param>
         /// <param name="e">Empty EventArgs</param>
-        void OnUpdateCanExecuteChanged (object sender, EventArgs e)
-        {
-            CanExecuteChanged?.Invoke (this, EventArgs.Empty);
-        }
+        void OnUpdateCanExecuteChanged (object sender, EventArgs e) => CanExecuteChanged?.Invoke (this, EventArgs.Empty);
 
         /// <summary>
         /// This is called to determine whether the command can be executed.
@@ -85,9 +74,8 @@ namespace eoTouchDelivery.Core.Commands
         public async void Execute (object parameter)
         {
             var ns = DependencyService.ServiceLocator.Get<INavigationService> ();
-            if (ns != null) {
+            if (ns != null) 
                 await ns.GoBackAsync ();
-            }
         }
     }
 }

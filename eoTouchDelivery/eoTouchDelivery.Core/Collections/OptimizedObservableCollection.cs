@@ -25,7 +25,7 @@ namespace eoTouchDelivery.Core.Collections
     [DebuggerDisplay ("Count={Count}")]
     public class OptimizedObservableCollection<T> : ObservableCollection<T>
     {
-        bool shouldRaiseNotifications;
+        bool _shouldRaiseNotifications;
 
         /// <summary> 
         /// Init a new instance of the collection.
@@ -48,10 +48,7 @@ namespace eoTouchDelivery.Core.Collections
         /// is Disposed. At that point, the entire collection is invalidated.
         /// </summary>
         /// <returns>IDisposable</returns>
-        public IDisposable BeginMassUpdate ()
-        {
-            return new MassUpdater (this);
-        }
+        public IDisposable BeginMassUpdate () => new MassUpdater (this);
 
         /// <summary>
         /// Turn off the collection changed notification
@@ -59,7 +56,7 @@ namespace eoTouchDelivery.Core.Collections
         /// <param name="e">E.</param>
         protected override void OnCollectionChanged (NotifyCollectionChangedEventArgs e)
         {
-            if (shouldRaiseNotifications)
+            if (_shouldRaiseNotifications)
                 base.OnCollectionChanged (e);
         }
 
@@ -69,7 +66,7 @@ namespace eoTouchDelivery.Core.Collections
         /// <param name="e">E.</param>
         protected override void OnPropertyChanged (PropertyChangedEventArgs e)
         {
-            if (shouldRaiseNotifications)
+            if (_shouldRaiseNotifications)
                 base.OnPropertyChanged (e);
         }
 
@@ -78,11 +75,11 @@ namespace eoTouchDelivery.Core.Collections
         /// </summary>
         class MassUpdater : IDisposable
         {
-            readonly OptimizedObservableCollection<T> parent;
+            readonly OptimizedObservableCollection<T> _parent;
             public MassUpdater (OptimizedObservableCollection<T> parent)
             {
-                this.parent = parent;
-                parent.shouldRaiseNotifications = false;
+                _parent = parent;
+                parent._shouldRaiseNotifications = false;
             }
 
             #if DEBUG
@@ -95,10 +92,10 @@ namespace eoTouchDelivery.Core.Collections
 
             public void Dispose ()
             {
-                parent.shouldRaiseNotifications = true;
-                parent.OnPropertyChanged (new PropertyChangedEventArgs ("Count"));
-                parent.OnPropertyChanged (new PropertyChangedEventArgs ("Item[]"));
-                parent.OnCollectionChanged (new NotifyCollectionChangedEventArgs (NotifyCollectionChangedAction.Reset));
+                _parent._shouldRaiseNotifications = true;
+                _parent.OnPropertyChanged (new PropertyChangedEventArgs ("Count"));
+                _parent.OnPropertyChanged (new PropertyChangedEventArgs ("Item[]"));
+                _parent.OnCollectionChanged (new NotifyCollectionChangedEventArgs (NotifyCollectionChangedAction.Reset));
             }
         }
     }

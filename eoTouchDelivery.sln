@@ -13,11 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eoTouchDelivery.UWP", "eoTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eoTouchDelivery.Core", "eoTouchDelivery\eoTouchDelivery.Core\eoTouchDelivery.Core.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTypes.XF", "..\CommonTypes.XF\CommonTypes.XF.csproj", "{F352A576-CFF3-49CA-84B3-8BF867E1356C}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{905187a8-ecc5-488c-8d25-bdf4e0894152}*SharedItemsImports = 13
 		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{c7597305-c5ef-4c6a-bfe5-3c3e1c2636e4}*SharedItemsImports = 4
-		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{e71070d6-66cd-4259-bc32-88c16f024dfc}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +138,30 @@ Global
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x64.Build.0 = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x86.ActiveCfg = Release|Any CPU
 		{67F9D3A8-F71E-4428-913F-C37AE82CDB24}.Release|x86.Build.0 = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|x64.Build.0 = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Debug|x86.Build.0 = Debug|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|ARM.Build.0 = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|iPhone.Build.0 = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|x64.ActiveCfg = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|x64.Build.0 = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|x86.ActiveCfg = Release|Any CPU
+		{F352A576-CFF3-49CA-84B3-8BF867E1356C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

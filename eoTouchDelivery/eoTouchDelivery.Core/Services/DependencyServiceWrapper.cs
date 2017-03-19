@@ -15,7 +15,7 @@ namespace eoTouchDelivery.Core.Services
     /// </summary>
     public class DependencyServiceWrapper : IDependencyService
     {
-        readonly MethodInfo genericGetMethod;
+        readonly MethodInfo _genericGetMethod;
         static readonly Dictionary<Type, object> DependencyInstances = new Dictionary<Type, object>();
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace eoTouchDelivery.Core.Services
         /// </summary>
         public DependencyServiceWrapper()
         {
-            genericGetMethod = GetType().GetTypeInfo().GetDeclaredMethod("Get");
+            _genericGetMethod = GetType().GetTypeInfo().GetDeclaredMethod("Get");
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace eoTouchDelivery.Core.Services
 
                 // Pick the first public constructor found and create any parameters.
                 return Activator.CreateInstance(targetType, ctors.First().GetParameters()
-                    .Select(p => genericGetMethod.MakeGenericMethod(p.ParameterType)
+                    .Select(p => _genericGetMethod.MakeGenericMethod(p.ParameterType)
                     .Invoke(this, null))
                     .ToArray()) as T;
             }

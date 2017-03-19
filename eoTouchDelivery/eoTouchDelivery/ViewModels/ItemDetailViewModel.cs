@@ -1,4 +1,5 @@
 ﻿using eoTouchDelivery.Models;
+using eostar;
 
 namespace eoTouchDelivery.ViewModels
 {
@@ -15,7 +16,7 @@ namespace eoTouchDelivery.ViewModels
 		public int Quantity
 		{
 			get { return quantity; }
-			set { SetProperty(ref quantity, value); }
+			set { SetPropertyValue(ref quantity, value); }
 		}
 	}
 }

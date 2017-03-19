@@ -17,7 +17,6 @@ namespace eoTouchDelivery.Core.Collections
 		/// Initializes a new instance of the System.Collections.ObjectModel.ObservableCollection(Of T) class. 
 		/// </summary> 
 		public ObservableRangeCollection()
-			: base()
 		{
 		}
 

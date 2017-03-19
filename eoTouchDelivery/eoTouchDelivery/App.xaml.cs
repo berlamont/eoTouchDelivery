@@ -1,4 +1,7 @@
-﻿using eoTouchDelivery.Views;
+﻿using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.Services;
+using eoTouchDelivery.ViewModels;
+using eoTouchDelivery.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,27 +14,38 @@ namespace eoTouchDelivery
 		{
 			InitializeComponent();
 
-			SetMainPage();
-		}
+			var masterDetailPage = new MasterDetailPage
+			{
+				Title = "eoTouch Delivery",
+				Master = new MenuPage(),
+				Detail = new HomePage()
+			};
 
-		public static void SetMainPage()
-		{
-            Current.MainPage = new TabbedPage
-            {
-                Children =
-                {
-                    new NavigationPage(new ItemsPage())
-                    {
-                        Title = "Browse",
-                        Icon = Device.OnPlatform("tab_feed.png",null,null)
-                    },
-                    new NavigationPage(new AboutPage())
-                    {
-                        Title = "About",
-                        Icon = Device.OnPlatform("tab_about.png",null,null)
-                    }
-                }
-            };
-        }
+			Current.MainPage = masterDetailPage;
+
+
+			var ds = Core.Services.DependencyService.Init();
+			ds.Register<BaseViewModel>();
+
+			var ns = ds.Get<FormsNavigationPageService>();
+			ns.RegisterPage(AppPages.ItemsPage, () => new ItemsPage());
+			//ns.RegisterPage(AppPages.ItemDetailPage, new ItemDetailPage());
+			ns.RegisterPage(AppPages.MenuPage, () => new MenuPage());
+			ns.RegisterPage(AppPages.HomePage, () => {
+				masterDetailPage.IsPresented = true;
+				return null;
+			});
+
+		}
+	}
+
+	enum AppPages
+	{
+		HomePage,
+		MenuPage,
+		ItemsPage,
+		ItemDetailPage,
+		CustomersPage,
+		CustomerDetailPage,
 	}
 }

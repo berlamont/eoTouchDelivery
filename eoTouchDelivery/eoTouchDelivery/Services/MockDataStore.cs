@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using eoTouchDelivery.Models;
 
 using Xamarin.Forms;
-
+/*
 [assembly: Dependency(typeof(eoTouchDelivery.Services.MockDataStore))]
 namespace eoTouchDelivery.Services
 {
@@ -95,3 +95,4 @@ namespace eoTouchDelivery.Services
 		}
 	}
 }
+ */

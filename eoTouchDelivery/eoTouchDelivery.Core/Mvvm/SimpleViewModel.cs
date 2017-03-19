@@ -14,7 +14,7 @@ namespace eoTouchDelivery.Core.Mvvm
         /// <summary>
         /// Event to raise when a property is changed.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         /// <summary>
         /// Inform any bindings that ALL property values must be read.
@@ -33,7 +33,7 @@ namespace eoTouchDelivery.Core.Mvvm
         protected void RaisePropertyChanged<T>(Expression<Func<T>> propExpr)
         {
             var prop = (PropertyInfo)((MemberExpression)propExpr.Body).Member;
-            this.RaisePropertyChanged(prop.Name);
+            RaisePropertyChanged(prop.Name);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace eoTouchDelivery.Core.Mvvm
 
             storageField = newValue;
             var prop = (PropertyInfo)((MemberExpression)propExpr.Body).Member;
-            this.RaisePropertyChanged(prop.Name);
+            RaisePropertyChanged(prop.Name);
 
             return true;
         }
@@ -79,7 +79,7 @@ namespace eoTouchDelivery.Core.Mvvm
                 return false;
 
             storageField = newValue;
-            this.RaisePropertyChanged(propertyName);
+            RaisePropertyChanged(propertyName);
 
             return true;
         }

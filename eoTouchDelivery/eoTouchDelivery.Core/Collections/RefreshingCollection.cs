@@ -15,7 +15,7 @@ namespace eoTouchDelivery.Core.Collections
     [DebuggerDisplay ("Count={Count}")]
     public class RefreshingCollection<T> : ObservableCollection<T>
     {
-        private bool isRefreshing;
+        bool _isRefreshing;
         readonly Func<Task<IEnumerable<T>>> refreshDataFunc;
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace eoTouchDelivery.Core.Collections
         public RefreshingCollection(Func<Task<IEnumerable<T>>> refreshFunc)
         {
             if (refreshFunc == null)
-                throw new ArgumentNullException("refreshFunc");
+                throw new ArgumentNullException(nameof(refreshFunc));
             this.refreshDataFunc = refreshFunc;
         }
 
@@ -54,7 +54,7 @@ namespace eoTouchDelivery.Core.Collections
         /// <param name="e">E.</param>
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
-            if (!isRefreshing)
+            if (!_isRefreshing)
                 base.OnCollectionChanged(e);
         }
 
@@ -68,7 +68,7 @@ namespace eoTouchDelivery.Core.Collections
         {
             object refreshParameter = null;
             Exception caughtException = null;
-            isRefreshing = true;
+            _isRefreshing = true;
 
             try
             {
@@ -93,11 +93,13 @@ namespace eoTouchDelivery.Core.Collections
                 if (RefreshFailed != null)
                     await RefreshFailed.Invoke (this, caughtException);  
             }
-            else if (AfterRefresh != null)
-                AfterRefresh.Invoke (this, refreshParameter);
-            
+            else
+            {
+                AfterRefresh?.Invoke (this, refreshParameter);
+            }
+
             // Done refresh the world.
-            isRefreshing = false;
+            _isRefreshing = false;
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(
                     NotifyCollectionChangedAction.Reset));

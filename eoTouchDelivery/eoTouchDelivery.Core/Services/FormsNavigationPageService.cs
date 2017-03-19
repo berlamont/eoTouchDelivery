@@ -13,10 +13,10 @@ namespace eoTouchDelivery.Core.Services
     /// </summary>
     public class FormsNavigationPageService : INavigationService
     {
-        private static readonly Task TaskCompleted = Task.FromResult(0);
-        private INavigation navigation;
-        private Dictionary<object, Func<Page>> registeredPages;
-        private Dictionary<object, Action<object>> registeredActions;
+        static readonly Task TaskCompleted = Task.FromResult(0);
+        INavigation _navigation;
+        Dictionary<object, Func<Page>> _registeredPages;
+        Dictionary<object, Action<object>> _registeredActions;
 
         /// <summary>
         /// Event raised when NavigateAsync is used.
@@ -48,16 +48,16 @@ namespace eoTouchDelivery.Core.Services
         {
             get
             {
-                return registeredPages?.Comparer;
+                return _registeredPages?.Comparer;
             }
 
             set
             {
                 if (value == null)
                     throw new ArgumentNullException (nameof(KeyComparer), "KeyComparer cannot be null.");
-                if (registeredPages != null)
+                if (_registeredPages != null)
                     throw new InvalidOperationException ("Cannot set KeyComparer once pages are added.");
-                registeredPages = new Dictionary<object, Func<Page>> (value);
+                _registeredPages = new Dictionary<object, Func<Page>> (value);
             }
         }
 
@@ -84,10 +84,10 @@ namespace eoTouchDelivery.Core.Services
 	        if (creator == null)
 	            throw new ArgumentNullException(nameof (creator));
 
-            if (registeredPages == null)
-                registeredPages = new Dictionary<object, Func<Page>> ();
+            if (_registeredPages == null)
+                _registeredPages = new Dictionary<object, Func<Page>> ();
    
-            registeredPages.Add(pageKey, creator);
+            _registeredPages.Add(pageKey, creator);
 	    }
 
         /// <summary>
@@ -102,9 +102,9 @@ namespace eoTouchDelivery.Core.Services
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
-            if (registeredActions == null)
-                registeredActions = new Dictionary<object, Action<object>>();
-            registeredActions.Add(key, action);
+            if (_registeredActions == null)
+                _registeredActions = new Dictionary<object, Action<object>>();
+            _registeredActions.Add(key, action);
         }
 
         /// <summary>
@@ -119,9 +119,9 @@ namespace eoTouchDelivery.Core.Services
             if (action == null)
                 throw new ArgumentNullException(nameof(action));
 
-            if (registeredActions == null)
-                registeredActions = new Dictionary<object, Action<object>>();
-            registeredActions.Add(key, unused => action());
+            if (_registeredActions == null)
+                _registeredActions = new Dictionary<object, Action<object>>();
+            _registeredActions.Add(key, unused => action());
         }
 
         /// <summary>
@@ -133,8 +133,8 @@ namespace eoTouchDelivery.Core.Services
             if (key == null)
                 throw new ArgumentNullException(nameof (key));
 
-            registeredPages?.Remove(key);
-	        registeredActions?.Remove(key);
+            _registeredPages?.Remove(key);
+	        _registeredActions?.Remove(key);
 	    }
 
         /// <summary>
@@ -147,11 +147,11 @@ namespace eoTouchDelivery.Core.Services
             if (pageKey == null)
                 throw new ArgumentNullException (nameof (pageKey));
 
-            if (registeredPages == null)
+            if (_registeredPages == null)
                 return null;
 
             Func<Page> creator;
-            return registeredPages.TryGetValue(pageKey, out creator) ? creator.Invoke() : null;
+            return _registeredPages.TryGetValue(pageKey, out creator) ? creator.Invoke() : null;
         }
 
         /// <summary>
@@ -159,20 +159,16 @@ namespace eoTouchDelivery.Core.Services
         /// MainPage or, in the case of a MasterDetail setup, on the Details page.
         /// </summary>
         /// <returns>The navigation page.</returns>
-        NavigationPage FindNavigationPage()
+        static NavigationPage FindNavigationPage()
         {
-            NavigationPage navPage = null;
-
             // Most of the time this is good.
-            navPage = Application.Current.MainPage as NavigationPage;
-            if (navPage == null)
-            {
-                // Special case for Master/Detail page.
-                var mdPage = Application.Current.MainPage as MasterDetailPage;
-                if (mdPage != null)
-                    // Should always have a NavigationPage as the Detail
-                    navPage = mdPage.Detail as NavigationPage;
-            }
+            var navPage = Application.Current.MainPage as NavigationPage;
+            if (navPage != null) return navPage;
+            // Special case for Master/Detail page.
+            var mdPage = Application.Current.MainPage as MasterDetailPage;
+            if (mdPage != null)
+                // Should always have a NavigationPage as the Detail
+                navPage = mdPage.Detail as NavigationPage;
 
             return navPage;
         }
@@ -186,28 +182,26 @@ namespace eoTouchDelivery.Core.Services
         {
             get
             {
-                if (navigation == null)
-                {
-                    // Locate the navigation page.
-                    var navPage = FindNavigationPage ();
-                    if (navPage == null)
-                        throw new Exception ("Failed to locate required NavigationPage from App.MainPage.");
+                if (_navigation != null) return _navigation;
+                // Locate the navigation page.
+                var navPage = FindNavigationPage ();
+                if (navPage == null)
+                    throw new Exception ("Failed to locate required NavigationPage from App.MainPage.");
 
-                    // Cache off Navigation interface.
-                    navigation = navPage.Navigation;
+                // Cache off Navigation interface.
+                _navigation = navPage.Navigation;
 
-                    // Wire into navigation events.
-                    navPage.Pushed += OnPagePushed;
-                    navPage.Popped += OnPagePopped;
-                    navPage.PoppedToRoot += OnPagePopped;
-                }
+                // Wire into navigation events.
+                navPage.Pushed += OnPagePushed;
+                navPage.Popped += OnPagePopped;
+                navPage.PoppedToRoot += OnPagePopped;
 
-                return navigation;
+                return _navigation;
             }
 
             set
             {
-                navigation = value;
+                _navigation = value;
             }
         }
         
@@ -258,10 +252,10 @@ namespace eoTouchDelivery.Core.Services
             // Look for a registered page first. If that's not available, look for an action.
             var page = GetPageByKey(pageKey);
             if (page == null) {
-                if (registeredActions != null)
+                if (_registeredActions != null)
                 {
                     Action<object> work;
-                    if (registeredActions.TryGetValue(pageKey, out work))
+                    if (_registeredActions.TryGetValue(pageKey, out work))
                     {
                         work.Invoke(viewModel);
                     }
@@ -285,10 +279,7 @@ namespace eoTouchDelivery.Core.Services
         /// Pops the last page off the stack.
         /// </summary>
         /// <returns>Task representing the navigation event.</returns>
-        public Task GoBackAsync()
-        {
-            return !CanGoBack ? TaskCompleted : Navigation.PopAsync();
-        }
+        public Task GoBackAsync() => !CanGoBack ? TaskCompleted : Navigation.PopAsync();
 
         /// <summary>
         /// Pushes a new page modally onto the navigation stack.
@@ -303,7 +294,7 @@ namespace eoTouchDelivery.Core.Services
 
             var page = GetPageByKey(pageKey);
             if (page == null)
-                throw new ArgumentException("Cannot navigate to unregistered page", "pageKey");
+                throw new ArgumentException("Cannot navigate to unregistered page", nameof(pageKey));
 
             if (viewModel != null)
                 page.BindingContext = viewModel;
@@ -315,10 +306,7 @@ namespace eoTouchDelivery.Core.Services
         /// Pops a page off the modal stack.
         /// </summary>
         /// <returns>Task representing the navigation.</returns>
-        public Task PopModalAsync()
-        {
-            return Navigation.PopModalAsync();
-        }
+        public Task PopModalAsync() => Navigation.PopModalAsync();
     }
 }
 

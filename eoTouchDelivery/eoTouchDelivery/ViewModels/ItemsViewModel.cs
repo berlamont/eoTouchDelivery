@@ -12,7 +12,7 @@ namespace eoTouchDelivery.ViewModels
 {
 	public class ItemsViewModel : BaseViewModel
 	{
-		public ObservableRangeCollection<Item> Items { get; set; }
+		public ObservableRangeCollection<> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()

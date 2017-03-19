@@ -25,46 +25,29 @@ namespace eoTouchDelivery.Core.Services
     /// </summary>
     public static class DependencyService
     {
-        static IDependencyService serviceLocator;
+        static IDependencyService _serviceLocator;
 
         /// <summary>
         /// This allows you to retrieve and customize the global dependency service
         /// used by the library (and app).
         /// </summary>
         /// <value>The service locator.</value>
-        public static IDependencyService ServiceLocator => serviceLocator != null
-                    ? serviceLocator
-                    : (serviceLocator = new DependencyServiceWrapper ());
-
-        /// <summary>
-        /// Registers the known services with the ServiceLocator type.
-        /// </summary>
-        /// <returns>IDependencyService</returns>
-        public static IDependencyService Init ()
-        {
-            return Init(null);
-        }
+        public static IDependencyService ServiceLocator => _serviceLocator ?? (_serviceLocator = new DependencyServiceWrapper ());
 
         /// <summary>
         /// Register the known services with the ServiceLocator type.
         /// </summary>
         /// <param name="defaultLocator">Service locator</param>
         /// <returns>IDependencyService</returns>
-        public static IDependencyService Init(IDependencyService defaultLocator)
-        {
-            return Init(defaultLocator, 
-                RegisterBehavior.MessageVisualizer | RegisterBehavior.Navigation);
-        }
+        public static IDependencyService Init(IDependencyService defaultLocator = null) => Init(defaultLocator, 
+            RegisterBehavior.MessageVisualizer | RegisterBehavior.Navigation);
 
         /// <summary>
         /// Register the known services with the ServiceLocator type.
         /// </summary>
         /// <param name="registerBehavior">Services to register</param>
         /// <returns>IDependencyService</returns>
-        public static IDependencyService Init(RegisterBehavior registerBehavior)
-        {
-            return Init(null, registerBehavior);
-        }
+        public static IDependencyService Init(RegisterBehavior registerBehavior) => Init(null, registerBehavior);
 
         /// <summary>
         /// Registers the known services with the ServiceLocator type.
@@ -76,8 +59,7 @@ namespace eoTouchDelivery.Core.Services
         {
             // If the ServiceLocator has already been set, then something used it before
             // Init was called. This is not allowed if they are going to change the locator.
-            if (defaultLocator != null 
-                && serviceLocator != null)
+            if (defaultLocator != null && _serviceLocator != null)
                 throw new InvalidOperationException (
                     "Must call eoTouchDelivery.Init before using any library features; " +
                     "ServiceLocator has already been set.");
@@ -85,10 +67,12 @@ namespace eoTouchDelivery.Core.Services
             // Assign the locator; either use the supplied one, or the default
             // DependencyService version if not supplied.
             if (defaultLocator == null)
+            {
                 defaultLocator = ServiceLocator;
+            }
             else {
-                Debug.Assert (serviceLocator == null);
-                serviceLocator = defaultLocator;
+                Debug.Assert (_serviceLocator == null);
+                _serviceLocator = defaultLocator;
             }
 
             // Register the services

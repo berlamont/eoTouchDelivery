@@ -73,8 +73,8 @@ namespace eoTouchDelivery.Core.Controls
         }
 
         // Data
-        StackLayout stack;
-        Label noItemsLabel;
+        StackLayout _stack;
+        Label _noItemsLabel;
 
         /// <summary>
         /// Initializes an ItemsControl.
@@ -83,20 +83,20 @@ namespace eoTouchDelivery.Core.Controls
         {
             Padding = new Thickness(5,0,5,5);
 
-            stack = new StackLayout {
+            _stack = new StackLayout {
                 Spacing = 10,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
-            noItemsLabel = new Label {
+            _noItemsLabel = new Label {
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center
             };
-            noItemsLabel.SetBinding (Label.StyleProperty, new Binding(nameof(ItemStyle), source: this));
-            noItemsLabel.SetBinding (Label.TextProperty, new Binding (nameof (PlaceholderText), source: this));
+            _noItemsLabel.SetBinding (Label.StyleProperty, new Binding(nameof(ItemStyle), source: this));
+            _noItemsLabel.SetBinding (Label.TextProperty, new Binding (nameof (PlaceholderText), source: this));
 
-            Content = noItemsLabel;
+            Content = _noItemsLabel;
         }
 
         /// <summary>
@@ -127,11 +127,11 @@ namespace eoTouchDelivery.Core.Controls
             }
 
             if (newValue == null) {
-                stack.Children.Clear ();
-                Content = noItemsLabel;
+                _stack.Children.Clear ();
+                Content = _noItemsLabel;
             }
             else {
-                Content = stack;
+                Content = _stack;
                 FillContainer (newValue);
                 var ncc = newValue as INotifyCollectionChanged;
                 if (ncc != null)
@@ -161,7 +161,7 @@ namespace eoTouchDelivery.Core.Controls
             if (ItemTemplate != null)
                 return;
 
-            foreach (var view in stack.Children)
+            foreach (var view in _stack.Children)
             {
                 var label = view as Label;
                 if (label != null) {
@@ -184,7 +184,7 @@ namespace eoTouchDelivery.Core.Controls
         {
             var itemStyle = ItemStyle;
             var template = ItemTemplate;
-            var visuals = stack.Children;
+            var visuals = _stack.Children;
 
             for (var i = 0; i < newValue.Count; i++) {
                 var dataItem = newValue [i];
@@ -216,12 +216,12 @@ namespace eoTouchDelivery.Core.Controls
                         if (itemStyle != null) {
                             label.Style = itemStyle;
                         }
-                        stack.Children.Add (label);
+                        _stack.Children.Add (label);
                     }
                 }
             }
 
-            Content = (stack.Children.Count == 0) ? (View) noItemsLabel : stack;
+            Content = (_stack.Children.Count == 0) ? (View) _noItemsLabel : _stack;
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace eoTouchDelivery.Core.Controls
             var view = template.CreateContent () as View;
             if (view != null) {
                 view.BindingContext = item;
-                stack.Children.Add (view);
+                _stack.Children.Add (view);
             }
         }
 

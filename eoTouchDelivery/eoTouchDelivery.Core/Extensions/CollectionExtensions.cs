@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Reflection;
 using eoTouchDelivery.Core.Collections;
 
 namespace eoTouchDelivery.Core.Extensions
@@ -11,6 +13,7 @@ namespace eoTouchDelivery.Core.Extensions
     /// </summary>
     public static class CollectionExtensions
     {
+
         /// <summary>
         /// Takes a LINQ GroupBy value and turns it into a set of GroupedObservableCollection objects.
         /// </summary>
@@ -21,9 +24,7 @@ namespace eoTouchDelivery.Core.Extensions
         public static IEnumerable<GroupedObservableCollection<TKey, TValue>> ToGroupedObservable<TKey, TValue> (
            this IEnumerable<IGrouping<TKey, TValue>> group)
         {
-            foreach (var item in group) {
-                yield return new GroupedObservableCollection<TKey, TValue> (item.Key, item);
-            }
+            return group.Select(item => new GroupedObservableCollection<TKey, TValue> (item.Key, item));
         }
 
         /// <summary>
@@ -32,10 +33,7 @@ namespace eoTouchDelivery.Core.Extensions
         /// <returns>The observable collection.</returns>
         /// <param name="items">Items.</param>
         /// <typeparam name="T">The 1st type parameter.</typeparam>
-        public static OptimizedObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> items)
-        {
-            return new OptimizedObservableCollection<T> (items);
-        }
+        public static OptimizedObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> items) => new OptimizedObservableCollection<T> (items);
 
         /// <summary>
         /// Perform a sort of the items in a collection. This is useful
@@ -52,10 +50,9 @@ namespace eoTouchDelivery.Core.Extensions
                     var d2 = collection [child];
 
                     var result = (!reverse) ? comparer (d1, d2) : comparer (d2, d1);
-                    if (result > 0) {
-                        collection.Remove (d1);
-                        collection.Insert (child, d1);
-                    }
+                    if (result <= 0) continue;
+                    collection.Remove (d1);
+                    collection.Insert (child, d1);
                 }
             }
         }
@@ -79,10 +76,9 @@ namespace eoTouchDelivery.Core.Extensions
                         ? comparer.Compare (d1, d2)
                         : comparer.Compare (d2, d1);
 
-                    if (result > 0) {
-                        collection.Remove (d1);
-                        collection.Insert (child, d1);
-                    }
+                    if (result <= 0) continue;
+                    collection.Remove (d1);
+                    collection.Insert (child, d1);
                 }
             }
         }
@@ -97,27 +93,24 @@ namespace eoTouchDelivery.Core.Extensions
         /// <returns></returns>
         public static bool Compare<T> (this ICollection<T> collection, ICollection<T> other, bool sameOrderRequired = false)
         {
-            if (!ReferenceEquals (collection, other)) {
-                if (other == null)
-                    throw new ArgumentNullException ("other");
+            if (ReferenceEquals(collection, other)) return true;
+            if (other == null)
+                throw new ArgumentNullException (nameof(other));
 
-                // Not the same number of elements.  No match
-                if (collection.Count != other.Count)
-                    return false;
+            // Not the same number of elements.  No match
+            if (collection.Count != other.Count)
+                return false;
 
-                // Require same-order; just defer to existing LINQ match
-                if (sameOrderRequired)
-                    return collection.SequenceEqual (other);
+            // Require same-order; just defer to existing LINQ match
+            if (sameOrderRequired)
+                return collection.SequenceEqual (other);
 
-                // Otherwise allow it to be any order, but require same count of each item type.
-                var comparer = EqualityComparer<T>.Default;
-                return !(from item in collection
-                         let thisItem = item
-                         where !other.Contains (item, comparer) || collection.Count (check => comparer.Equals (thisItem, check)) != other.Count (check => comparer.Equals (thisItem, check))
-                         select item).Any ();
-            }
-
-            return true;
+            // Otherwise allow it to be any order, but require same count of each item type.
+            var comparer = EqualityComparer<T>.Default;
+            return !(from item in collection
+                     let thisItem = item
+                     where !other.Contains (item, comparer) || collection.Count (check => comparer.Equals (thisItem, check)) != other.Count (check => comparer.Equals (thisItem, check))
+                     select item).Any ();
         }
 
         /// <summary>
@@ -129,25 +122,25 @@ namespace eoTouchDelivery.Core.Extensions
         public static void AddRange<T> (this ICollection<T> collection, IEnumerable<T> items)
         {
             if (collection == null)
-                throw new ArgumentNullException ("collection");
+                throw new ArgumentNullException (nameof(collection));
             if (items == null)
-                throw new ArgumentNullException ("items");
+                throw new ArgumentNullException (nameof(items));
 
             foreach (var item in items)
                 collection.Add (item);
         }
 
         /// <summary>
-        /// Removes a set of items from the collection.
-        /// </summary>
-        /// <param name="collection">Collection to remove from</param>
-        /// <param name="items">Items to remove from collection.</param>
+    /// Removes a set of items from the collection.
+    /// </summary>
+    /// <param name="collection">Collection to remove from</param>
+    /// <param name="items">Items to remove from collection.</param>
         public static void RemoveRange<T>(this ICollection<T> collection, IEnumerable<T> items)
         {
             if (collection == null)
-                throw new ArgumentNullException ("collection");
+                throw new ArgumentNullException (nameof(collection));
             if (items == null)
-                throw new ArgumentNullException ("items");
+                throw new ArgumentNullException (nameof(items));
 
             foreach (var item in items)
                 collection.Remove (item);
@@ -183,9 +176,9 @@ namespace eoTouchDelivery.Core.Extensions
         {
             // Simple parameter checking
             if (sourceIndex < 0 || sourceIndex >= collection.Count)
-                throw new ArgumentOutOfRangeException ("sourceIndex");
+                throw new ArgumentOutOfRangeException (nameof(sourceIndex));
             if (destIndex < 0 || destIndex >= collection.Count)
-                throw new ArgumentOutOfRangeException ("destIndex");
+                throw new ArgumentOutOfRangeException (nameof(destIndex));
 
             // Ignore if same index
             if (sourceIndex == destIndex)
@@ -208,13 +201,13 @@ namespace eoTouchDelivery.Core.Extensions
         {
             // Simple parameter checking
             if (startingIndex < 0 || startingIndex >= collection.Count)
-                throw new ArgumentOutOfRangeException ("startingIndex");
+                throw new ArgumentOutOfRangeException (nameof(startingIndex));
             if (destIndex < 0 || destIndex >= collection.Count)
-                throw new ArgumentOutOfRangeException ("destIndex");
+                throw new ArgumentOutOfRangeException (nameof(destIndex));
             if (startingIndex + count > collection.Count)
-                throw new ArgumentOutOfRangeException ("count");
+                throw new ArgumentOutOfRangeException (nameof(count));
             if (count < 0)
-                throw new ArgumentOutOfRangeException ("count");
+                throw new ArgumentOutOfRangeException (nameof(count));
 
             // Ignore if same index or count is zero
             if (startingIndex == destIndex || count == 0)

@@ -17,11 +17,9 @@ namespace eoTouchDelivery.Core.Mvvm
     /// The idea for this class was taken from a similar implementation in WPF.
     /// </remarks>
     /// <typeparam name="T">The type of object to monitor for property changes.</typeparam>
-    public sealed class PropertyObserver<T> : IDisposable
-        where T : class, INotifyPropertyChanged
+    public sealed class PropertyObserver<T> : IDisposable where T : class, INotifyPropertyChanged
     {
-        private readonly Dictionary<string, Action<T>> pcToHandlerMap;
-        private T source;
+        readonly Dictionary<string, Action<T>> _pcToHandlerMap;
 
         /// <summary>
         /// Initializes a new instance of PropertyObserver, which
@@ -31,21 +29,18 @@ namespace eoTouchDelivery.Core.Mvvm
         public PropertyObserver (T propertySource)
         {
             if (propertySource == null)
-                throw new ArgumentNullException ("propertySource");
+                throw new ArgumentNullException (nameof(propertySource));
 
-            source = propertySource;
-            source.PropertyChanged += OnSourcePropertyChanged;
-            pcToHandlerMap = new Dictionary<string, Action<T>> ();
+            Source = propertySource;
+            Source.PropertyChanged += OnSourcePropertyChanged;
+            _pcToHandlerMap = new Dictionary<string, Action<T>> ();
         }
 
         /// <summary>
         /// Source object this observer is monitoring.
         /// </summary>
         /// <value>The source.</value>
-        public T Source
-        {
-            get { return source; }
-        }
+        public T Source { get; set; }
 
         /// <summary>
         /// Called on each PropertyChange notification, forwards to handlers.
@@ -57,23 +52,20 @@ namespace eoTouchDelivery.Core.Mvvm
             var propertyName = e.PropertyName;
             var propertySource = (T)sender;
 
-            Debug.Assert (propertySource == source);
+            Debug.Assert (propertySource == Source);
 
             // If there's no property, then notify ALL handlers.
             if (string.IsNullOrEmpty (propertyName)) {
                 // Get a safe copy of the list
-                var entries = pcToHandlerMap.Values.ToList ();
+                var entries = _pcToHandlerMap.Values.ToList ();
                 foreach (var entry in entries)
                     entry.Invoke (propertySource);
             }
             else
             {
                 Action<T> action = null;
-                if (pcToHandlerMap.TryGetValue (propertyName, out action))
-                {
-                    if (action != null)
-                        action (propertySource);
-                }
+                if (!_pcToHandlerMap.TryGetValue(propertyName, out action)) return;
+                action?.Invoke (propertySource);
             }
         }
 
@@ -85,19 +77,19 @@ namespace eoTouchDelivery.Core.Mvvm
         /// <returns>The object on which this method was invoked, to allow for multiple invocations chained together.</returns>
         public PropertyObserver<T> RegisterHandler (Expression<Func<T, object>> expression, Action<T> handler)
         {
-            if (source == null)
+            if (Source == null)
                 throw new ObjectDisposedException ("source");
             if (expression == null)
-                throw new ArgumentNullException ("expression");
+                throw new ArgumentNullException (nameof(expression));
 
             var propertyName = GetPropertyName (expression);
-            if (String.IsNullOrEmpty (propertyName))
+            if (string.IsNullOrEmpty (propertyName))
                 throw new ArgumentException ("'expression' did not provide a property name.");
 
             if (handler == null)
-                throw new ArgumentNullException ("handler");
+                throw new ArgumentNullException (nameof(handler));
 
-            pcToHandlerMap.Add (propertyName, handler);
+            _pcToHandlerMap.Add (propertyName, handler);
             return this;
         }
 
@@ -108,16 +100,16 @@ namespace eoTouchDelivery.Core.Mvvm
         /// <returns>The object on which this method was invoked, to allow for multiple invocations chained together.</returns>
         public PropertyObserver<T> UnregisterHandler (Expression<Func<T, object>> expression)
         {
-            if (source == null)
+            if (Source == null)
                 throw new ObjectDisposedException ("source");
             if (expression == null)
-                throw new ArgumentNullException ("expression");
+                throw new ArgumentNullException (nameof(expression));
 
             var propertyName = GetPropertyName (expression);
-            if (String.IsNullOrEmpty (propertyName))
+            if (string.IsNullOrEmpty (propertyName))
                 throw new ArgumentException ("'expression' did not provide a property name.");
 
-            pcToHandlerMap.Remove (propertyName);
+            _pcToHandlerMap.Remove (propertyName);
 
             return this;
         }
@@ -127,7 +119,7 @@ namespace eoTouchDelivery.Core.Mvvm
         /// </summary>
         /// <param name="expression">Expression to evaluate</param>
         /// <returns>Property name</returns>
-        private static string GetPropertyName (Expression<Func<T, object>> expression)
+        static string GetPropertyName (Expression<Func<T, object>> expression)
         {
             var lambda = expression as LambdaExpression;
             MemberExpression memberExpression;
@@ -156,9 +148,9 @@ namespace eoTouchDelivery.Core.Mvvm
         /// </summary>
         public void Dispose ()
         {
-            source.PropertyChanged -= OnSourcePropertyChanged;
-            pcToHandlerMap.Clear ();
-            source = null;
+            Source.PropertyChanged -= OnSourcePropertyChanged;
+            _pcToHandlerMap.Clear ();
+            Source = null;
         }
 
         #endregion

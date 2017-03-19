@@ -70,7 +70,7 @@ namespace eoTouchDelivery.Core.Behaviors
         {
             Debug.Assert (AssociatedObject == sender);
             Debug.Assert (bindingContextForwarded == true);
-            this.BindingContext = ((BindableObject)sender).BindingContext;
+            BindingContext = ((BindableObject)sender).BindingContext;
         }
    }
 }
