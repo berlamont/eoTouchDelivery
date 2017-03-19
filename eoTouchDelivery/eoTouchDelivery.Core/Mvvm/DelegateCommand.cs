@@ -1,6 +1,7 @@
 ﻿using System;
+using eoTouchDelivery.Core.Interfaces;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Mvvm
 {
     /// <summary>
     /// Implementation of ICommand using delegates.

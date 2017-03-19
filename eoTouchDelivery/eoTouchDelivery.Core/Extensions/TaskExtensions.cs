@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Extensions
 {
     /// <summary>
     /// Extensions for the System.Threading.Tasks.Task type.

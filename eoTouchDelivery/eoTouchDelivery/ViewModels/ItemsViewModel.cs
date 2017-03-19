@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
+using eoTouchDelivery.Core.Collections;
 using eoTouchDelivery.Helpers;
 using eoTouchDelivery.Models;
 using eoTouchDelivery.Views;

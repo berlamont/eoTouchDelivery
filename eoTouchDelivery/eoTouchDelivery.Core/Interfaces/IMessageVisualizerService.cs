@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Interfaces
+namespace eoTouchDelivery.Core.Interfaces
 {
     /// <summary>
     /// Interface to display UI "MessageBox" style prompts.

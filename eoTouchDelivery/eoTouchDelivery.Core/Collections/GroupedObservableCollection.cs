@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using eoTouchDelivery.Infrastructure;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace eoTouchDelivery.Collections
+namespace eoTouchDelivery.Core.Collections
 {
     /// <summary>
     /// This is a simple observable collection which has a GroupBy key which can

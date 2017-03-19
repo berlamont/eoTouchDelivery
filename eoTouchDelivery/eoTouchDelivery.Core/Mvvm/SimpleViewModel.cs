@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Mvvm
 {
     /// <summary>
     /// This is a simple base class for MVVM.

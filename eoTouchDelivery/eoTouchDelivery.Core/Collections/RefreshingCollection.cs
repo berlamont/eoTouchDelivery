@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Collections
 {
     /// <summary>
     /// Provides an ObservableCollection which is backed by an asynchronous "fill"

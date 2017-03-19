@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using eoTouchDelivery.Core.Mvvm;
 using eoTouchDelivery.Helpers;
 using eoTouchDelivery.Models;
 using eoTouchDelivery.Services;

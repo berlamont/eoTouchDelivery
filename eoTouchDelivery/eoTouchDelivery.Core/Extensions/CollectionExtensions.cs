@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
-using eoTouchDelivery.Collections;
+using eoTouchDelivery.Core.Collections;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Extensions
 {
     /// <summary>
     /// A set of <c>IList</c>, <c>IEnumerable</c>, and <c>ICollection</c> extension methods

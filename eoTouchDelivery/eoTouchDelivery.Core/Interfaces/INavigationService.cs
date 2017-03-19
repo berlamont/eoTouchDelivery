@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Interfaces
+namespace eoTouchDelivery.Core.Interfaces
 {
     /// <summary>
     /// Interface to manage navigation in the application.

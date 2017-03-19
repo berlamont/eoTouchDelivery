@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Extensions
 {
     /// <summary>
     /// Extensions for the global Exception type

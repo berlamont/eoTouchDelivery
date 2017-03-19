@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace eoTouchDelivery
+namespace eoTouchDelivery.Core.Mvvm
 {
     /// <summary>
     /// Monitors the PropertyChanged event of an object that implements INotifyPropertyChanged,

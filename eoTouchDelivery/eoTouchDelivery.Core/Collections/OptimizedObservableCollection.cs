@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Collections
 {
     /// <summary>
     /// ObservableCollection implementation which supports 

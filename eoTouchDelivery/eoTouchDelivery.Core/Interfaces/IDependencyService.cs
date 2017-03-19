@@ -1,4 +1,4 @@
-namespace eoTouchDelivery.Interfaces
+namespace eoTouchDelivery.Core.Interfaces
 {
     /// <summary>
     /// Interface to wrap a ServiceLocator

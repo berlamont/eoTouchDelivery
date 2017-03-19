@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using eoTouchDelivery.Core.Interfaces;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Mvvm
 {
     /// <summary>
     /// A base ICommand implementation that supports async/await.

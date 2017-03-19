@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Infrastructure
+namespace eoTouchDelivery.Core.Interfaces
 {
     /// <summary>
     /// Extension of ICommand which exposes a raise execute handler and async support.
