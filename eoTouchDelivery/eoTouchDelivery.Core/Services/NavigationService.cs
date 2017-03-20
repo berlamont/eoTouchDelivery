@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using eoTouchDelivery.Core.DataServices;
 using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.ViewModels;
+using eoTouchDelivery.Core.ViewModels.Base;
 using eoTouchDelivery.Views;
 using Xamarin.Forms;
 
@@ -16,6 +19,7 @@ namespace eoTouchDelivery.Core.Services
 	{
 
 		protected readonly Dictionary<Type, Type> _mappings;
+		IAuthenticationService _authenticationService;
 
 		protected Application CurrentApplication
 		{
@@ -169,44 +173,35 @@ namespace eoTouchDelivery.Core.Services
 			return page;
 		}
 
-		private void CreatePageViewModelMappings()
+		void CreatePageViewModelMappings()
 		{
-			_mappings.Add(typeof(CustomRideViewModel), typeof(CustomRidePage));
-			_mappings.Add(typeof(EventSummaryViewModel), typeof(EventSummaryPage));
 			_mappings.Add(typeof(HomeViewModel), typeof(HomePage));
 			_mappings.Add(typeof(LoginViewModel), typeof(LoginPage));
-			_mappings.Add(typeof(PaymentViewModel), typeof(PaymentPage));
 
 			if (Device.OS == TargetPlatform.Windows)
 			{
-				_mappings.Add(typeof(SignUpViewModel), typeof(UwpSignUpPage));
 
 				if (Device.Idiom == TargetIdiom.Desktop)
 				{
-					_mappings.Add(typeof(UwpMyRidesViewModel), typeof(UwpMyRidesPage));
 					_mappings.Add(typeof(ProfileViewModel), typeof(UwpProfilePage));
 				}
 				else
 				{
-					_mappings.Add(typeof(MyRidesViewModel), typeof(MyRidesPage));
 					_mappings.Add(typeof(ProfileViewModel), typeof(ProfilePage));
 				}
 			}
 			else
 			{
-				_mappings.Add(typeof(SignUpViewModel), typeof(SignUpPage));
-				_mappings.Add(typeof(MyRidesViewModel), typeof(MyRidesPage));
 				_mappings.Add(typeof(ProfileViewModel), typeof(ProfilePage));
 			}
 
-			_mappings.Add(typeof(ReportIncidentViewModel), typeof(ReportIncidentPage));
-			_mappings.Add(typeof(BookingViewModel), typeof(BookingPage));
+			_mappings.Add(typeof(ReportViewModel), typeof(ReportPage));
 			_mappings.Add(typeof(MainViewModel), typeof(MainPage));
 		}
 
 		private void CreateMessengerSubscriptions()
 		{
-			MessagingCenter.Subscribe<ReportedIssue>(this, MessengerKeys.GoBackFromReportRequest, GoBackFromReportRequested);
+			MessagingCenter.Subscribe<Reports>(this, MessengerKeys.GoBackFromReportRequest, GoBackFromReportRequested);
 		}
 
 		private async void GoBackFromReportRequested(ReportedIssue issue)
@@ -216,5 +211,9 @@ namespace eoTouchDelivery.Core.Services
 				await NavigateBackAsync();
 			}
 		}
+	}
+
+	public class ViewModelBase
+	{
 	}
 }

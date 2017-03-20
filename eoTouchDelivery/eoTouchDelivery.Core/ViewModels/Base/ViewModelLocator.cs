@@ -38,7 +38,6 @@ namespace eoTouchDelivery.Core.ViewModels.Base
 			_unityContainer.RegisterType<ProfileViewModel>();
 			_unityContainer.RegisterType<UserViewModel>();
 			_unityContainer.RegisterType<ReportsViewModel>();
-			_unityContainer.RegisterType<BookingViewModel>();
 		}
 
 		public static ViewModelLocator Instance { get; } = new ViewModelLocator();

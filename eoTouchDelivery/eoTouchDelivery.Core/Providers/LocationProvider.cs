@@ -38,7 +38,9 @@ namespace eoTouchDelivery.Core.Services
                 Debug.WriteLine(ex);
             }
 
-            return DemoHelper.DefaultLocation;
+            return DefaultLocation;
         }
+
+        public ILocationResponse DefaultLocation { get; set; }
     }
 }

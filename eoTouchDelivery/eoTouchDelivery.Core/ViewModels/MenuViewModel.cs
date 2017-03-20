@@ -2,17 +2,16 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using eoTouchDelivery.Core.Helpers;
-using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.Models.Users;
 using eoTouchDelivery.Core.Services;
+using eoTouchDelivery.Core.Utils;
 using eoTouchDelivery.Models.Enums;
-using eoTouchDelivery.Models.Users;
 using Xamarin.Forms;
 using MenuItem = eoTouchDelivery.Models.MenuItem;
 
-namespace eoTouchDelivery.ViewModels
+namespace eoTouchDelivery.Core.ViewModels
 {
-    public class MenuViewModel : BaseViewModel
+    public class MenuViewModel : ViewModelBase
     {
         public ICommand ItemSelectedCommand => new Command<MenuItem>(OnSelectItem);
 
@@ -77,7 +76,7 @@ namespace eoTouchDelivery.ViewModels
                 Title = "Report",
                 MenuItemType = MenuItemType.Reports,
                 ViewModelType = typeof(ReportsViewModel),
-                IsEnabled = Settings.CurrentBookingId != 0
+                IsEnabled = Settings.SupportBit != 0
             });
 
             MenuItems.Add(new MenuItem
@@ -103,17 +102,6 @@ namespace eoTouchDelivery.ViewModels
         {
             await _authenticationService.LogoutAsync();
             await NavigationService.NavigateToAsync<LoginViewModel>();
-        }
-
-        private void OnBookingRequested(Booking booking)
-        {
-            SetMenuItemStatus(MenuItemType.UpcomingRide, true);
-            SetMenuItemStatus(MenuItemType.ReportIncident, true);
-        }
-
-        private void OnBookingFinished(Booking booking)
-        {
-            SetMenuItemStatus(MenuItemType.UpcomingRide, false);
         }
 
         private void SetMenuItemStatus(MenuItemType type, bool enabled)

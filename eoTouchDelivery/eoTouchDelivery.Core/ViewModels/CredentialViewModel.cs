@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Models.Users
+namespace eoTouchDelivery.Core.ViewModels
 {
-    public class UserProfile
+    public class CredentialViewModel
     {
         
     }

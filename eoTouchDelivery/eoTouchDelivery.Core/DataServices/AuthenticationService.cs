@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.DataServices.Base;
 using eoTouchDelivery.Core.Helpers;
+using eoTouchDelivery.Core.Models;
+using eoTouchDelivery.Core.Models.Users;
+using eoTouchDelivery.Core.Utils;
 
 namespace eoTouchDelivery.Core.DataServices
 {
@@ -46,7 +49,6 @@ namespace eoTouchDelivery.Core.DataServices
             Settings.RemoveUserId();
             Settings.RemoveProfileId();
             Settings.RemoveAccessToken();
-            Settings.RemoveCurrentBookingId();
 
             return Task.FromResult(false);
         }

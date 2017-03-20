@@ -65,5 +65,21 @@ namespace eoTouchDelivery.Core.Utils
         AppSettings.AddOrUpdateValue(UwpWindowSizeKey, value);
       }
     }
+
+    public static int ProfileId { get; set; }
+    public static string AccessToken { get; set; }
+    public static int SupportBit { get; set; }
+
+    public static void RemoveUserId()
+    {
+    }
+
+    public static void RemoveProfileId()
+    {
+    }
+
+    public static void RemoveAccessToken()
+    {
+    }
   }
 }

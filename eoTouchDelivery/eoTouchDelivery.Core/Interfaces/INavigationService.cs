@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using eoTouchDelivery.ViewModels;
-
+using eoTouchDelivery.Core.Services;
 
 namespace eoTouchDelivery.Core.Interfaces
 {
@@ -9,9 +8,9 @@ namespace eoTouchDelivery.Core.Interfaces
     {
         Task InitializeAsync();
 
-        Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel;
+        Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;
 
-        Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : BaseViewModel;
+        Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
 
         Task NavigateToAsync(Type viewModelType);
 

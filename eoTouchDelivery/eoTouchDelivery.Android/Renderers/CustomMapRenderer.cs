@@ -13,15 +13,15 @@ namespace eoTouchDelivery.Droid.Renderers
 {
     class CustomMapRenderer : MapRenderer
     {
-        private const int NormalResource = Resource.Drawable.pushpin;
-        private const int FromResource = Resource.Drawable.pushpin_origin;
-        private const int ToResource = Resource.Drawable.pushpin_destiny;
+        const int NormalResource = Resource.Drawable.pushpin;
+        const int FromResource = Resource.Drawable.pushpin_origin;
+        const int ToResource = Resource.Drawable.pushpin_destiny;
 
-        private BitmapDescriptor _pinIcon;
-        private BitmapDescriptor _fromPinIcon;
-        private BitmapDescriptor _toPinIcon;
-        private List<CustomMarkerOptions> _tempMarkers;
-        private bool _isDrawnDone;
+        BitmapDescriptor _pinIcon;
+        BitmapDescriptor _fromPinIcon;
+        BitmapDescriptor _toPinIcon;
+        List<CustomMarkerOptions> _tempMarkers;
+        bool _isDrawnDone;
 
         public CustomMapRenderer()
         {
@@ -68,13 +68,15 @@ namespace eoTouchDelivery.Droid.Renderers
             var marker = e.Marker;
             marker.ShowInfoWindow();
 
-            var myMap = this.Element as CustomMap;
+            var myMap = Element as CustomMap;
 
             var tempMarker = _tempMarkers
                 .FirstOrDefault(m => m.MarkerOptions.Position.Latitude
                                      == marker.Position.Latitude &&
                                      m.MarkerOptions.Position.Longitude == marker.Position.Longitude);
 
+            if (tempMarker == null)
+                return;
             var formsPin = new CustomPin
             {
                 Id = tempMarker.Id,
@@ -83,9 +85,11 @@ namespace eoTouchDelivery.Droid.Renderers
                 Position = new Position(marker.Position.Latitude, marker.Position.Longitude)
             };
 
+            if (myMap == null)
+                return;
             myMap.SelectedPin = formsPin;
 
-            if (!_tempMarkers.Any(p => p.MarkerOptions.Icon == _fromPinIcon))
+            if (_tempMarkers.All(p => p.MarkerOptions.Icon != _fromPinIcon))
             {
                 formsPin.Type = CustomPin.AnnotationType.From;
                 myMap.From = formsPin;
@@ -94,16 +98,16 @@ namespace eoTouchDelivery.Droid.Renderers
             {
                 var from = _tempMarkers.FirstOrDefault(p => p.MarkerOptions.Icon == _fromPinIcon);
 
-                if (from != null
-                    && !_tempMarkers.Any(p => p.MarkerOptions.Icon == _toPinIcon)
-                    && from.Id == myMap.SelectedPin.Id)
+                if (@from != null
+                    && _tempMarkers.All(p => p.MarkerOptions.Icon != _toPinIcon)
+                    && @from.Id == myMap.SelectedPin.Id)
                 {
                     myMap.From = null;
                 }
                 else
                 {
                     if (_tempMarkers.Any(p => p.MarkerOptions.Icon == _fromPinIcon) &&
-                        !_tempMarkers.Any(p => p.MarkerOptions.Icon == _toPinIcon))
+                        _tempMarkers.All(p => p.MarkerOptions.Icon != _toPinIcon))
                     {
                         formsPin.Type = CustomPin.AnnotationType.To;
                         myMap.To = formsPin;
@@ -136,12 +140,9 @@ namespace eoTouchDelivery.Droid.Renderers
             }
         }
 
-        private void ClearPushPins(MapView mapView)
-        {
-            mapView.Map.Clear();
-        }
+        static void ClearPushPins(MapView mapView) => mapView.Map.Clear();
 
-        private void AddPushPins(MapView mapView, IEnumerable<CustomPin> pins)
+        void AddPushPins(MapView mapView, IEnumerable<CustomPin> pins)
         {
             foreach (var formsPin in pins)
             {
@@ -151,10 +152,7 @@ namespace eoTouchDelivery.Droid.Renderers
                 markerWithIcon.SetTitle(formsPin.Label);
                 markerWithIcon.SetSnippet(formsPin.Address);
 
-                if (!string.IsNullOrEmpty(formsPin.PinIcon))
-                    markerWithIcon.SetIcon(_pinIcon);
-                else
-                    markerWithIcon.SetIcon(BitmapDescriptorFactory.DefaultMarker());
+                markerWithIcon.SetIcon(!string.IsNullOrEmpty(formsPin.PinIcon) ? _pinIcon : BitmapDescriptorFactory.DefaultMarker());
 
                 mapView.Map.AddMarker(markerWithIcon);
 
@@ -166,7 +164,7 @@ namespace eoTouchDelivery.Droid.Renderers
             }
         }
 
-        private void AddPushPins(MapView mapView, IEnumerable<CustomMarkerOptions> markers)
+        static void AddPushPins(MapView mapView, IEnumerable<CustomMarkerOptions> markers)
         {
             foreach (var marker in markers)
             {
@@ -174,16 +172,13 @@ namespace eoTouchDelivery.Droid.Renderers
             }
         }
 
-        private void AddFromPushPin(MapView mapView, CustomPin from)
+        void AddFromPushPin(MapView mapView, CustomPin from)
         {
             // Reset previous From pushpin
             var fromTempMarker = _tempMarkers
                 .FirstOrDefault(p => p.MarkerOptions.Icon == _fromPinIcon);
 
-            if (fromTempMarker != null)
-            {
-                fromTempMarker.MarkerOptions.SetIcon(_pinIcon);
-            }
+            fromTempMarker?.MarkerOptions.SetIcon(_pinIcon);
 
             // Set new From pushpin
             if (from != null)
@@ -193,26 +188,20 @@ namespace eoTouchDelivery.Droid.Renderers
                 var newFromTempMarker = _tempMarkers
                     .FirstOrDefault(p => p.Id == from.Id);
 
-                if (newFromTempMarker != null)
-                {
-                    newFromTempMarker.MarkerOptions.SetIcon(_fromPinIcon);
-                }
+                newFromTempMarker?.MarkerOptions.SetIcon(_fromPinIcon);
             }
 
             ClearPushPins(mapView);
             AddPushPins(mapView, _tempMarkers);
         }
 
-        private void AddToPushPin(MapView mapView, CustomPin to)
+        void AddToPushPin(MapView mapView, CustomPin to)
         {
             // Reset previous To pushpin
             var toTempMarker = _tempMarkers
                 .FirstOrDefault(p => p.MarkerOptions.Icon == _toPinIcon);
 
-            if (toTempMarker != null)
-            {
-                toTempMarker.MarkerOptions.SetIcon(_pinIcon);
-            }
+            toTempMarker?.MarkerOptions.SetIcon(_pinIcon);
 
             // Set new To pushpin
             if (to != null)
@@ -222,33 +211,33 @@ namespace eoTouchDelivery.Droid.Renderers
                 var newToTempMarker = _tempMarkers
                     .FirstOrDefault(p => p.Id == to.Id);
 
-                if (newToTempMarker != null)
-                {
-                    newToTempMarker.MarkerOptions.SetIcon(_toPinIcon);
-                }
+                newToTempMarker?.MarkerOptions.SetIcon(_toPinIcon);
             }
 
             ClearPushPins(mapView);
             AddPushPins(mapView, _tempMarkers);
         }
 
-        private void PositionMap()
+        void PositionMap()
         {
             var myMap = this.Element as CustomMap;
+            if (myMap == null)
+                return;
             var formsPins = myMap.CustomPins;
 
-            if (formsPins == null || formsPins.Count() == 0)
+            var customPins = formsPins as CustomPin[] ?? formsPins.ToArray();
+            if (!customPins.Any())
             {
                 return;
             }
 
-            var centerPosition = new Position(formsPins.Average(x => x.Position.Latitude), formsPins.Average(x => x.Position.Longitude));
+            var centerPosition = new Position(customPins.Average(x => x.Position.Latitude), customPins.Average(x => x.Position.Longitude));
 
-            var minLongitude = formsPins.Min(x => x.Position.Longitude);
-            var minLatitude = formsPins.Min(x => x.Position.Latitude);
+            var minLongitude = customPins.Min(x => x.Position.Longitude);
+            var minLatitude = customPins.Min(x => x.Position.Latitude);
 
-            var maxLongitude = formsPins.Max(x => x.Position.Longitude);
-            var maxLatitude = formsPins.Max(x => x.Position.Latitude);
+            var maxLongitude = customPins.Max(x => x.Position.Longitude);
+            var maxLatitude = customPins.Max(x => x.Position.Latitude);
 
             var distance = MapHelper.CalculateDistance(minLatitude, minLongitude,
                                maxLatitude, maxLongitude, 'M') / 2;

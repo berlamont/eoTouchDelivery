@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.DataServices;
+using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;
 using eoTouchDelivery.Views;
 using Xamarin.Forms;
