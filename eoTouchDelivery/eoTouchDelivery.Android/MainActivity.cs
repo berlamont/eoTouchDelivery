@@ -1,11 +1,13 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using FFImageLoading.Forms.Droid;
 
 namespace eoTouchDelivery.Droid
 {
-	[Activity(Label = "eoTouchDelivery.Android", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+	[Activity(Label = "eoTouchDelivery.Android", Icon = "@drawable/icon", Theme = "@style/MainTheme", ScreenOrientation = ScreenOrientation.Portrait)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 	{
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -15,6 +17,9 @@ namespace eoTouchDelivery.Droid
 			base.OnCreate(bundle);
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
+			Xamarin.FormsMaps.Init(this, bundle);
+			UserDialogs.Init(this);
+			CachedImageRenderer.Init();
 
 			LoadApplication(new App());
 		}

@@ -1,4 +1,4 @@
-﻿namespace eoTouchDelivery.Core.Helpers
+﻿namespace eoTouchDelivery.Core.Utils
 {
     public sealed class OnCustomPlatform<T>
     {

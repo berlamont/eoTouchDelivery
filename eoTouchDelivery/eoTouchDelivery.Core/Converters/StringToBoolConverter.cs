@@ -31,6 +31,3 @@ namespace eoTouchDelivery.Core.Converters
         }
     }
 }
-
-    }
-}

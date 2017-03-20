@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eoTouchDelivery.Helpers
+namespace eoTouchDelivery.Core.Utils
 {
 	public class MessagingCenterAlert
 	{
