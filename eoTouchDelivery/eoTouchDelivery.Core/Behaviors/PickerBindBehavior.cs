@@ -7,13 +7,13 @@ using Xamarin.Forms;
 namespace eoTouchDelivery.Core.Behaviors
 {
     /// <summary>
-    /// This Xamarin.Forms behavior enables data binding with the Picker control for MVVM.
-    /// Add an instance to the Behaviors collection and bind the Items and SelectedItem 
-    /// property on the behavior. This will populate the picker and let you control and
-    /// monitor the selection.
+    ///     This Xamarin.Forms behavior enables data binding with the Picker control for MVVM.
+    ///     Add an instance to the Behaviors collection and bind the Items and SelectedItem
+    ///     property on the behavior. This will populate the picker and let you control and
+    ///     monitor the selection.
     /// </summary>
     /// <example>
-    /// <!--[CDATA[
+    ///     <!--[CDATA[
     /// <Picker ...>
     ///    <Picker.Behaviors>
     ///        <PickerBindBehavior Items="{Binding ACollection}" 
@@ -23,258 +23,243 @@ namespace eoTouchDelivery.Core.Behaviors
     /// ]]>-->
     /// </example>
     public class PickerBindBehavior : BindingContextBehavior<Picker>
-    {
-        bool updatingValue;
+	{
+		bool _updatingValue;
 
-        #region ItemsProperty
-        /// <summary>
-        /// Items bindable property
-        /// </summary>
-        public static BindableProperty ItemsProperty =
-            BindableProperty.Create("Items", typeof(IEnumerable),
-                typeof(PickerBindBehavior),null,
-                propertyChanged: ItemsChanged);
+	    /// <summary>
+	    ///     Called when this behavior is attached to a visual.
+	    /// </summary>
+	    /// <param name="bindable">Visual owner</param>
+	    protected override void OnAttachedTo(Picker bindable)
+		{
+			base.OnAttachedTo(bindable);
 
-        /// <summary>
-        /// Get or set the collection of items for the Picker to display.
-        /// The behavior will add the textual (ToString) representation for each item.
-        /// </summary>
-        /// <value>Any IEnumerable of items to display.</value>
-        public IEnumerable Items
-        {
-            get { return (IEnumerable) base.GetValue(ItemsProperty); }
-            set { base.SetValue(ItemsProperty, value); }
-        }
+			bindable.SelectedIndexChanged += OnSelectedIndexChanged;
+			OnItemsChanged(null, Items);
+			OnSelectedItemChanged(null, SelectedItem);
+		}
 
-        static void ItemsChanged(BindableObject bindableObject, object oldValue, object newValue)
-        {
-            var behavior = bindableObject as PickerBindBehavior;
-            if (behavior != null)
-                behavior.OnItemsChanged((IEnumerable)oldValue, (IEnumerable)newValue);
-        }
-        #endregion
+	    /// <summary>
+	    ///     Called when this behavior is detached from a visual
+	    /// </summary>
+	    /// <param name="bindable">Visual owner</param>
+	    protected override void OnDetachingFrom(Picker bindable)
+		{
+			bindable.SelectedIndexChanged -= OnSelectedIndexChanged;
+			base.OnDetachingFrom(bindable);
+		}
 
-        #region SelectedItemProperty
-        /// <summary>
-        /// The currently selected item
-        /// </summary>
-        public static BindableProperty SelectedItemProperty =
-            BindableProperty.Create("SelectedItem",
-                typeof(object), typeof(PickerBindBehavior),
-                null,
-                BindingMode.TwoWay,
-                propertyChanged: SelectedItemChanged);
+	    /// <summary>
+	    ///     This method is called when the <see cref="Items" /> property is changed.
+	    ///     It will update the picker visual and also add a change handler if the
+	    ///     passed enumerable implements <see cref="INotifyCollectionChanged" />
+	    /// </summary>
+	    /// <param name="oldValue">Old value.</param>
+	    /// <param name="newValue">New value.</param>
+	    void OnItemsChanged(IEnumerable oldValue, IEnumerable newValue)
+		{
+			var ncc = oldValue as INotifyCollectionChanged;
+			if (ncc != null)
+				ncc.CollectionChanged -= OnCollectionChanged;
 
-        /// <summary>
-        /// The currently selected object in the Picker.
-        /// This is the actual instance, not just a string.
-        /// </summary>
-        /// <value>The selected item.</value>
-        public object SelectedItem
-        {
-            get { return base.GetValue(SelectedItemProperty); }
-            set { base.SetValue(SelectedItemProperty, value); }
-        }
+			if (AssociatedObject == null)
+				return;
 
-        static void SelectedItemChanged(BindableObject bindableObject, object oldValue, object newValue)
-        {
-            var behavior = bindableObject as PickerBindBehavior;
-            if (behavior != null)
-                behavior.OnSelectedItemChanged(oldValue, newValue);
-        }
-        #endregion
+			AssociatedObject.Items.Clear();
 
-        /// <summary>
-        /// Called when this behavior is attached to a visual.
-        /// </summary>
-        /// <param name="bindable">Visual owner</param>
-        protected override void OnAttachedTo(Picker bindable)
-        {
-            base.OnAttachedTo (bindable);
+			if (newValue == null)
+				return;
 
-            bindable.SelectedIndexChanged += OnSelectedIndexChanged;
-            OnItemsChanged(null, Items);
-            OnSelectedItemChanged(null, SelectedItem);
-        }
+			foreach (var item in newValue)
+				AssociatedObject.Items.Add((item ?? "").ToString());
 
-        /// <summary>
-        /// Called when this behavior is detached from a visual
-        /// </summary>
-        /// <param name="bindable">Visual owner</param>
-        protected override void OnDetachingFrom(Picker bindable)
-        {
-            bindable.SelectedIndexChanged -= OnSelectedIndexChanged;
-            base.OnDetachingFrom (bindable);
-        }
+			ncc = newValue as INotifyCollectionChanged;
+			if (ncc != null)
+				ncc.CollectionChanged += OnCollectionChanged;
+		}
 
-        /// <summary>
-        /// This method is called when the <see cref="Items"/> property is changed.
-        /// It will update the picker visual and also add a change handler if the 
-        /// passed enumerable implements <see cref="INotifyCollectionChanged"/>
-        /// </summary>
-        /// <param name="oldValue">Old value.</param>
-        /// <param name="newValue">New value.</param>
-        private void OnItemsChanged(IEnumerable oldValue, IEnumerable newValue)
-        {
-            var ncc = oldValue as INotifyCollectionChanged;
-            if (ncc != null)
-            {
-                ncc.CollectionChanged -= OnCollectionChanged;
-            }
+	    /// <summary>
+	    ///     This method is called if the data-bound Items implements collection-change
+	    ///     notifications. It will update the Picker visuals based on the collection changes.
+	    /// </summary>
+	    /// <param name="sender">The collection</param>
+	    /// <param name="e">EventArgs</param>
+	    void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			Debug.Assert(ReferenceEquals(sender, Items));
 
-            if (AssociatedObject == null)
-                return;
+			if (e.Action == NotifyCollectionChangedAction.Add)
+			{
+				foreach (var item in e.NewItems)
+					AssociatedObject.Items.Add((item ?? "").ToString());
+			}
+			else if (e.Action == NotifyCollectionChangedAction.Remove)
+			{
+				foreach (var item in e.OldItems)
+				{
+					var value = (item ?? "").ToString();
+					AssociatedObject.Items.Remove(value);
+				}
+			}
 
-            AssociatedObject.Items.Clear ();
+			else if (e.Action == NotifyCollectionChangedAction.Reset)
+			{
+				AssociatedObject.Items.Clear();
+				foreach (var item in Items)
+					AssociatedObject.Items.Add((item ?? "").ToString());
+			}
 
-            if (newValue == null)
-                return;
+			if (SelectedItem != null && AssociatedObject.SelectedIndex == -1)
+				OnSelectedItemChanged(null, SelectedItem);
+		}
 
-            foreach (var item in newValue) {
-                AssociatedObject.Items.Add ((item ?? "").ToString());
-            }
+	    /// <summary>
+	    ///     This is called when the behavior's <see cref="SelectedItem" /> property is changed.
+	    ///     It will update the Picker's SelectedIndex property.
+	    /// </summary>
+	    /// <param name="oldValue">Old value.</param>
+	    /// <param name="newValue">New value.</param>
+	    void OnSelectedItemChanged(object oldValue, object newValue)
+		{
+			if (AssociatedObject == null || _updatingValue)
+				return;
 
-            ncc = newValue as INotifyCollectionChanged;
-            if (ncc != null)
-            {
-                ncc.CollectionChanged += OnCollectionChanged;
-            }
-        }
+			if (Equals(oldValue, newValue))
+				return;
 
-        /// <summary>
-        /// This method is called if the data-bound Items implements collection-change
-        /// notifications. It will update the Picker visuals based on the collection changes.
-        /// </summary>
-        /// <param name="sender">The collection</param>
-        /// <param name="e">EventArgs</param>
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            Debug.Assert(ReferenceEquals(sender, Items));
+			_updatingValue = true;
+			try
+			{
+				if (newValue == null)
+					AssociatedObject.SelectedIndex = -1;
 
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (var item in e.NewItems)
-                {
-                    AssociatedObject.Items.Add((item ?? "").ToString());
-                }
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (var item in e.OldItems)
-                {
-                    var value = (item ?? "").ToString();
-                    AssociatedObject.Items.Remove(value);
-                }
-            }
+				var items = Items;
+				if (items == null)
+					return;
 
-            else if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                AssociatedObject.Items.Clear();
-                foreach (var item in Items)
-                {
-                    AssociatedObject.Items.Add((item ?? "").ToString());
-                }
-            }
+				var index = -1;
+				var itemList = items as IList;
+				if (itemList != null)
+					index = itemList.IndexOf(newValue);
+				else
+					foreach (var testValue in items)
+					{
+						index++;
+						if (Equals(testValue, newValue))
+							break;
+					}
+				AssociatedObject.SelectedIndex = index;
+			}
+			finally
+			{
+				_updatingValue = false;
+			}
+		}
 
-            if (SelectedItem != null && AssociatedObject.SelectedIndex == -1) {
-                OnSelectedItemChanged (null, SelectedItem);
-            }
-        }
+	    /// <summary>
+	    ///     This is called when the Picker's SelectedIndex property is changed
+	    ///     by the visual control. It will update the <see cref="SelectedItem" /> property.
+	    /// </summary>
+	    /// <param name="sender">Sender.</param>
+	    /// <param name="e">E.</param>
+	    void OnSelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (AssociatedObject == null || _updatingValue)
+				return;
 
-        /// <summary>
-        /// This is called when the behavior's <see cref="SelectedItem"/> property is changed.
-        /// It will update the Picker's SelectedIndex property.
-        /// </summary>
-        /// <param name="oldValue">Old value.</param>
-        /// <param name="newValue">New value.</param>
-        void OnSelectedItemChanged(object oldValue, object newValue)
-        {
-            if (AssociatedObject == null || updatingValue)
-                return;
+			var items = Items;
+			if (items == null)
+				return;
 
-            if (Object.Equals(oldValue, newValue))
-                return;
+			var selectedIndex = AssociatedObject.SelectedIndex;
+			if (selectedIndex == -1)
+			{
+				SelectedItem = null;
+				return;
+			}
 
-            updatingValue = true;
-            try
-            {
-                if (newValue == null)
-                {
-                    AssociatedObject.SelectedIndex = -1;
-                }
+			object value = null;
 
-                var items = Items;
-                if (items == null)
-                    return;
+			var itemList = items as IList;
+			if (itemList != null)
+			{
+				value = itemList[selectedIndex];
+			}
+			else
+			{
+				var index = 0;
+				foreach (var testValue in items)
+				{
+					if (index == selectedIndex)
+					{
+						value = testValue;
+						break;
+					}
+					index++;
+				}
+			}
 
-                var index = -1;
-                var itemList = items as IList;
-                if (itemList != null)
-                {
-                    index = itemList.IndexOf(newValue);
-                }
-                else
-                {
-                    foreach (var testValue in items)
-                    {
-                        index++;
-                        if (Equals(testValue, newValue))
-                            break;
-                    }
-                }
-                AssociatedObject.SelectedIndex = index;
-            }
-            finally
-            {
-                updatingValue = false;
-            }
-        }
+			SelectedItem = value;
+		}
 
-        /// <summary>
-        /// This is called when the Picker's SelectedIndex property is changed
-        /// by the visual control. It will update the <see cref="SelectedItem"/> property.
-        /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
-        void OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (AssociatedObject == null || updatingValue)
-                return;
+		#region ItemsProperty
 
-            var items = Items;
-            if (items == null)
-                return;
+	    /// <summary>
+	    ///     Items bindable property
+	    /// </summary>
+	    public static BindableProperty ItemsProperty =
+			BindableProperty.Create("Items", typeof(IEnumerable),
+				typeof(PickerBindBehavior), null,
+				propertyChanged: ItemsChanged);
 
-            var selectedIndex = AssociatedObject.SelectedIndex;
-            if (selectedIndex == -1)
-            {
-                SelectedItem = null;
-                return;
-            }
+	    /// <summary>
+	    ///     Get or set the collection of items for the Picker to display.
+	    ///     The behavior will add the textual (ToString) representation for each item.
+	    /// </summary>
+	    /// <value>Any IEnumerable of items to display.</value>
+	    public IEnumerable Items
+		{
+			get => (IEnumerable) GetValue(ItemsProperty);
+			set => SetValue(ItemsProperty, value);
+		}
 
-            object value = null;
+		static void ItemsChanged(BindableObject bindableObject, object oldValue, object newValue)
+		{
+			var behavior = bindableObject as PickerBindBehavior;
+			behavior?.OnItemsChanged((IEnumerable) oldValue, (IEnumerable) newValue);
+		}
 
-            var itemList = items as IList;
-            if (itemList != null)
-            {
-                value = itemList[selectedIndex];
-            }
-            else
-            {
-                var index = 0;
-                foreach (var testValue in items)
-                {
-                    if (index == selectedIndex)
-                    {
-                        value = testValue;
-                        break;
-                    }
-                    index++;
-                }
-            }
+		#endregion
 
-            SelectedItem = value;
-        }
-    }
+		#region SelectedItemProperty
+
+	    /// <summary>
+	    ///     The currently selected item
+	    /// </summary>
+	    public static BindableProperty SelectedItemProperty =
+			BindableProperty.Create("SelectedItem",
+				typeof(object), typeof(PickerBindBehavior),
+				null,
+				BindingMode.TwoWay,
+				propertyChanged: SelectedItemChanged);
+
+	    /// <summary>
+	    ///     The currently selected object in the Picker.
+	    ///     This is the actual instance, not just a string.
+	    /// </summary>
+	    /// <value>The selected item.</value>
+	    public object SelectedItem
+		{
+			get => GetValue(SelectedItemProperty);
+			set => SetValue(SelectedItemProperty, value);
+		}
+
+		static void SelectedItemChanged(BindableObject bindableObject, object oldValue, object newValue)
+		{
+			var behavior = bindableObject as PickerBindBehavior;
+			behavior?.OnSelectedItemChanged(oldValue, newValue);
+		}
+
+		#endregion
+	}
 }
-

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "eoTouchDelivery", "eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.shproj", "{905187A8-ECC5-488C-8D25-BDF4E0894152}"
 EndProject
@@ -18,7 +18,9 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{905187a8-ecc5-488c-8d25-bdf4e0894152}*SharedItemsImports = 13
+		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{925bf3df-13de-4698-99fa-4053a23ffc67}*SharedItemsImports = 4
 		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{c7597305-c5ef-4c6a-bfe5-3c3e1c2636e4}*SharedItemsImports = 4
+		eoTouchDelivery\eoTouchDelivery\eoTouchDelivery.projitems*{e71070d6-66cd-4259-bc32-88c16f024dfc}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

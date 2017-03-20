@@ -79,7 +79,7 @@ namespace eoTouchDelivery.Core.Services
             if (registerBehavior.HasFlag(RegisterBehavior.MessageVisualizer))
                 defaultLocator.Register<IMessageVisualizerService, FormsMessageVisualizerService>();
             if (registerBehavior.HasFlag(RegisterBehavior.Navigation))
-                defaultLocator.Register<INavigationService, FormsNavigationPageService>();
+                defaultLocator.Register<INavigationService, NavigationService>();
 
             defaultLocator.Register<IDependencyService>(defaultLocator);
 

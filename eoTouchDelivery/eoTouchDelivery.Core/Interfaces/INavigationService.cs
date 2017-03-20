@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using eoTouchDelivery.ViewModels;
+
 
 namespace eoTouchDelivery.Core.Interfaces
 {
@@ -24,7 +26,7 @@ namespace eoTouchDelivery.Core.Interfaces
         /// <returns>The async.</returns>
         /// <param name="pageKey">Page key.</param>
         /// <param name="viewModel">View model.</param>
-        Task NavigateAsync(object pageKey, object viewModel = null);
+        Task NavigateToAsync(object pageKey, object viewModel = null);
 
         /// <summary>
         /// Returns true/false whether we can go backwards on the Nav Stack.
@@ -51,5 +53,19 @@ namespace eoTouchDelivery.Core.Interfaces
         /// </summary>
         /// <returns>Async response</returns>
         Task PopModalAsync();
+
+        Task InitializeAsync();
+
+        Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel;
+
+        Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : BaseViewModel;
+
+        Task NavigateToAsync(Type viewModelType);
+
+        Task NavigateToAsync(Type viewModelType, object parameter);
+
+        Task NavigateBackAsync();
+
+        Task RemoveLastFromBackStackAsync();
     }
 }

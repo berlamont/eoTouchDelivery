@@ -22,8 +22,8 @@ namespace eoTouchDelivery.Core.Controls
         /// </summary>
         /// <value>The placeholder text.</value>
         public string PlaceholderText {
-            get { return (string)GetValue (PlaceholderTextProperty); }
-            set { SetValue (PlaceholderTextProperty, value); }
+            get => (string)GetValue (PlaceholderTextProperty);
+            set => SetValue (PlaceholderTextProperty, value);
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace eoTouchDelivery.Core.Controls
         /// </summary>
         /// <value>The item style.</value>
         public Style ItemStyle {
-            get { return (Style)GetValue (ItemStyleProperty); }
-            set { SetValue (ItemStyleProperty, value); }
+            get => (Style)GetValue (ItemStyleProperty);
+            set => SetValue (ItemStyleProperty, value);
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace eoTouchDelivery.Core.Controls
         /// </summary>
         /// <value>The items source.</value>
         public IList ItemsSource {
-            get { return (IList)GetValue (ItemsSourceProperty); }
-            set { SetValue (ItemsSourceProperty, value); }
+            get => (IList)GetValue (ItemsSourceProperty);
+            set => SetValue (ItemsSourceProperty, value);
         }
 
         /// <summary>
@@ -68,8 +68,8 @@ namespace eoTouchDelivery.Core.Controls
         /// </summary>
         /// <value>The item template.</value>
         public DataTemplate ItemTemplate {
-            get { return (DataTemplate)GetValue (ItemTemplateProperty); }
-            set { SetValue (ItemTemplateProperty, value); }
+            get => (DataTemplate)GetValue (ItemTemplateProperty);
+            set => SetValue (ItemTemplateProperty, value);
         }
 
         // Data
@@ -93,7 +93,7 @@ namespace eoTouchDelivery.Core.Controls
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalTextAlignment = TextAlignment.Center
             };
-            _noItemsLabel.SetBinding (Label.StyleProperty, new Binding(nameof(ItemStyle), source: this));
+            _noItemsLabel.SetBinding (StyleProperty, new Binding(nameof(ItemStyle), source: this));
             _noItemsLabel.SetBinding (Label.TextProperty, new Binding (nameof (PlaceholderText), source: this));
 
             Content = _noItemsLabel;
@@ -163,14 +163,12 @@ namespace eoTouchDelivery.Core.Controls
 
             foreach (var view in _stack.Children)
             {
-                var label = view as Label;
-                if (label != null) {
-
-                    if (style == null)
-                        label.ClearValue (Label.StyleProperty);
-                    else
-                        label.Style = style;
-                }
+                if (!(view is Label label))
+                    continue;
+                if (style == null)
+                    label.ClearValue(StyleProperty);
+                else
+                    label.Style = style;
             }
         }
 
@@ -203,7 +201,7 @@ namespace eoTouchDelivery.Core.Controls
                         if (itemStyle != null) {
                             visualItem.Style = itemStyle;
                         } else {
-                            visualItem.ClearValue (Label.StyleProperty);
+                            visualItem.ClearValue (StyleProperty);
                         }
                     }
                 }
@@ -233,15 +231,13 @@ namespace eoTouchDelivery.Core.Controls
         void InflateTemplate (DataTemplate template, object item)
         {
             // Pull real template from selector if necessary.
-            var dSelector = template as DataTemplateSelector;
-            if (dSelector != null)
-                template = dSelector.SelectTemplate (item, this);
+            if (template is DataTemplateSelector dSelector)
+                template = dSelector.SelectTemplate(item, this);
 
-            var view = template.CreateContent () as View;
-            if (view != null) {
-                view.BindingContext = item;
-                _stack.Children.Add (view);
-            }
+            if (!(template.CreateContent() is View view))
+                return;
+            view.BindingContext = item;
+            _stack.Children.Add(view);
         }
 
         /// <summary>
@@ -251,10 +247,7 @@ namespace eoTouchDelivery.Core.Controls
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">E.</param>
-        void OnCollectionChanged (object sender, NotifyCollectionChangedEventArgs e)
-        {
-            FillContainer ((IList)sender);
-        }
-   }
+        void OnCollectionChanged (object sender, NotifyCollectionChangedEventArgs e) => FillContainer ((IList)sender);
+    }
 }
 

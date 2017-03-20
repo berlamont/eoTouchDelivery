@@ -36,6 +36,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animations\Base\AnimationBase.cs" />
+    <Compile Include="Animations\EasingType.cs" />
+    <Compile Include="Animations\FadeToAnimation.cs" />
+    <Compile Include="Animations\RotateToAnimation.cs" />
+    <Compile Include="Animations\ScaleToAnimation.cs" />
+    <Compile Include="Animations\StoryBoard.cs" />
+    <Compile Include="Animations\TranslateAnimation.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Behaviors\BindingContextBehavior.cs" />
     <Compile Include="Behaviors\EffectBehavior.cs" />
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
@@ -50,7 +60,18 @@
     <Compile Include="Commands\NavigateBackCommand.cs" />
     <Compile Include="Commands\NavigateToCommand.cs" />
     <Compile Include="Commands\NavigationCommands.cs" />
+    <Compile Include="Controls\BindablePicker\BindablePicker.cs" />
+    <Compile Include="Controls\CircularProgressControl.cs" />
+    <Compile Include="Controls\CustomMap\CustomMap.cs" />
+    <Compile Include="Controls\CustomMap\CustomPin.cs" />
+    <Compile Include="Controls\CustomProgressBar\CustomProgressBar.cs" />
+    <Compile Include="Controls\FloatingActionButtonView\FloatingActionButtonView.cs" />
+    <Compile Include="Controls\ImageButton\ImageButton.cs" />
+    <Compile Include="Controls\ImageButton\ImageOrientation.cs" />
     <Compile Include="Controls\ItemsControl.cs" />
+    <Compile Include="Controls\NoBarsScrollViewer.cs" />
+    <Compile Include="Controls\StackedList.cs" />
+    <Compile Include="Controls\ToggleButton\ToggleButton.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\ByteToImageConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
@@ -63,6 +84,12 @@
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="Helpers\CacheHelper.cs" />
+    <Compile Include="Helpers\EasingHelper.cs" />
+    <Compile Include="Helpers\MapHelper.cs" />
+    <Compile Include="Helpers\MessengingCenterAlert.cs" />
+    <Compile Include="Helpers\OnCustomPlatform.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Interfaces\IAsyncDelegateCommand.cs" />
     <Compile Include="Interfaces\IDelegateCommand.cs" />
     <Compile Include="Interfaces\IDependencyService.cs" />
@@ -72,22 +99,51 @@
     <Compile Include="MarkupExtensions\DependencyServiceExtension.cs" />
     <Compile Include="MarkupExtensions\ImageResourceExtension.cs" />
     <Compile Include="MarkupExtensions\RelativeBindingContext.cs" />
+    <Compile Include="Models\Enums\MenuItemType.cs" />
+    <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Mvvm\AsyncDelegateCommand.cs" />
     <Compile Include="Mvvm\DelegateCommand.cs" />
     <Compile Include="Mvvm\PropertyObserver.cs" />
     <Compile Include="Mvvm\SimpleViewModel.cs" />
     <Compile Include="NamedDataTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\ThemedNavigationPage.cs" />
     <Compile Include="Services\DependencyServiceWrapper.cs" />
     <Compile Include="Services\DependencyService.cs" />
     <Compile Include="Services\FormsMessageVisualizerService.cs" />
-    <Compile Include="Services\FormsNavigationPageService.cs" />
-    <Compile Include="Services\SettingService.cs" />
+    <Compile Include="Services\IDataStore.cs" />
+    <Compile Include="Services\MockDataStore.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Triggers\BeginAnimation.cs" />
+    <Compile Include="Users\UserProfile.cs" />
+    <Compile Include="Utils\ObservableRangeCollection.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
+    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Maps, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Forms.Maps.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
@@ -100,6 +156,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MenuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml">
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
