@@ -72,19 +72,42 @@
     <Compile Include="Controls\NoBarsScrollViewer.cs" />
     <Compile Include="Controls\StackedList.cs" />
     <Compile Include="Controls\ToggleButton\ToggleButton.cs" />
+    <Compile Include="Converters\BoolToColorConverter.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\ByteToImageConverter.cs" />
+    <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EventArgsConverter.cs" />
     <Compile Include="Converters\ImageResourceConverter.cs" />
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />
+    <Compile Include="Converters\InverseBoolConverter.cs" />
+    <Compile Include="Converters\InverseNullToBoolConverter.cs" />
+    <Compile Include="Converters\MapColorConverter.cs" />
+    <Compile Include="Converters\MenuItemTypeConverter.cs" />
     <Compile Include="Converters\NotBooleanConverter.cs" />
     <Compile Include="Converters\NullOrEmptyBooleanConverter.cs" />
+    <Compile Include="Converters\NullToBoolConverter.cs" />
+    <Compile Include="Converters\StringToBoolConverter.cs" />
+    <Compile Include="DataServices\AuthenticationService.cs" />
+    <Compile Include="DataServices\Base\IRequestProvider.cs" />
+    <Compile Include="DataServices\Base\RequestProvider.cs" />
+    <Compile Include="DataServices\Base\ServiceAuthenticationException.cs" />
+    <Compile Include="DataServices\Fake\FakeAuthenticationService.cs" />
+    <Compile Include="DataServices\Fake\FakeProfileService.cs" />
+    <Compile Include="DataServices\Interfaces\IAuthenticationService.cs" />
+    <Compile Include="DataServices\Interfaces\IProfileService.cs" />
+    <Compile Include="DataServices\ProfileService.cs" />
+    <Compile Include="Effects\ContentPageTitleFontEffect.cs" />
+    <Compile Include="Effects\LineColorEffect.cs" />
+    <Compile Include="Effects\MaxLinesEffect.cs" />
+    <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
+    <Compile Include="GlobalSettings.cs" />
     <Compile Include="Helpers\CacheHelper.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\EasingHelper.cs" />
     <Compile Include="Helpers\MapHelper.cs" />
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
@@ -99,12 +122,13 @@
     <Compile Include="MarkupExtensions\DependencyServiceExtension.cs" />
     <Compile Include="MarkupExtensions\ImageResourceExtension.cs" />
     <Compile Include="MarkupExtensions\RelativeBindingContext.cs" />
+    <Compile Include="Models\Users\AuthenticationRequest.cs" />
     <Compile Include="Models\Enums\MenuItemType.cs" />
-    <Compile Include="Models\ImageModel.cs" />
+    <Compile Include="Models\Users\ImageModel.cs" />
     <Compile Include="Models\MenuItem.cs" />
-    <Compile Include="Mvvm\AsyncDelegateCommand.cs" />
-    <Compile Include="Mvvm\DelegateCommand.cs" />
-    <Compile Include="Mvvm\PropertyObserver.cs" />
+    <Compile Include="Models\Users\AuthenticationResponse.cs" />
+    <Compile Include="Models\Users\Tenant.cs" />
+    <Compile Include="Models\Users\User.cs" />
     <Compile Include="Mvvm\SimpleViewModel.cs" />
     <Compile Include="NamedDataTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +137,7 @@
     <Compile Include="Services\DependencyService.cs" />
     <Compile Include="Services\FormsMessageVisualizerService.cs" />
     <Compile Include="Services\IDataStore.cs" />
+    <Compile Include="Services\iOSNavigationService.cs" />
     <Compile Include="Services\MockDataStore.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Triggers\BeginAnimation.cs" />
@@ -120,6 +145,8 @@
     <Compile Include="Utils\ObservableRangeCollection.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
+    <Compile Include="ViewModels\Base\MessengerKeys.cs" />
+    <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -129,6 +156,27 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.3.10\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Acr.UserDialogs.6.3.10\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -137,6 +185,9 @@
     </Reference>
     <Reference Include="Plugin.Settings.Abstractions, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>

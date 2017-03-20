@@ -2,349 +2,219 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.Interfaces;
-using eoTouchDelivery.ViewModels;
+using eoTouchDelivery.Views;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Core.Services
 {
-    /// <summary>
-    ///     Service to manage the Xamarin.Forms Stack navigation system.
-    ///     This understands both <c>NavigationPage</c> and <c>MasterDetailPage</c> with
-    ///     an embedded navigation page.
-    /// </summary>
-    public class NavigationService : INavigationService
+	/// <summary>
+	///     Service to manage the Xamarin.Forms Stack navigation system.
+	///     This understands both <c>NavigationPage</c> and <c>MasterDetailPage</c> with
+	///     an embedded navigation page.
+	/// </summary>
+	public class NavigationService : INavigationService
 	{
-		static readonly Task TaskCompleted = Task.FromResult(0);
-		INavigation _navigation;
-		Dictionary<object, Action<object>> _registeredActions;
-		Dictionary<object, Func<Page>> _registeredPages;
 
-	    /// <summary>
-	    ///     Constructor
-	    /// </summary>
-	    public NavigationService()
-		{
-			// If we are using MasterDetailPage as the MainPage, then
-			// hide master page when we navigate on phones since we only look at
-			// the detail page for the navigation root.
-			HideMasterPageOnNavigation = Device.Idiom == TargetIdiom.Phone;
-		}
+		protected readonly Dictionary<Type, Type> _mappings;
 
-	    /// <summary>
-	    ///     Allows you to change how keys are compared.
-	    ///     Must be called _before_ any pages are registered.
-	    /// </summary>
-	    /// <value>The key comparer.</value>
-	    public IEqualityComparer<object> KeyComparer
-		{
-			get => _registeredPages?.Comparer;
-
-			set
-			{
-				if (value == null)
-					throw new ArgumentNullException(nameof(KeyComparer), "KeyComparer cannot be null.");
-				if (_registeredPages != null)
-					throw new InvalidOperationException("Cannot set KeyComparer once pages are added.");
-				_registeredPages = new Dictionary<object, Func<Page>>(value);
-			}
-		}
-
-	    /// <summary>
-	    ///     This flag determines whether to hide the master page when a NavigateAsync
-	    ///     occurs. The default is TRUE for phones, but you can set this flag to FALSE
-	    ///     to turn off this behavior.
-	    /// </summary>
-	    /// <value><c>true</c> if hide master page on navigation; otherwise, <c>false</c>.</value>
-	    public bool HideMasterPageOnNavigation { get; set; }
-
-	    /// <summary>
-	    ///     Returns the underlying Navigation interface implemented by the
-	    ///     Forms page system.
-	    /// </summary>
-	    /// <value>The INavigation implementation to use for navigation.</value>
-	    public INavigation Navigation
+		protected Application CurrentApplication
 		{
 			get
 			{
-				if (_navigation != null)
-					return _navigation;
-				// Locate the navigation page.
-				var navPage = FindNavigationPage();
-				if (navPage == null)
-					throw new Exception("Failed to locate required NavigationPage from App.MainPage.");
-
-				// Cache off Navigation interface.
-				_navigation = navPage.Navigation;
-
-				// Wire into navigation events.
-				navPage.Pushed += OnPagePushed;
-				navPage.Popped += OnPagePopped;
-				navPage.PoppedToRoot += OnPagePopped;
-
-				return _navigation;
+				return Application.Current;
 			}
-
-			set => _navigation = value;
 		}
 
-	    /// <summary>
-	    ///     Event raised when NavigateAsync is used.
-	    /// </summary>
-	    public event EventHandler Navigated;
-
-	    /// <summary>
-	    ///     Event raised when a GoBackAsync operation occurs.
-	    /// </summary>
-	    public event EventHandler NavigatedBack;
-
-	    /// <summary>
-	    ///     Navigate to a page using the passed key. This also assigns the
-	    ///     BindingContext if a ViewModel is passed.
-	    /// </summary>
-	    /// <returns>Task representing the navigation</returns>
-	    /// <param name="pageKey">Page key.</param>
-	    /// <param name="viewModel">View model.</param>
-	    public Task NavigateAsync(object pageKey, object viewModel = null)
+		public NavigationService(IAuthenticationService authenticationService)
 		{
-			if (pageKey == null)
-				throw new ArgumentNullException(nameof(pageKey));
+			_authenticationService = authenticationService;
+			_mappings = new Dictionary<Type, Type>();
 
-			// On a phone, always hide master page when we navigate since we
-			// will be using the Detail page.
-			if (HideMasterPageOnNavigation)
-			{
-				var mdPage = Application.Current.MainPage as MasterDetailPage;
-				if (mdPage != null)
-					mdPage.IsPresented = false;
-			}
-
-			// Look for a registered page first. If that's not available, look for an action.
-			var page = GetPageByKey(pageKey);
-			if (page == null)
-			{
-				if (_registeredActions != null)
-				{
-					Action<object> work;
-					if (_registeredActions.TryGetValue(pageKey, out work))
-						work.Invoke(viewModel);
-				}
-				return TaskCompleted;
-			}
-
-			if (viewModel != null)
-				page.BindingContext = viewModel;
-
-			return Navigation.PushAsync(page);
+			CreatePageViewModelMappings();
+			CreateMessengerSubscriptions();
 		}
 
-		/// <inheritdoc />
-		public Task NavigateToAsync(object pageKey, object viewModel = null)
-		{
-			return null;
-		}
-
-		/// <summary>
-	    ///     True if we can go backwards on the navigation stack.
-	    /// </summary>
-	    /// <value><c>true</c> if can go back; otherwise, <c>false</c>.</value>
-	    public bool CanGoBack => Navigation.NavigationStack.Count > 1;
-
-	    /// <summary>
-	    ///     Pops the last page off the stack.
-	    /// </summary>
-	    /// <returns>Task representing the navigation event.</returns>
-	    public Task GoBackAsync() => !CanGoBack ? TaskCompleted : Navigation.PopAsync();
-
-	    /// <summary>
-	    ///     Pushes a new page modally onto the navigation stack.
-	    /// </summary>
-	    /// <returns>Task representing the modal navigation.</returns>
-	    /// <param name="pageKey">Page key.</param>
-	    /// <param name="viewModel">View model.</param>
-	    public Task PushModalAsync(object pageKey, object viewModel = null)
-		{
-			if (pageKey == null)
-				throw new ArgumentNullException(nameof(pageKey));
-
-			var page = GetPageByKey(pageKey);
-			if (page == null)
-				throw new ArgumentException("Cannot navigate to unregistered page", nameof(pageKey));
-
-			if (viewModel != null)
-				page.BindingContext = viewModel;
-
-			return Navigation.PushModalAsync(page);
-		}
-
-	    /// <summary>
-	    ///     Pops a page off the modal stack.
-	    /// </summary>
-	    /// <returns>Task representing the navigation.</returns>
-	    public Task PopModalAsync() => Navigation.PopModalAsync();
-
-		/// <inheritdoc />
 		public Task InitializeAsync()
 		{
-			return null;
+			if (_authenticationService.IsAuthenticated)
+			{
+				return NavigateToAsync<MainViewModel>();
+			}
+			else
+			{
+				return NavigateToAsync<LoginViewModel>();
+			}
 		}
 
-		/// <inheritdoc />
-		public Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel
+		public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
 		{
-			return null;
+			return InternalNavigateToAsync(typeof(TViewModel), null);
 		}
 
-		/// <inheritdoc />
-		public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : BaseViewModel
+		public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase
 		{
-			return null;
+			return InternalNavigateToAsync(typeof(TViewModel), parameter);
 		}
 
-		/// <inheritdoc />
 		public Task NavigateToAsync(Type viewModelType)
 		{
-			return null;
+			return InternalNavigateToAsync(viewModelType, null);
 		}
 
-		/// <inheritdoc />
 		public Task NavigateToAsync(Type viewModelType, object parameter)
 		{
-			return null;
+			return InternalNavigateToAsync(viewModelType, parameter);
 		}
 
-		/// <inheritdoc />
-		public Task NavigateBackAsync()
+		public async Task NavigateBackAsync()
 		{
-			return null;
+			if (CurrentApplication.MainPage is MainPage)
+			{
+				var mainPage = CurrentApplication.MainPage as MainPage;
+				await mainPage.Detail.Navigation.PopAsync();
+			}
+			else if (CurrentApplication.MainPage != null)
+			{
+				await CurrentApplication.MainPage.Navigation.PopAsync();
+			}
 		}
 
-		/// <inheritdoc />
-		public Task RemoveLastFromBackStackAsync()
+		public virtual Task RemoveLastFromBackStackAsync()
 		{
-			return null;
+			var mainPage = CurrentApplication.MainPage as MainPage;
+
+			if (mainPage != null)
+			{
+				mainPage.Detail.Navigation.RemovePage(
+					mainPage.Detail.Navigation.NavigationStack[mainPage.Detail.Navigation.NavigationStack.Count - 2]);
+			}
+
+			return Task.FromResult(true);
 		}
 
-		/// <summary>
-	    ///     Register a page with a known key.
-	    /// </summary>
-	    /// <param name="pageKey">Page key.</param>
-	    /// <param name="creator">Creator.</param>
-	    public void RegisterPage(object pageKey, Func<Page> creator)
+		protected virtual async Task InternalNavigateToAsync(Type viewModelType, object parameter)
 		{
-			if (pageKey == null)
-				throw new ArgumentNullException(nameof(pageKey));
-			if (creator == null)
-				throw new ArgumentNullException(nameof(creator));
+			Page page = CreateAndBindPage(viewModelType, parameter);
 
-			if (_registeredPages == null)
-				_registeredPages = new Dictionary<object, Func<Page>>();
+			if (page is MainPage)
+			{
+				CurrentApplication.MainPage = page;
+			}
+			else if (page is LoginPage)
+			{
+				CurrentApplication.MainPage = new CustomNavigationPage(page);
+			}
+			else if (CurrentApplication.MainPage is MainPage)
+			{
+				var mainPage = CurrentApplication.MainPage as MainPage;
+				var navigationPage = mainPage.Detail as CustomNavigationPage;
 
-			_registeredPages.Add(pageKey, creator);
+				if (navigationPage != null)
+				{
+					await navigationPage.PushAsync(page);
+				}
+				else
+				{
+					navigationPage = new CustomNavigationPage(page);
+					mainPage.Detail = navigationPage;
+				}
+
+				mainPage.IsPresented = false;
+			}
+			else
+			{
+				var navigationPage = CurrentApplication.MainPage as CustomNavigationPage;
+
+				if (navigationPage != null)
+				{
+					await navigationPage.PushAsync(page);
+				}
+				else
+				{
+					CurrentApplication.MainPage = new CustomNavigationPage(page);
+				}
+			}
+
+			await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
 		}
 
-	    /// <summary>
-	    ///     Registers an action in response to a navigation request.
-	    /// </summary>
-	    /// <param name="key">Key</param>
-	    /// <param name="action">Action to perform, gets passed the viewModel parameter.</param>
-	    public void RegisterAction(object key, Action<object> action)
+		protected Type GetPageTypeForViewModel(Type viewModelType)
 		{
-			if (key == null)
-				throw new ArgumentNullException(nameof(key));
-			if (action == null)
-				throw new ArgumentNullException(nameof(action));
+			if (!_mappings.ContainsKey(viewModelType))
+			{
+				throw new KeyNotFoundException($"No map for ${viewModelType} was found on navigation mappings");
+			}
 
-			if (_registeredActions == null)
-				_registeredActions = new Dictionary<object, Action<object>>();
-			_registeredActions.Add(key, action);
+			return _mappings[viewModelType];
 		}
 
-	    /// <summary>
-	    ///     Registers an action in response to a navigation request.
-	    /// </summary>
-	    /// <param name="key">Key</param>
-	    /// <param name="action">Action to perform</param>
-	    public void RegisterAction(object key, Action action)
+		protected Page CreateAndBindPage(Type viewModelType, object parameter)
 		{
-			if (key == null)
-				throw new ArgumentNullException(nameof(key));
-			if (action == null)
-				throw new ArgumentNullException(nameof(action));
+			Type pageType = GetPageTypeForViewModel(viewModelType);
 
-			if (_registeredActions == null)
-				_registeredActions = new Dictionary<object, Action<object>>();
-			_registeredActions.Add(key, unused => action());
+			if (pageType == null)
+			{
+				throw new Exception($"Mapping type for {viewModelType} is not a page");
+			}
+
+			Page page = Activator.CreateInstance(pageType) as Page;
+			ViewModelBase viewModel = ViewModelLocator.Instance.Resolve(viewModelType) as ViewModelBase;
+			page.BindingContext = viewModel;
+
+			if (page is IPageWithParameters)
+			{
+				((IPageWithParameters)page).InitializeWith(parameter);
+			}
+
+			return page;
 		}
 
-	    /// <summary>
-	    ///     Unregister a known page/action by key.
-	    /// </summary>
-	    /// <param name="key">Page key.</param>
-	    public void Unregister(object key)
+		private void CreatePageViewModelMappings()
 		{
-			if (key == null)
-				throw new ArgumentNullException(nameof(key));
+			_mappings.Add(typeof(CustomRideViewModel), typeof(CustomRidePage));
+			_mappings.Add(typeof(EventSummaryViewModel), typeof(EventSummaryPage));
+			_mappings.Add(typeof(HomeViewModel), typeof(HomePage));
+			_mappings.Add(typeof(LoginViewModel), typeof(LoginPage));
+			_mappings.Add(typeof(PaymentViewModel), typeof(PaymentPage));
 
-			_registeredPages?.Remove(key);
-			_registeredActions?.Remove(key);
+			if (Device.OS == TargetPlatform.Windows)
+			{
+				_mappings.Add(typeof(SignUpViewModel), typeof(UwpSignUpPage));
+
+				if (Device.Idiom == TargetIdiom.Desktop)
+				{
+					_mappings.Add(typeof(UwpMyRidesViewModel), typeof(UwpMyRidesPage));
+					_mappings.Add(typeof(ProfileViewModel), typeof(UwpProfilePage));
+				}
+				else
+				{
+					_mappings.Add(typeof(MyRidesViewModel), typeof(MyRidesPage));
+					_mappings.Add(typeof(ProfileViewModel), typeof(ProfilePage));
+				}
+			}
+			else
+			{
+				_mappings.Add(typeof(SignUpViewModel), typeof(SignUpPage));
+				_mappings.Add(typeof(MyRidesViewModel), typeof(MyRidesPage));
+				_mappings.Add(typeof(ProfileViewModel), typeof(ProfilePage));
+			}
+
+			_mappings.Add(typeof(ReportIncidentViewModel), typeof(ReportIncidentPage));
+			_mappings.Add(typeof(BookingViewModel), typeof(BookingPage));
+			_mappings.Add(typeof(MainViewModel), typeof(MainPage));
 		}
 
-	    /// <summary>
-	    ///     Locates a page creator by key.
-	    /// </summary>
-	    /// <returns>The page by key.</returns>
-	    /// <param name="pageKey">Page key.</param>
-	    Page GetPageByKey(object pageKey)
+		private void CreateMessengerSubscriptions()
 		{
-			if (pageKey == null)
-				throw new ArgumentNullException(nameof(pageKey));
-
-			if (_registeredPages == null)
-				return null;
-
-			Func<Page> creator;
-			return _registeredPages.TryGetValue(pageKey, out creator) ? creator.Invoke() : null;
+			MessagingCenter.Subscribe<ReportedIssue>(this, MessengerKeys.GoBackFromReportRequest, GoBackFromReportRequested);
 		}
 
-	    /// <summary>
-	    ///     Method used to locate the NavigationPage - looks either on the
-	    ///     MainPage or, in the case of a MasterDetail setup, on the Details page.
-	    /// </summary>
-	    /// <returns>The navigation page.</returns>
-	    static NavigationPage FindNavigationPage()
+		private async void GoBackFromReportRequested(ReportedIssue issue)
 		{
-			// Most of the time this is good.
-			var navPage = Application.Current.MainPage as NavigationPage;
-			if (navPage != null)
-				return navPage;
-			// Special case for Master/Detail page.
-			var mdPage = Application.Current.MainPage as MasterDetailPage;
-			if (mdPage != null)
-				// Should always have a NavigationPage as the Detail
-				navPage = mdPage.Detail as NavigationPage;
-
-			return navPage;
-		}
-
-	    /// <summary>
-	    ///     Method called when a page is pushed onto the Navigation stack.
-	    /// </summary>
-	    /// <param name="sender">NavigationPage</param>
-	    /// <param name="e">Details</param>
-	    void OnPagePushed(object sender, NavigationEventArgs e)
-		{
-			Navigated?.Invoke(this, EventArgs.Empty);
-		}
-
-	    /// <summary>
-	    ///     Method called when a page is popped off the Navigation stack,
-	    ///     or when we pop to root.
-	    /// </summary>
-	    /// <param name="sender">NavigationPage</param>
-	    /// <param name="e">Details</param>
-	    void OnPagePopped(object sender, NavigationEventArgs e)
-		{
-			NavigatedBack?.Invoke(this, EventArgs.Empty);
+			if (Device.OS != TargetPlatform.iOS)
+			{
+				await NavigateBackAsync();
+			}
 		}
 	}
 }

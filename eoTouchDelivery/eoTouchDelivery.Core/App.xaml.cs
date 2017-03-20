@@ -1,7 +1,8 @@
-﻿using eoTouchDelivery.Core.Interfaces;
-using eoTouchDelivery.Core.Services;
-using eoTouchDelivery.ViewModels;
-using eoTouchDelivery.Views;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using eoTouchDelivery.Core.Helpers;
+using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,42 +11,46 @@ namespace eoTouchDelivery
 {
 	public partial class App : Application
 	{
-        public App()
+		public App()
 		{
 			InitializeComponent();
 
-			var masterDetailPage = new MasterDetailPage
+			AdaptColorsToHexString();
+
+			if (Device.OS == TargetPlatform.Windows)
 			{
-				Title = "eoTouch Delivery",
-				Master = new MenuPage(),
-				Detail = new HomePage()
-			};
-
-			Current.MainPage = masterDetailPage;
-
-
-			var ds = Core.Services.DependencyService.Init();
-			ds.Register<BaseViewModel>();
-
-			var ns = ds.Get<NavigationService>();
-			//ns.RegisterPage(AppPages.ItemsPage, () => new ItemsPage());
-			//ns.RegisterPage(AppPages.ItemDetailPage, new ItemDetailPage());
-			ns.RegisterPage(AppPages.MenuPage, () => new MenuPage());
-			ns.RegisterPage(AppPages.HomePage, () => {
-				masterDetailPage.IsPresented = true;
-				return null;
-			});
-
+				InitNavigation();
+			}
 		}
-	}
 
-	enum AppPages
-	{
-		HomePage,
-		MenuPage,
-		ItemsPage,
-		ItemDetailPage,
-		CustomersPage,
-		CustomerDetailPage,
+		protected override async void OnStart()
+		{
+			base.OnStart();
+
+			if (Device.OS != TargetPlatform.Windows)
+			{
+				await InitNavigation();
+			}
+		}
+
+		Task InitNavigation()
+		{
+			var navigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+			return navigationService.InitializeAsync();
+		}
+
+		void AdaptColorsToHexString()
+		{
+			for (var i = 0;i < this.Resources.Count;i++)
+			{
+				var key = this.Resources.Keys.ElementAt(i);
+				var resource = this.Resources[key];
+
+				if (!(resource is Color))
+					continue;
+				var color = (Color)resource;
+				Resources.Add(key + "HexString", color.ToHexString());
+			}
+		}
 	}
 }
