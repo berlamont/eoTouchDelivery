@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Views
+namespace eoTouchDelivery.Core.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MenuPage : ContentPage
+	public partial class UwpProfilePage : ContentPage
 	{
-		public MenuPage ()
+		public UwpProfilePage()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }

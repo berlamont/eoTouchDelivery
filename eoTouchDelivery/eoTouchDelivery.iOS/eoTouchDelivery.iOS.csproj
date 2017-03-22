@@ -230,6 +230,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\DatePickerLineColorEffect.cs" />
+    <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Effects\MaxLinesEffect.cs" />
+    <Compile Include="Effects\PickerLineColorEffect.cs" />
+    <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

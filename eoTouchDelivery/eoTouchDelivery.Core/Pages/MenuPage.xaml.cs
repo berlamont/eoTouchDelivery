@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace eoTouchDelivery.Views
+namespace eoTouchDelivery.Core.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HomePage : ContentPage
+	public partial class MenuPage : ContentPage
 	{
-		public HomePage ()
+		public MenuPage ()
 		{
 			InitializeComponent ();
 		}

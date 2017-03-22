@@ -105,6 +105,30 @@
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\EasingHelper.cs" />
     <Compile Include="Helpers\MapHelper.cs" />
+    <Compile Include="Pages\CustomNavigationPage.xaml.cs">
+      <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\IONReports.xaml.cs">
+      <DependentUpon>IONReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\iOSMainPage.xaml.cs">
+      <DependentUpon>iOSMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\IPageParameters.cs" />
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ReportsPage.xaml.cs">
+      <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UwpProfilePage.xaml.cs">
+      <DependentUpon>UwpProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\MapHelper.cs" />
+    <Compile Include="Utils\MathHelper.cs" />
     <Compile Include="Utils\MessengingCenterAlert.cs" />
     <Compile Include="Utils\OnCustomPlatform.cs" />
     <Compile Include="Utils\Settings.cs" />
@@ -150,10 +174,10 @@
     <Compile Include="ViewModels\Base\MessengerKeys.cs" />
     <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="Views\HomePage.xaml.cs">
+    <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuPage.xaml.cs">
+    <Compile Include="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -220,14 +244,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\HomePage.xaml">
+    <EmbeddedResource Include="Pages\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>
       </SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MenuPage.xaml">
+    <EmbeddedResource Include="Pages\MenuPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>
       </SubType>
@@ -237,6 +261,48 @@
     <EmbeddedResource Include="App.xaml">
       <SubType>
       </SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\iOSMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\CustomNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ReportsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\IONReports.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\UwpProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
