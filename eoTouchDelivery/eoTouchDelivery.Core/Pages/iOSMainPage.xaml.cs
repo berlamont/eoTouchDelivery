@@ -71,7 +71,7 @@ namespace eoTouchDelivery.Core.Pages
 			}
 		}
 
-		private CustomNavigationPage GetTabPageWithInitial(Type type)
+		CustomNavigationPage GetTabPageWithInitial(Type type)
 		{
 			CustomNavigationPage page = Children.OfType<CustomNavigationPage>()
 				.FirstOrDefault(p =>
@@ -84,9 +84,20 @@ namespace eoTouchDelivery.Core.Pages
 			return page;
 		}
 
-		private string GetIconForPage(Page page)
+		static string GetIconForPage(Page page)
 		{
-			string icon = string.Empty;
+			var icon = string.Empty;
+
+			switch (page)
+			{
+				case
+					if (page is HomePage)
+					{
+						
+					}
+
+					break;
+			}
 
 			if (page is HomePage)
 			{
@@ -96,23 +107,16 @@ namespace eoTouchDelivery.Core.Pages
 			{
 				icon = "menu_ic_profile";
 			}
-			else if (page is MyRidesPage)
-			{
-				icon = "menu_ic_bike";
-			}
-			else if (page is ReportIncidentPage)
+			else if (page is ReportsPage)
 			{
 				icon = "menu_ic_report_incident";
 			}
-			else if (page is BookingPage)
-			{
-				icon = "menu_ic_upcoming_ride";
-			}
+
 
 			return icon;
 		}
 
-		private void OnCurrentPageChanged(object sender, EventArgs e)
+		void OnCurrentPageChanged(object sender, EventArgs e)
 		{
 			if (CurrentPage == null)
 			{
@@ -130,22 +134,19 @@ namespace eoTouchDelivery.Core.Pages
 			}
 		}
 
-		private void OnBookingRequested(Booking booking)
+		void OnBookingRequested(Booking booking)
 		{
 			SetMenuItemStatus(typeof(BookingPage), true);
 			SetMenuItemStatus(typeof(ReportIncidentPage), true);
 		}
 
-		private void OnBookingFinished(Booking booking)
-		{
-			SetMenuItemStatus(typeof(BookingPage), false);
-		}
+		void OnBookingFinished(Booking booking) => SetMenuItemStatus(typeof(BookingPage), false);
 
-		private void SetMenuItemStatus(Type pageType, bool enabled)
+		void SetMenuItemStatus(Type pageType, bool enabled)
 		{
-			Page page = Children.OfType<CustomNavigationPage>()
-				.Where(nav => nav.CurrentPage.GetType() == pageType)
-				.FirstOrDefault();
+			Page page = Children
+				.OfType<CustomNavigationPage>()
+				.FirstOrDefault(nav => nav.CurrentPage.GetType() == pageType);
 
 			if (page != null)
 			{
@@ -153,9 +154,6 @@ namespace eoTouchDelivery.Core.Pages
 			}
 		}
 
-		private void OnGoBackFromReportRequested(ReportedIssue issue)
-		{
-			TrySetCurrentPage(typeof(HomePage));
-		}
+		void OnGoBackFromReportRequested(ReportedIssue issue) => TrySetCurrentPage(typeof(HomePage));
 	}
 }

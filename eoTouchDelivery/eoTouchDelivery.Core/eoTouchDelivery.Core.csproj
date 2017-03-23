@@ -89,6 +89,8 @@
     <Compile Include="DataServices\Base\IRequestProvider.cs" />
     <Compile Include="DataServices\Base\RequestProvider.cs" />
     <Compile Include="DataServices\Base\ServiceAuthenticationException.cs" />
+    <Compile Include="DataServices\Fake\FakeAuthenticationService.cs" />
+    <Compile Include="DataServices\Fake\FakeProfileService.cs" />
     <Compile Include="DataServices\Interfaces\IAuthenticationService.cs" />
     <Compile Include="DataServices\Interfaces\IProfileService.cs" />
     <Compile Include="DataServices\ProfileService.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\EasingHelper.cs" />
     <Compile Include="Helpers\MapHelper.cs" />
+    <Compile Include="Helpers\MathHelper.cs" />
     <Compile Include="Pages\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
     </Compile>
@@ -127,8 +130,6 @@
     <Compile Include="Pages\UwpProfilePage.xaml.cs">
       <DependentUpon>UwpProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\MapHelper.cs" />
-    <Compile Include="Utils\MathHelper.cs" />
     <Compile Include="Utils\MessengingCenterAlert.cs" />
     <Compile Include="Utils\OnCustomPlatform.cs" />
     <Compile Include="Utils\Settings.cs" />

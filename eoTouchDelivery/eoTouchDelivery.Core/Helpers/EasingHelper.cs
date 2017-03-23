@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eoTouchDelivery.Core.Animations;
+﻿using eoTouchDelivery.Core.Animations;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Core.Helpers
