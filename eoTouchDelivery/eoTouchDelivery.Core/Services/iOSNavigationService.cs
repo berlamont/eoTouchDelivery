@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.DataServices;
+using eoTouchDelivery.Core.Pages;
 using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;
-using eoTouchDelivery.Views;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Core.Services
 {
     public class iOSNavigationService : NavigationService
     {
-        private Type _requestedPageType;
-        private object _requestedNavigationParameter;
+        Type _requestedPageType;
+        object _requestedNavigationParameter;
 
         public iOSNavigationService(IAuthenticationService authenticationService) : base(authenticationService)
         {
@@ -31,7 +31,7 @@ namespace eoTouchDelivery.Core.Services
             {
                 var currentNavigation = mainPage.CurrentPage as CustomNavigationPage;
 
-                if (currentNavigation?.CurrentPage is BookingPage)
+                if (currentNavigation?.CurrentPage is CheckOutPage)
                 {
                     return mainPage.ClearNavigationForPage(typeof(HomePage));
                 }
@@ -84,43 +84,43 @@ namespace eoTouchDelivery.Core.Services
             }
         }
 
-        private Task InitializePageViewModelAsync(Page page, object parameter)
+        Task InitializePageViewModelAsync(Page page, object parameter)
         {
             return (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
         }
 
-        private Task InitializeTabPageCurrentPageViewModelAsync(object parameter)
+        Task InitializeTabPageCurrentPageViewModelAsync(object parameter)
         {
             var mainPage = CurrentApplication.MainPage as iOSMainPage;
             return ((mainPage.CurrentPage as CustomNavigationPage).CurrentPage.BindingContext as ViewModelBase).InitializeAsync(parameter);
         }
 
-        private void InitalizeMainPage(iOSMainPage mainPage)
+        void InitalizeMainPage(iOSMainPage mainPage)
         {
             CurrentApplication.MainPage = mainPage;
 
             var homePage = CreateAndBindPage(typeof(HomeViewModel), null);
             mainPage.AddPage(homePage, "Home");
 
-            var myRidesPage = CreateAndBindPage(typeof(MyRidesViewModel), null);
+            var myRidesPage = CreateAndBindPage(typeof(PaymentsViewModel), null);
             mainPage.AddPage(myRidesPage, "My Rides");
 
-            var bookingPage = CreateAndBindPage(typeof(BookingViewModel), null);
-            mainPage.AddPage(bookingPage, "Upcoming");
+            var CheckOutPage = CreateAndBindPage(typeof(WalkAroundViewModel), null);
+            mainPage.AddPage(CheckOutPage, "Upcoming");
 
-            var reportPage = CreateAndBindPage(typeof(ReportIncidentViewModel), null);
+            var reportPage = CreateAndBindPage(typeof(ReportViewModel), null);
             mainPage.AddPage(reportPage, "Report");
 
             var profilePage = CreateAndBindPage(typeof(ProfileViewModel), null);
             mainPage.AddPage(profilePage, "Profile");
         }
 
-        private async void OnTabPageAppearing(object sender, EventArgs e)
+        async void OnTabPageAppearing(object sender, EventArgs e)
         {
             await InitializeTabPageCurrentPageViewModelAsync(null);
         }
 
-        private void CreatePageViewModelMappings()
+        void CreatePageViewModelMappings()
         {
             if (_mappings.ContainsKey(typeof(MainViewModel)))
             {
@@ -132,13 +132,13 @@ namespace eoTouchDelivery.Core.Services
             }
         }
 
-        private async void OnMainPageCurrentChanged(iOSMainPage mainPage)
+        async void OnMainPageCurrentChanged(iOSMainPage mainPage)
         {
             object parameter = null;
 
             CustomNavigationPage navigation = mainPage.CurrentPage as CustomNavigationPage;
 
-            if (navigation.CurrentPage is BookingPage && _requestedPageType == typeof(BookingPage))
+            if (navigation.CurrentPage is CheckOutPage && _requestedPageType == typeof(CheckOutPage))
             {
                 parameter = _requestedNavigationParameter;
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.DataServices;
 using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.Pages;
 using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;
-using eoTouchDelivery.Views;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Core.Services
@@ -204,7 +204,7 @@ namespace eoTouchDelivery.Core.Services
 			MessagingCenter.Subscribe<Reports>(this, MessengerKeys.GoBackFromReportRequest, GoBackFromReportRequested);
 		}
 
-		private async void GoBackFromReportRequested(ReportedIssue issue)
+		private async void GoBackFromReportRequested(ReportRequest issue)
 		{
 			if (Device.OS != TargetPlatform.iOS)
 			{

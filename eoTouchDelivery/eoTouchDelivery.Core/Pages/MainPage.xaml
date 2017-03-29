@@ -1,0 +1,15 @@
+﻿<MasterDetailPage
+	x:Class="BikeSharing.Clients.Core.Pages.MainPage"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:pages="clr-namespace:eoTouchDelivery.Core.Pages;assembly=eoTouchDelivery.Core">
+	<MasterDetailPage.MasterBehavior>
+		<OnPlatform x:TypeArguments="MasterBehavior" WinPhone="Popover" />
+	</MasterDetailPage.MasterBehavior>
+	<MasterDetailPage.Master>
+		<pages:MenuPage BindingContext="{Binding MenuViewModel}" />
+	</MasterDetailPage.Master>
+	<MasterDetailPage.Detail>
+		<ContentPage BackgroundColor="Transparent" />
+	</MasterDetailPage.Detail>
+</MasterDetailPage>

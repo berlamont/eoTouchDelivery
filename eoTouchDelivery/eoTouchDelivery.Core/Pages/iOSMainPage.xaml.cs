@@ -17,9 +17,9 @@ namespace eoTouchDelivery.Core.Pages
 		{
 			InitializeComponent();
 			CurrentPageChanged += OnCurrentPageChanged;
-			MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingRequested, OnBookingRequested);
-			MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingFinished, OnBookingFinished);
-			MessagingCenter.Subscribe<ReportedIssue>(this, MessengerKeys.GoBackFromReportRequest, OnGoBackFromReportRequested);
+			MessagingCenter.Subscribe<WalkAround>(this, MessengerKeys.WalkAroundRequested, OnWalkAroundRequested);
+			MessagingCenter.Subscribe<WalkAround>(this, MessengerKeys.WalkAroundFinished, OnWalkAroundFinished);
+			MessagingCenter.Subscribe<ReportRequest>(this, MessengerKeys.GoBackFromReportRequest, OnGoBackFromReportRequested);
 		}
 
 		public void AddPage(Page page, string title)
@@ -30,9 +30,9 @@ namespace eoTouchDelivery.Core.Pages
 				Icon = GetIconForPage(page)
 			};
 
-			if (page is BookingPage || page is ReportIncidentPage)
+			if (page is WalkAroundPage || page is ReportsPage)
 			{
-				navigationPage.IsEnabled = Settings.CurrentBookingId != 0;
+				navigationPage.IsEnabled = Settings.CurrentWalkAroundId != 0;
 			}
 
 			if (_previousPage == null)
@@ -134,13 +134,13 @@ namespace eoTouchDelivery.Core.Pages
 			}
 		}
 
-		void OnBookingRequested(Booking booking)
+		void OnWalkAroundRequested(WalkAround WalkAround)
 		{
-			SetMenuItemStatus(typeof(BookingPage), true);
-			SetMenuItemStatus(typeof(ReportIncidentPage), true);
+			SetMenuItemStatus(typeof(WalkAroundPage), true);
+			SetMenuItemStatus(typeof(ReportsPage), true);
 		}
 
-		void OnBookingFinished(Booking booking) => SetMenuItemStatus(typeof(BookingPage), false);
+		void OnWalkAroundFinished(WalkAround WalkAround) => SetMenuItemStatus(typeof(WalkAroundPage), false);
 
 		void SetMenuItemStatus(Type pageType, bool enabled)
 		{
@@ -154,6 +154,6 @@ namespace eoTouchDelivery.Core.Pages
 			}
 		}
 
-		void OnGoBackFromReportRequested(ReportedIssue issue) => TrySetCurrentPage(typeof(HomePage));
+		void OnGoBackFromReportRequested(ReportRequest issue) => TrySetCurrentPage(typeof(HomePage));
 	}
 }

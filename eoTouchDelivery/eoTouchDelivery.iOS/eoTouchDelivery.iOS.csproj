@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Robert Strand (949YDWJP23)</CodesignKey>
     <MtouchDebug>True</MtouchDebug>
     <MtouchFastDev>True</MtouchFastDev>
     <MtouchUseSGen>True</MtouchUseSGen>
@@ -37,6 +37,9 @@
     <MtouchEnableBitcode>False</MtouchEnableBitcode>
     <OptimizePNGs>True</OptimizePNGs>
     <MtouchFloat32>False</MtouchFloat32>
+    <IOSDebugOverWiFi>False</IOSDebugOverWiFi>
+    <IOSDebuggerPort>10000</IOSDebuggerPort>
+    <CodesignProvision>56b43c6d-074d-4413-b5bd-bc37eb67db48</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
