@@ -53,6 +53,7 @@
     <Compile Include="Behaviors\TurnValidOnFocusBehavior.cs" />
     <Compile Include="Behaviors\ValidateOnLostFocusBehavior.cs" />
     <Compile Include="Behaviors\ValidateOnTextChangedBehavior.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="Controls\BindablePicker\BindablePicker.cs" />
     <Compile Include="Controls\CircularProgressControl.cs" />
     <Compile Include="Controls\CustomMap\CustomMap.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
     <Compile Include="Converters\EventArgsConverter.cs" />
+    <Compile Include="Converters\ImageConverter.cs" />
     <Compile Include="Converters\ImageResourceConverter.cs" />
     <Compile Include="Converters\IntegerToBooleanConverter.cs" />
     <Compile Include="Converters\InverseBoolConverter.cs" />
@@ -80,16 +82,21 @@
     <Compile Include="Converters\NotBooleanConverter.cs" />
     <Compile Include="Converters\NullOrEmptyBooleanConverter.cs" />
     <Compile Include="Converters\NullToBoolConverter.cs" />
+    <Compile Include="Converters\StatusImageConverter.cs" />
     <Compile Include="Converters\StringToBoolConverter.cs" />
     <Compile Include="DataServices\AuthenticationService.cs" />
     <Compile Include="DataServices\Base\IRequestProvider.cs" />
     <Compile Include="DataServices\Base\RequestProvider.cs" />
     <Compile Include="DataServices\Base\ServiceAuthenticationException.cs" />
+    <None Include="DataServices\CheckOutData.json" />
+    <Compile Include="DataServices\CheckOutService.cs" />
     <Compile Include="DataServices\Fake\FakeAuthenticationService.cs" />
     <Compile Include="DataServices\Fake\FakeProfileService.cs" />
     <Compile Include="DataServices\Interfaces\IAuthenticationService.cs" />
     <Compile Include="DataServices\Interfaces\IProfileService.cs" />
     <Compile Include="DataServices\ProfileService.cs" />
+    <Compile Include="DataServices\StaticDataService.cs" />
+    <Compile Include="DataServices\WebService.cs" />
     <Compile Include="Effects\ContentPageTitleFontEffect.cs" />
     <Compile Include="Effects\LineColorEffect.cs" />
     <Compile Include="Effects\MaxLinesEffect.cs" />
@@ -102,13 +109,34 @@
     <Compile Include="Helpers\EasingHelper.cs" />
     <Compile Include="Helpers\MapHelper.cs" />
     <Compile Include="Helpers\MathHelper.cs" />
+    <Compile Include="Models\CheckOutModel.cs" />
+    <Compile Include="Models\CustomPin.cs" />
+    <Compile Include="Models\DeliveryModel.cs" />
+    <Compile Include="Models\MasterPageItem.cs" />
+    <Compile Include="Models\MenuItemMode.cs" />
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\ReportRequest.cs" />
+    <Compile Include="Models\RouteModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\StoreModel.cs" />
+    <Compile Include="Models\TruckInspectionDetailsModel.cs" />
+    <Compile Include="Models\TruckInspectionModel.cs" />
+    <Compile Include="Models\TruckInventoryModel.cs" />
     <Compile Include="Models\WalkAround.cs" />
+    <Compile Include="Pages\CheckInTabbedPage.xaml.cs">
+      <DependentUpon>CheckInTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CheckOutPage.xaml.cs">
       <DependentUpon>CheckOutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ContactsPage.xaml.cs">
+      <DependentUpon>ContactsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InspectionDetailPage.xaml.cs">
+      <DependentUpon>InspectionDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\IONReports.xaml.cs">
       <DependentUpon>IONReports.xaml</DependentUpon>
@@ -117,17 +145,62 @@
       <DependentUpon>iOSMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\IPageParameters.cs" />
+    <Compile Include="Pages\ItemsPage.xaml.cs">
+      <DependentUpon>ItemsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MasterPage2.xaml.cs">
+      <DependentUpon>MasterPage2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReportsPage.xaml.cs">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RoutePage.xaml.cs">
+      <DependentUpon>RoutePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TruckInventoryPage.xaml.cs">
+      <DependentUpon>TruckInventoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\InspectionPage.xaml.cs">
+      <DependentUpon>InspectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\InventoryPage.xaml.cs">
+      <DependentUpon>InventoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\Inventory\AddPage.xaml.cs">
+      <DependentUpon>AddPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\Inventory\CutPage.xaml.cs">
+      <DependentUpon>CutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\Inventory\PreOrderPage.xaml.cs">
+      <DependentUpon>PreOrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\Inventory\TruckLevelPage.xaml.cs">
+      <DependentUpon>TruckLevelPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Truck\Inventory\WriteOffPage.xaml.cs">
+      <DependentUpon>WriteOffPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UwpProfilePage.xaml.cs">
       <DependentUpon>UwpProfilePage.xaml</DependentUpon>
@@ -146,9 +219,6 @@
     <Compile Include="Interfaces\IDependencyService.cs" />
     <Compile Include="Interfaces\IMessageVisualizerService.cs" />
     <Compile Include="Interfaces\ISettingService.cs" />
-    <Compile Include="MarkupExtensions\DependencyServiceExtension.cs" />
-    <Compile Include="MarkupExtensions\ImageResourceExtension.cs" />
-    <Compile Include="MarkupExtensions\RelativeBindingContext.cs" />
     <Compile Include="Models\GeoLocation.cs" />
     <Compile Include="Models\ILocationResponse.cs" />
     <Compile Include="Models\UnknownLocation.cs" />
@@ -182,6 +252,7 @@
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\RouteViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
@@ -337,6 +408,80 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Pages\CheckInTabbedPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ContactsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\InspectionDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ItemsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MapPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MasterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MasterPage2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\OrdersPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\RoutePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\TruckInventoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\InspectionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\InventoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\Inventory\AddPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\Inventory\CutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\Inventory\PreOrderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\Inventory\TruckLevelPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Truck\Inventory\WriteOffPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

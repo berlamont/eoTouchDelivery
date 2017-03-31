@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+	x:Class="eoTouchDelivery.Core.Pages.TruckInventoryPage"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:inventory="clr-namespace:eoTouchDelivery.Core.Pages;assembly=eoTouchDelivery.Core"
+	xmlns:inventory1="clr-namespace:eoTouchDelivery.Core.Pages.Truck.Inventory;assembly=eoTouchDelivery.Core"
+	Title="Truck Inventory">
+	<TabbedPage.ToolbarItems>
+		<ToolbarItem
+			x:Name="Toolbar"
+			Clicked="Toolbar_OnClicked"
+			Order="Primary"
+			Priority="0"
+			Text="Menu1">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource" Android="MenuItem.png" />
+			</ToolbarItem.Icon>
+		</ToolbarItem>
+	</TabbedPage.ToolbarItems>
+	<TabbedPage.Children>
+		<inventory:PreOrderPage />
+		<inventory1:CutPage />
+		<inventory1:AddPage />
+		<inventory1:WriteOffPage />
+	</TabbedPage.Children>
+</TabbedPage>

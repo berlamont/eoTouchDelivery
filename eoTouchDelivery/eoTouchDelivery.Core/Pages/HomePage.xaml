@@ -44,48 +44,6 @@
 					Opacity="1"
 					Duration="500" />
 			</animations:StoryBoard>
-
-			<Style
-				x:Key="TempLabelStyle"
-				BasedOn="{StaticResource MontserratRegularLabelStyle}"
-				TargetType="{x:Type Label}">
-				<Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
-				<Setter Property="FontSize" Value="{StaticResource HugeSize}" />
-			</Style>
-
-			<Style
-				x:Key="SectionLabelStyle"
-				BasedOn="{StaticResource MontserratRegularLabelStyle}"
-				TargetType="{x:Type Label}">
-				<Setter Property="TextColor" Value="{StaticResource GrayColor}" />
-				<Setter Property="FontSize" Value="{StaticResource LargerSize}" />
-				<Setter Property="Margin" Value="15, 10, 0, 0" />
-			</Style>
-
-			<Style
-				x:Key="EventTitleLabelStyle"
-				BasedOn="{StaticResource MontserratRegularLabelStyle}"
-				TargetType="{x:Type Label}">
-				<Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
-				<Setter Property="FontSize" Value="{StaticResource BigSize}" />
-			</Style>
-
-			<Style
-				x:Key="EventSubtitleLabelStyle"
-				BasedOn="{StaticResource MontserratRegularLabelStyle}"
-				TargetType="{x:Type Label}">
-				<Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
-				<Setter Property="FontSize" Value="{StaticResource MediumSize}" />
-			</Style>
-
-			<Style
-				x:Key="EventLabelStyle"
-				BasedOn="{StaticResource MontserratRegularLabelStyle}"
-				TargetType="{x:Type Label}">
-				<Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
-				<Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
-			</Style>
-
 		</ResourceDictionary>
 	</ContentPage.Resources>
 	<ContentPage.Triggers>
@@ -172,14 +130,14 @@
 						Style="{StaticResource SectionLabelStyle}"
 						Text="Events"
 						VerticalOptions="Center" />
-					<controls:StackedList
+					<ctrl:StackedList
 						Grid.Row="1"
 						Margin="5,0"
 						ItemsSource="{Binding Events}"
 						ListOrientation="Horizontal"
 						SelectedCommand="{Binding ShowEventCommand}"
 						Spacing="5">
-						<controls:StackedList.ItemTemplate>
+						<ctrl:StackedList.ItemTemplate>
 							<DataTemplate>
 								<Grid>
 									<Grid.Margin>
@@ -221,8 +179,8 @@
 									</StackLayout>
 								</Grid>
 							</DataTemplate>
-						</controls:StackedList.ItemTemplate>
-					</controls:StackedList>
+						</ctrl:StackedList.ItemTemplate>
+					</ctrl:StackedList>
 					<BoxView
 						Grid.Row="2"
 						HeightRequest="1"
@@ -235,14 +193,14 @@
 						Style="{StaticResource SectionLabelStyle}"
 						Text="Recommended"
 						VerticalOptions="Center" />
-					<controls:StackedList
+					<ctrl:StackedList
 						x:Name="SuggestionsList"
 						Grid.Row="4"
 						Padding="5,0,5,10"
 						ItemsSource="{Binding Suggestions}"
 						SelectedCommand="{Binding ShowRecommendedRideCommand}"
 						Spacing="15">
-						<controls:StackedList.ItemTemplate>
+						<ctrl:StackedList.ItemTemplate>
 							<DataTemplate>
 								<Grid>
 									<Grid.Margin>
@@ -333,8 +291,8 @@
 									</Grid>
 								</Grid>
 							</DataTemplate>
-						</controls:StackedList.ItemTemplate>
-					</controls:StackedList>
+						</ctrl:StackedList.ItemTemplate>
+					</ctrl:StackedList>
 				</Grid>
 			</StackLayout>
 		</ScrollView>
@@ -358,7 +316,7 @@
 					iOS="100" />
 			</ActivityIndicator.WidthRequest>
 		</ActivityIndicator>
-		<controls:FloatingActionButtonView
+		<ctrl:FloatingActionButtonView
 			x:Name="FloatingActionButton"
 			ColorNormal="#3164F6"
 			ColorPressed="Black"

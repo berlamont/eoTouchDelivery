@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Core
+namespace eoTouchDelivery.Core.Pages
 {
-    public partial class ReportsPage : ContentPage
+    public partial class MasterPage2 : ContentPage
     {
-        public ReportsPage()
+        public MasterPage2()
         {
             InitializeComponent();
         }

@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	x:Class="eoTouchDelivery.Core.Pages.InspectionDetailPage"
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+	<StackLayout
+		x:Name="_Mainlayout"
+		Padding="0,10,0,0"
+		BackgroundColor="#4cb7db"
+		HorizontalOptions="FillAndExpand"
+		VerticalOptions="Fill">
+
+		<StackLayout
+			Padding="0,10,0,0"
+			BackgroundColor="#4cb7db"
+			HorizontalOptions="FillAndExpand"
+			Orientation="Horizontal">
+			<Label
+				Margin="10"
+				Font="Bold,20"
+				Text="Begning of Day Inspection"
+				TextColor="#ffffff" />
+			<Label
+				Margin="10"
+				HorizontalOptions="EndAndExpand"
+				Text="1244"
+				TextColor="Gray" />
+		</StackLayout>
+		<StackLayout
+			x:Name="_CreatedOnStack"
+			Padding="0,10,0,0"
+			BackgroundColor="#C0C0C0"
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="FillAndExpand">
+			<Label
+				Margin="10"
+				Text="Created On"
+				TextColor="#4cb7db" />
+
+			<StackLayout
+				Padding="0,10,0,0"
+				HorizontalOptions="FillAndExpand"
+				Orientation="Horizontal">
+				<Label
+					Margin="10,10,0,10"
+					Font="Bold,15"
+					Text="Sunday Feburay 26,2017"
+					TextColor="Gray" />
+				<Label
+					Margin="10,10,10,10"
+					HorizontalOptions="EndAndExpand"
+					Text="12:44"
+					TextColor="Gray" />
+			</StackLayout>
+			<StackLayout
+				BackgroundColor="#ffffff"
+				HorizontalOptions="FillAndExpand"
+				VerticalOptions="FillAndExpand">
+				<Grid Padding="10" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="6*" />
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="4*" />
+					</Grid.ColumnDefinitions>
+					<Image
+						Grid.Row="0"
+						Grid.Column="0"
+						Source="truck.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="1"
+						Text="Truck"
+						TextColor="#4cb7db" />
+					<Image
+						Grid.Row="0"
+						Grid.Column="2"
+						Source="TransportTrailerIcon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="3"
+						Text="Truck"
+						TextColor="#4cb7db" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						Text="481562342" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						Text="48" />
+				</Grid>
+				<Grid Padding="10" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="6*" />
+					</Grid.ColumnDefinitions>
+					<Image
+						Grid.Row="0"
+						Grid.Column="0"
+						x:name="_status"
+						Source="CheckIcon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="1"
+						Text="Truck Condition"
+						TextColor="#4cb7db" />
+
+					<Label
+						x:Name="_truckConditionLabel"
+						Grid.Row="1"
+						Grid.Column="1"
+						Font="Bold,15"
+						Text="Condition Satisfactory" />
+				</Grid>
+
+				<Grid Padding="10" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="6*" />
+					</Grid.ColumnDefinitions>
+					<Image
+						Grid.Row="0"
+						Grid.Column="0"
+						x:name="_IssueStatus"
+						Source="DangerIcon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="1"
+						Text="Inspection Items"
+						TextColor="#4cb7db" />
+
+					<Label
+						x:Name="_InspectionLabel"
+						Grid.Row="1"
+						Grid.Column="1"
+						Font="Bold,15"
+						Text="3 defects Recorded" />
+				</Grid>
+
+
+				<Grid Padding="10" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="6*" />
+						<ColumnDefinition Width="2*" />
+						<ColumnDefinition Width="4*" />
+					</Grid.ColumnDefinitions>
+					<Image
+						Grid.Row="0"
+						Grid.Column="0"
+						Source="DashboardIcon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="1"
+						Text="Odometer"
+						TextColor="#4cb7db" />
+					<Image
+						Grid.Row="0"
+						Grid.Column="2"
+						Source="Temperature2Icon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="3"
+						Text="Temperature"
+						TextColor="#4cb7db" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						Text="39,048 miles" />
+					<Label
+						Grid.Row="1"
+						Grid.Column="3"
+						Text="40 F" />
+				</Grid>
+
+				<Grid Padding="10" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="6*" />
+					</Grid.ColumnDefinitions>
+					<Image
+						Grid.Row="0"
+						Grid.Column="0"
+						x:name="_notes"
+						Source="MessagingNoteIcon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="1"
+						Text="Notes"
+						TextColor="#4cb7db" />
+
+					<Label
+						x:Name="_notesLabel"
+						Grid.Row="1"
+						Grid.Column="1"
+						Font="Bold,15"
+						Text="Check engine again at 45,000 km" />
+				</Grid>
+				<Grid Padding="10" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="6*" />
+					</Grid.ColumnDefinitions>
+					<Image
+						Grid.Row="0"
+						Grid.Column="0"
+						x:name="_signature"
+						Source="editIcon.png" />
+					<Label
+						Grid.Row="0"
+						Grid.Column="1"
+						Text="Signature"
+						TextColor="#4cb7db" />
+
+					<Label
+						Grid.Row="1"
+						Grid.Column="1"
+						Font="Bold,15"
+						Text="signature here " />
+				</Grid>
+
+			</StackLayout>
+		</StackLayout>
+	</StackLayout>
+</ContentPage>
