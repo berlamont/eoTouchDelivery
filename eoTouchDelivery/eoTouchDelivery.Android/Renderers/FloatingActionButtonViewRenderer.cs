@@ -16,7 +16,6 @@ using ListView = Xamarin.Forms.ListView;
 using Path = System.IO.Path;
 
 [assembly: ExportRenderer(typeof(FloatingActionButtonView), typeof(FloatingActionButtonViewRenderer))]
-
 namespace eoTouchDelivery.Droid.Renderers
 {
     public class FloatingActionButtonViewRenderer : ViewRenderer<FloatingActionButtonView, FrameLayout>

@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eoTouchDelivery.Droid.Renderers;
 using Xamarin.Forms.Platform.Android;
 
+[assembly: ExportRenderer(typeof(NoBarsScrollViewer), typeof(NoBarsScrollViewerRenderer))]
 namespace eoTouchDelivery.Droid.Renderers
 {
     public class NoBarsScrollViewerRenderer : ScrollViewRenderer

@@ -173,6 +173,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\SplashActivity.cs" />
+    <Compile Include="Effects\ContentPageTitleFontEffect.cs" />
+    <Compile Include="Effects\DatePickerLineColorEffect.cs" />
+    <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Effects\MaxLineEffects.cs" />
+    <Compile Include="Effects\PickerLineColorEffect.cs" />
+    <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
@@ -218,7 +225,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\floating_action_button_normal.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_drop_down.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_arrow_drop_dow.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_close.png" />
@@ -457,7 +464,63 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\report_done_message.png" />
   </ItemGroup>
-  <Import Project="..\eoTouchDelivery\eoTouchDelivery.projitems" Label="Shared" Condition="Exists('..\eoTouchDelivery\eoTouchDelivery.projitems')" />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\profile_generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\report_open_bot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_arrow_drop_dow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_distance.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_distance_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\menu_ic_logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\profile_camera_overlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\profile_generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\profile_illustration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\profile_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\progress_done.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\progress_pending.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pushpin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pushpin_origin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\pushpin_destiny.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\report_done_message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floating_action_button_disable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\floating_action_button_normal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -34,7 +34,6 @@ using Object = Java.Lang.Object;
 using View = Android.Views.View;
 
 [assembly: ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
-
 namespace eoTouchDelivery.Droid.Renderers
 {
     /// <summary>

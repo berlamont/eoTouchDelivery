@@ -8,7 +8,10 @@ using eoTouchDelivery.Core.Helpers;
 using System.Linq;
 using Xamarin.Forms.Maps;
 using System.Collections.Generic;
+using eoTouchDelivery.Droid.Renderers;
 
+
+[assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace eoTouchDelivery.Droid.Renderers
 {
     class CustomMapRenderer : MapRenderer

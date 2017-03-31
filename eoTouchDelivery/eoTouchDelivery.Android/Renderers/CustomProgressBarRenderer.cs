@@ -1,8 +1,9 @@
-﻿using System;
+﻿using eoTouchDelivery.Droid.Renderers;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
+[assembly: ExportRenderer(typeof(CustomProgressBar), typeof(CustomProgressBarRenderer))]
 namespace eoTouchDelivery.Droid.Renderers
 {
     public class CustomProgressBarRenderer : ProgressBarRenderer
@@ -13,7 +14,7 @@ namespace eoTouchDelivery.Droid.Renderers
 
             try
             {
-                var solidTransparentColor = new Color(255, 255, 255, 1.0);
+                var solidTransparentColor = new Resource.Color(255, 255, 255, 1.0);
                 Control.ProgressDrawable.SetColorFilter(solidTransparentColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcIn);
                 Control.ProgressTintList = Android.Content.Res.ColorStateList.ValueOf(solidTransparentColor.ToAndroid());
             }
