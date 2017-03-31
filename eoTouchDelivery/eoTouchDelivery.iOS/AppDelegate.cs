@@ -1,4 +1,4 @@
-﻿using eoTouchDelivery.Core.Interfaces;
+﻿using eoTouchDelivery.Core;
 using eoTouchDelivery.Core.Services;
 using eoTouchDelivery.Core.ViewModels.Base;
 using FFImageLoading.Forms.Touch;

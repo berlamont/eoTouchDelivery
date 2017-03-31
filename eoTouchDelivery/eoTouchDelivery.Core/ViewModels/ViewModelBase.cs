@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using eoTouchDelivery.Core.Services;
 using eoTouchDelivery.Core.ViewModels.Base;
-using eoTouchDelivery.ViewModels.Base;
 
 namespace eoTouchDelivery.Core.ViewModels
 {
@@ -13,7 +9,7 @@ namespace eoTouchDelivery.Core.ViewModels
 		protected readonly IDialogService DialogService;
 		protected readonly INavigationService NavigationService;
 
-		private bool _isBusy;
+		bool _isBusy;
 
 		public bool IsBusy
 		{

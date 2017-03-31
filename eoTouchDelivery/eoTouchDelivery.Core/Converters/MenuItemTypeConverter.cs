@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eoTouchDelivery.Models.Enums;
+using eoTouchDelivery.Core.Models.Enums;
 using Xamarin.Forms;
 
 namespace eoTouchDelivery.Core.Converters

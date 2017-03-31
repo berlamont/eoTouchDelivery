@@ -3,8 +3,8 @@ namespace eoTouchDelivery.Core.ViewModels.Base
 {
     public class MessengerKeys
     {
-        public static string WalkAroundRequested = "Walkaround";
-        public static string WalkAroundFinished;
+        public static string WalkAroundRequested = "WalkaroundRequested";
+        public static string WalkAroundFinished = "WalkaroundFinished";
         public const string ReportSent = "ReportSent";
         public const string GoBackFromReportRequest = "GoBackFromReportRequest";
 

@@ -1,8 +1,8 @@
 ﻿using System;
-using eoTouchDelivery.Models.Enums;
-using eoTouchDelivery.ViewModels.Base;
+using eoTouchDelivery.Core.ViewModels.Base;
+using eoTouchDelivery.Core.Models.Enums;
 
-namespace eoTouchDelivery.Models
+namespace eoTouchDelivery.Core.Models
 {
 	public class MenuItem : ExtendedBindableObject
 	{

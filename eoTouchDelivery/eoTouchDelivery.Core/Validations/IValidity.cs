@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Core.ViewModels
+namespace eoTouchDelivery.Core.Validations
 {
-    public class ProfileViewModel : ViewModelBase
-    {
-        
-    }
+	public interface IValidity
+	{
+		bool IsValid { get; set; }
+	}
 }

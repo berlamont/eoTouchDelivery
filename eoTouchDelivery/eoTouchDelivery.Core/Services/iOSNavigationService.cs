@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eoTouchDelivery.Core.DataServices;
+using eoTouchDelivery.Core.DataServices.Interfaces;
 using eoTouchDelivery.Core.Pages;
 using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;

@@ -248,7 +248,6 @@
     <Compile Include="Renderers\CustomProgressBarRenderer.cs" />
     <Compile Include="Renderers\NoBarsScrollViewerRenderer.cs" />
     <Compile Include="Renderers\TabbedPageRenderer.cs" />
-    <Compile Include="Renderers\ThemedNavigationRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile_generic.png" />

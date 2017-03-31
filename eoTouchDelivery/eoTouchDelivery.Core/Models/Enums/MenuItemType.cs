@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Models.Enums
+namespace eoTouchDelivery.Core.Models.Enums
 {
     public enum MenuItemType
     {

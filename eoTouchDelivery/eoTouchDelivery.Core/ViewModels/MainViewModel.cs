@@ -35,7 +35,7 @@ namespace eoTouchDelivery.Core.ViewModels
             return Task.WhenAll
                 (
                  _menuViewModel.InitializeAsync(navigationData),
-                 NavigationService.NavigateToAsync<HomeViewModel>()
+				 NavigationService.NavigateToAsync<HomeViewModel>()
                 );
         }
     }

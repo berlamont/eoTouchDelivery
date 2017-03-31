@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using eoTouchDelivery.Core.DataServices;
-using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.DataServices.Interfaces;
+using eoTouchDelivery.Core.Models;
 using eoTouchDelivery.Core.Pages;
 using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;
@@ -40,14 +40,7 @@ namespace eoTouchDelivery.Core.Services
 
 		public Task InitializeAsync()
 		{
-			if (_authenticationService.IsAuthenticated)
-			{
-				return NavigateToAsync<MainViewModel>();
-			}
-			else
-			{
-				return NavigateToAsync<LoginViewModel>();
-			}
+			return _authenticationService.IsAuthenticated ? NavigateToAsync<MainViewModel>() : NavigateToAsync<LoginViewModel>();
 		}
 
 		public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
@@ -195,13 +188,13 @@ namespace eoTouchDelivery.Core.Services
 				_mappings.Add(typeof(ProfileViewModel), typeof(ProfilePage));
 			}
 
-			_mappings.Add(typeof(ReportViewModel), typeof(ReportPage));
+			_mappings.Add(typeof(ReportViewModel), typeof(ReportsPage));
 			_mappings.Add(typeof(MainViewModel), typeof(MainPage));
 		}
 
 		private void CreateMessengerSubscriptions()
 		{
-			MessagingCenter.Subscribe<Reports>(this, MessengerKeys.GoBackFromReportRequest, GoBackFromReportRequested);
+			MessagingCenter.Subscribe<ReportRequest>(this, MessengerKeys.GoBackFromReportRequest, GoBackFromReportRequested);
 		}
 
 		private async void GoBackFromReportRequested(ReportRequest issue)
@@ -211,9 +204,5 @@ namespace eoTouchDelivery.Core.Services
 				await NavigateBackAsync();
 			}
 		}
-	}
-
-	public class ViewModelBase
-	{
 	}
 }

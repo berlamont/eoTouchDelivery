@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eoTouchDelivery.Core.ViewModels
 {
-    public class ReportsViewModel
+    public class ReportsViewModel : ViewModelBase
     {
         
     }

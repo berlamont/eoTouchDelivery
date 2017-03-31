@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eoTouchDelivery.Core.DataServices.Interfaces;
 using eoTouchDelivery.Core.Models.Users;
-using eoTouchDelivery.Models.Users;
 
 namespace eoTouchDelivery.Core.DataServices.Fake
 {

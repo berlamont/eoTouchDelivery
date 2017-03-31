@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eoTouchDelivery.Core.Models;
 using eoTouchDelivery.Core.Utils;
 using eoTouchDelivery.Core.ViewModels.Base;
 using Xamarin.Forms;
@@ -10,11 +11,13 @@ using Xamarin.Forms.Xaml;
 
 namespace eoTouchDelivery.Core.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class iOSMainPage : TabbedPage
 	{
+		Page _previousPage;
+
 		public iOSMainPage()
 		{
+			NavigationPage.SetHasNavigationBar(this, false);
 			InitializeComponent();
 			CurrentPageChanged += OnCurrentPageChanged;
 			MessagingCenter.Subscribe<WalkAround>(this, MessengerKeys.WalkAroundRequested, OnWalkAroundRequested);
@@ -32,7 +35,7 @@ namespace eoTouchDelivery.Core.Pages
 
 			if (page is WalkAroundPage || page is ReportsPage)
 			{
-				navigationPage.IsEnabled = Settings.CurrentWalkAroundId != 0;
+				navigationPage.IsEnabled = Settings.UserId != 0;
 			}
 
 			if (_previousPage == null)
@@ -76,42 +79,24 @@ namespace eoTouchDelivery.Core.Pages
 			CustomNavigationPage page = Children.OfType<CustomNavigationPage>()
 				.FirstOrDefault(p =>
 				{
-					return p.CurrentPage.Navigation.NavigationStack.Count > 0
-						? p.CurrentPage.Navigation.NavigationStack[0].GetType() == type
-						: false;
+					return p.CurrentPage.Navigation.NavigationStack.Count > 0 && p.CurrentPage.Navigation.NavigationStack[0].GetType() == type;
 				});
 
 			return page;
 		}
 
-		static string GetIconForPage(Page page)
+
+		private string GetIconForPage(Page page)
 		{
-			var icon = string.Empty;
-
-			switch (page)
-			{
-				case
-					if (page is HomePage)
-					{
-						
-					}
-
-					break;
-			}
+			string icon = string.Empty;
 
 			if (page is HomePage)
 			{
 				icon = "menu_ic_home";
-			}
-			else if (page is ProfilePage)
+			} else if (page is ProfilePage)
 			{
 				icon = "menu_ic_profile";
 			}
-			else if (page is ReportsPage)
-			{
-				icon = "menu_ic_report_incident";
-			}
-
 
 			return icon;
 		}
@@ -134,13 +119,13 @@ namespace eoTouchDelivery.Core.Pages
 			}
 		}
 
-		void OnWalkAroundRequested(WalkAround WalkAround)
+		void OnWalkAroundRequested(WalkAround walkAround)
 		{
 			SetMenuItemStatus(typeof(WalkAroundPage), true);
 			SetMenuItemStatus(typeof(ReportsPage), true);
 		}
 
-		void OnWalkAroundFinished(WalkAround WalkAround) => SetMenuItemStatus(typeof(WalkAroundPage), false);
+		void OnWalkAroundFinished(WalkAround walkAround) => SetMenuItemStatus(typeof(WalkAroundPage), false);
 
 		void SetMenuItemStatus(Type pageType, bool enabled)
 		{

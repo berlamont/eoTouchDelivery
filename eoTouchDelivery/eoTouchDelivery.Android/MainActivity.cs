@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using eoTouchDelivery.Core;
 using FFImageLoading.Forms.Droid;
 
 namespace eoTouchDelivery.Droid

@@ -21,7 +21,7 @@ namespace eoTouchDelivery.UWP
 		{
 			this.InitializeComponent();
 
-			LoadApplication(new eoTouchDelivery.App());
+			LoadApplication(new Core.App());
 		}
 	}
 }

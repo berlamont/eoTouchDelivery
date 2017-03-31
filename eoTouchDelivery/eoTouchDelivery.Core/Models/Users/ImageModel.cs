@@ -1,4 +1,4 @@
-﻿namespace eoTouchDelivery.Models.Users
+﻿namespace eoTouchDelivery.Core.Models.Users
 {
     public class ImageModel
     {

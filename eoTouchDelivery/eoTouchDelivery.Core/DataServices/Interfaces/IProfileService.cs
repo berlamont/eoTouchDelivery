@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Core.DataServices
+namespace eoTouchDelivery.Core.DataServices.Interfaces
 {
     public interface IProfileService
     {

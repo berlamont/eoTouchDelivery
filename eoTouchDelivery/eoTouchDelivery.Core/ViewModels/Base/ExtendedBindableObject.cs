@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.ViewModels.Base
+namespace eoTouchDelivery.Core.ViewModels.Base
 {
 	public abstract class ExtendedBindableObject : BindableObject
 	{
@@ -13,19 +13,17 @@ namespace eoTouchDelivery.ViewModels.Base
 			OnPropertyChanged(name);
 		}
 
-		static MemberInfo GetMemberInfo(Expression expression)
+		MemberInfo GetMemberInfo(Expression expression)
 		{
 			MemberExpression operand;
-			var lambdaExpression = (LambdaExpression) expression;
-			var expressionBody = lambdaExpression.Body as UnaryExpression;
-			if (expressionBody != null)
+			LambdaExpression lambdaExpression = (LambdaExpression)expression;
+			if (lambdaExpression.Body as UnaryExpression != null)
 			{
-				var body = expressionBody;
-				operand = (MemberExpression) body.Operand;
-			}
-			else
+				UnaryExpression body = (UnaryExpression)lambdaExpression.Body;
+				operand = (MemberExpression)body.Operand;
+			} else
 			{
-				operand = (MemberExpression) lambdaExpression.Body;
+				operand = (MemberExpression)lambdaExpression.Body;
 			}
 			return operand.Member;
 		}

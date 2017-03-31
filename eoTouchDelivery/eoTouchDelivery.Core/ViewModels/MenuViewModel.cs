@@ -5,9 +5,9 @@ using System.Windows.Input;
 using eoTouchDelivery.Core.Models.Users;
 using eoTouchDelivery.Core.Services;
 using eoTouchDelivery.Core.Utils;
-using eoTouchDelivery.Models.Enums;
+using eoTouchDelivery.Core.Models.Enums;
 using Xamarin.Forms;
-using MenuItem = eoTouchDelivery.Models.MenuItem;
+using MenuItem = eoTouchDelivery.Core.Models.MenuItem;
 
 namespace eoTouchDelivery.Core.ViewModels
 {
@@ -51,13 +51,6 @@ namespace eoTouchDelivery.Core.ViewModels
                     IsEnabled = true
                 });
 
-                MenuItems.Add(new MenuItem
-                {
-                    Title = "New Ride",
-                    MenuItemType = MenuItemType.NewRide,
-                    ViewModelType = typeof(CustomRideViewModel),
-                    IsEnabled = true
-                });
             }
 
             if (Device.OS == TargetPlatform.Android)
@@ -65,8 +58,8 @@ namespace eoTouchDelivery.Core.ViewModels
                 MenuItems.Add(new MenuItem
                 {
                     Title = "New Ride",
-                    MenuItemType = MenuItemType.NewRide,
-                    ViewModelType = typeof(CustomRideViewModel),
+                    MenuItemType = MenuItemType.Home,
+                    ViewModelType = typeof(MainViewModel),
                     IsEnabled = true
                 });
             }
@@ -79,16 +72,9 @@ namespace eoTouchDelivery.Core.ViewModels
                 IsEnabled = Settings.SupportBit != 0
             });
 
-            MenuItems.Add(new MenuItem
-            {
-                Title = "Profile",
-                MenuItemType = MenuItemType.Profile,
-                ViewModelType = typeof(ProfileViewModel),
-                IsEnabled = true
-            });
         }
 
-        private async void OnSelectItem(MenuItem item)
+	    async void OnSelectItem(MenuItem item)
         {
             if (item.IsEnabled)
             {
@@ -98,13 +84,12 @@ namespace eoTouchDelivery.Core.ViewModels
             }
         }
 
-        private async void OnLogout()
+	    async void OnLogout()
         {
-            await _authenticationService.LogoutAsync();
             await NavigationService.NavigateToAsync<LoginViewModel>();
         }
 
-        private void SetMenuItemStatus(MenuItemType type, bool enabled)
+	    void SetMenuItemStatus(MenuItemType type, bool enabled)
         {
             MenuItem rideItem = MenuItems.FirstOrDefault(m => m.MenuItemType == type);
 
@@ -112,18 +97,6 @@ namespace eoTouchDelivery.Core.ViewModels
             {
                 rideItem.IsEnabled = enabled;
             }
-        }
-
-        private async void OnProfileUpdated(UserProfile profile)
-        {
-            Profile = null;
-
-            if (Device.OS == TargetPlatform.Windows)
-            {
-                await Task.Delay(2000); // Give UWP enough time (for Photo reload)
-            }
-
-            Profile = profile;
         }
     }
 }

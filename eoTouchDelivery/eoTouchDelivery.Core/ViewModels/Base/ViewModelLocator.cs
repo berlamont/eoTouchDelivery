@@ -1,9 +1,10 @@
 ﻿using System;
 using eoTouchDelivery.Core.DataServices;
 using eoTouchDelivery.Core.DataServices.Base;
+using eoTouchDelivery.Core.DataServices.Interfaces;
 using eoTouchDelivery.Core.Interfaces;
 using eoTouchDelivery.Core.Services;
-using eoTouchDelivery.ViewModels;
+using eoTouchDelivery.Core.ViewModels;
 using Microsoft.Practices.Unity;
 
 namespace eoTouchDelivery.Core.ViewModels.Base
@@ -19,7 +20,6 @@ namespace eoTouchDelivery.Core.ViewModels.Base
 			// providers
 			_unityContainer.RegisterType<IRequestProvider, RequestProvider>();
 			_unityContainer.RegisterType<ILocationProvider, LocationProvider>();
-			_unityContainer.RegisterType<IMediaPickerService, MediaPickerService>();
 
 			// services
 			_unityContainer.RegisterType<IDialogService, DialogService>();

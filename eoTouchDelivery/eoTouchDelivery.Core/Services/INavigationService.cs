@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using eoTouchDelivery.Core.ViewModels;
 
 namespace eoTouchDelivery.Core.Services
 {

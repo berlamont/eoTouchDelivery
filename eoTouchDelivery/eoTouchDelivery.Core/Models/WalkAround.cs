@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Core.ViewModels
+namespace eoTouchDelivery.Core.Models
 {
-    public class ProfileViewModel : ViewModelBase
+    public class WalkAround
     {
         
     }

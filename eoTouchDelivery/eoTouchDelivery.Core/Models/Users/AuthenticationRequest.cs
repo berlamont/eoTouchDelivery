@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eoTouchDelivery.Core.Models
+namespace eoTouchDelivery.Core.Models.Users
 {
     public class AuthenticationRequest
     {
