@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using eoTouchDelivery.Core.Controls;
 using eoTouchDelivery.Droid.Renderers;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(NoBarsScrollViewer), typeof(NoBarsScrollViewerRenderer))]
@@ -29,7 +26,7 @@ namespace eoTouchDelivery.Droid.Renderers
             e.NewElement.PropertyChanged += OnElementPropertyChanged;
         }
 
-        private void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ContentSize" && ChildCount > 0)
             {

@@ -2,6 +2,7 @@
 using Xamarin.Forms.Platform.Android;
 using Android.Widget;
 using System.ComponentModel;
+using eoTouchDelivery.Core.Effects;
 using eoTouchDelivery.Droid.Effects;
 
 [assembly: ExportEffect(typeof(MaxLinesEffect), "MaxLinesEffect")]

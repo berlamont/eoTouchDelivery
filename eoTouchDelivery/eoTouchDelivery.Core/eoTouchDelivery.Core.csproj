@@ -53,11 +53,6 @@
     <Compile Include="Behaviors\TurnValidOnFocusBehavior.cs" />
     <Compile Include="Behaviors\ValidateOnLostFocusBehavior.cs" />
     <Compile Include="Behaviors\ValidateOnTextChangedBehavior.cs" />
-    <Compile Include="Collections\GroupedObservableCollection.cs" />
-    <Compile Include="Collections\ObservableDictionary.cs" />
-    <Compile Include="Collections\ObservableRangeCollection.cs" />
-    <Compile Include="Collections\OptimizedObservableCollection.cs" />
-    <Compile Include="Collections\RefreshingCollection.cs" />
     <Compile Include="Controls\BindablePicker\BindablePicker.cs" />
     <Compile Include="Controls\CircularProgressControl.cs" />
     <Compile Include="Controls\CustomMap\CustomMap.cs" />
@@ -99,11 +94,8 @@
     <Compile Include="Effects\LineColorEffect.cs" />
     <Compile Include="Effects\MaxLinesEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />
+    <Compile Include="Events\IsValidMessageEventArgs.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
-    <Compile Include="Extensions\CollectionExtensions.cs" />
-    <Compile Include="Extensions\ElementExtensions.cs" />
-    <Compile Include="Extensions\ExceptionExtensions.cs" />
-    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />

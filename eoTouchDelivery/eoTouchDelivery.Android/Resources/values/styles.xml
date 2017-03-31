@@ -22,7 +22,6 @@
 		<item name="android:textCursorDrawable">@null</item>
 		<item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 		<item name="android:buttonStyle">@style/AppButtonStyle</item>
-		<item name="android:windowBackground">@drawable/background</item>
 	</style>
 
 	<style name="Theme.Splash" parent="Theme.AppCompat.Light.NoActionBar">

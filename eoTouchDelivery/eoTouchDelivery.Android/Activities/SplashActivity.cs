@@ -6,7 +6,7 @@ using Android.Support.V7.App;
 
 namespace eoTouchDelivery.Droid.Activities
 {
-	[Activity(Label = "BikesSharing",
+	[Activity(Label = "eoTouchDelivery",
 		Icon = "@drawable/icon",
 		Theme = "@style/Theme.Splash",
 		MainLauncher = true,

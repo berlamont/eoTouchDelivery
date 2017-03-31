@@ -1,5 +1,6 @@
 ﻿using eoTouchDelivery.Droid.Renderers;
 using System;
+using eoTouchDelivery.Core.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -14,7 +15,7 @@ namespace eoTouchDelivery.Droid.Renderers
 
             try
             {
-                var solidTransparentColor = new Resource.Color(255, 255, 255, 1.0);
+                var solidTransparentColor = new Color(255, 255, 255, 1.0);
                 Control.ProgressDrawable.SetColorFilter(solidTransparentColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcIn);
                 Control.ProgressTintList = Android.Content.Res.ColorStateList.ValueOf(solidTransparentColor.ToAndroid());
             }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using System.Diagnostics;
+using eoTouchDelivery.Core.Effects;
 using eoTouchDelivery.Droid.Effects;
 
 [assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]
