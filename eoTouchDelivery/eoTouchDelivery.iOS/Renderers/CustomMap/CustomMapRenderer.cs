@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoreGraphics;
 using CoreLocation;
+using eoTouchDelivery.Core.Controls;
 using eoTouchDelivery.Core.Helpers;
 using eoTouchDelivery.iOS.Renderers;
 using MapKit;
@@ -94,13 +95,13 @@ namespace eoTouchDelivery.iOS.Renderers
 
                 switch (customPin.Type)
                 {
-                    case AnnotationType.Normal:
+                    case CustomPin.AnnotationType.Normal:
                         annotationView.Image = _normalImage;
                         break;
-                    case AnnotationType.From:
+                    case CustomPin.AnnotationType.From:
                         annotationView.Image = _fromImage;
                         break;
-                    case AnnotationType.To:
+                    case CustomPin.AnnotationType.To:
                         annotationView.Image = _toImage;
                         break;
                 }
@@ -134,11 +135,11 @@ namespace eoTouchDelivery.iOS.Renderers
         void AddFromPushPin(MKMapView mapView, CustomPin from)
         {
             var fromPrevious = _customPins
-                .FirstOrDefault(p => p.Type == AnnotationType.From);
+                .FirstOrDefault(p => p.Type == CustomPin.AnnotationType.From);
 
             if (fromPrevious != null)
             {
-                fromPrevious.Type = AnnotationType.Normal;
+                fromPrevious.Type = CustomPin.AnnotationType.Normal;
             }
 
             if (from != null)
@@ -148,7 +149,7 @@ namespace eoTouchDelivery.iOS.Renderers
 
                 if (fromPin != null)
                 {
-                    fromPin.Type = AnnotationType.From;
+                    fromPin.Type = CustomPin.AnnotationType.From;
                 }
             }
 
@@ -159,11 +160,11 @@ namespace eoTouchDelivery.iOS.Renderers
         void AddToPushPin(MKMapView mapView, CustomPin to)
         {
             var toPrevious = _customPins
-                .FirstOrDefault(p => p.Type == AnnotationType.To);
+                .FirstOrDefault(p => p.Type == CustomPin.AnnotationType.To);
 
             if (toPrevious != null)
             {
-                toPrevious.Type = AnnotationType.Normal;
+                toPrevious.Type = CustomPin.AnnotationType.Normal;
             }
 
             if (to != null)
@@ -173,7 +174,7 @@ namespace eoTouchDelivery.iOS.Renderers
 
                 if (toPin != null)
                 {
-                    toPin.Type = AnnotationType.To;
+                    toPin.Type = CustomPin.AnnotationType.To;
                 }
             }
 
@@ -211,45 +212,45 @@ namespace eoTouchDelivery.iOS.Renderers
 
             var selectedPin = GetCustomPin(anotation);
 
-            if (!_customPins.Any(p => p.Type == AnnotationType.From))
+            if (!_customPins.Any(p => p.Type == CustomPin.AnnotationType.From))
             {
                 var fromPin = _customPins.FirstOrDefault((p => p.Id == selectedPin.Id));
-                fromPin.Type = AnnotationType.From;
+                fromPin.Type = CustomPin.AnnotationType.From;
                 _customMap.From = fromPin;
                 customView.Image = _fromImage;
                 _customMap.SelectedPin = fromPin;
             }
             else
             {
-                var fromPin = _customPins.FirstOrDefault((p => p.Type == AnnotationType.From));
+                var fromPin = _customPins.FirstOrDefault((p => p.Type == CustomPin.AnnotationType.From));
 
                 if (fromPin != null
-                    && !_customPins.Any(p => p.Type == AnnotationType.To)
+                    && !_customPins.Any(p => p.Type == CustomPin.AnnotationType.To)
                     && fromPin.Id == selectedPin.Id)
                 {
-                    fromPin.Type = AnnotationType.Normal;
+                    fromPin.Type = CustomPin.AnnotationType.Normal;
                     _customMap.From = null;
                     customView.Image = _normalImage;
                     _customMap.SelectedPin = null;
                 }
                 else
                 {
-                    if (_customPins.Any(p => p.Type == AnnotationType.From) &&
-                        !_customPins.Any(p => p.Type == AnnotationType.To))
+                    if (_customPins.Any(p => p.Type == CustomPin.AnnotationType.From) &&
+                        !_customPins.Any(p => p.Type == CustomPin.AnnotationType.To))
                     {
                         var toPin = _customPins.FirstOrDefault((p => p.Id == selectedPin.Id));
-                        toPin.Type = AnnotationType.To;
+                        toPin.Type = CustomPin.AnnotationType.To;
                         _customMap.To = toPin;
                         customView.Image = _toImage;
                         _customMap.SelectedPin = toPin;
                     }
                     else
                     {
-                        var to = _customPins.FirstOrDefault(p => p.Type == AnnotationType.To);
+                        var to = _customPins.FirstOrDefault(p => p.Type == CustomPin.AnnotationType.To);
 
                         if (to != null)
                         {
-                            to.Type = AnnotationType.Normal;
+                            to.Type = CustomPin.AnnotationType.Normal;
                             _customMap.To = null;
                             customView.Image = _normalImage;
                             _customMap.SelectedPin = null;

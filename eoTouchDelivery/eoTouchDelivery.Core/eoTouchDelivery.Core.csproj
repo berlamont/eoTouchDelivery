@@ -139,6 +139,9 @@
     <Compile Include="Pages\WalkAroundPage.xaml.cs">
       <DependentUpon>WalkAroundPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\Interfaces\IDialogService.cs" />
     <Compile Include="Utils\MessengingCenterAlert.cs" />
     <Compile Include="Utils\OnCustomPlatform.cs" />
     <Compile Include="Utils\Settings.cs" />
@@ -146,7 +149,6 @@
     <Compile Include="Interfaces\IDelegateCommand.cs" />
     <Compile Include="Interfaces\IDependencyService.cs" />
     <Compile Include="Interfaces\IMessageVisualizerService.cs" />
-    <Compile Include="Interfaces\INavigationService.cs" />
     <Compile Include="Interfaces\ISettingService.cs" />
     <Compile Include="MarkupExtensions\DependencyServiceExtension.cs" />
     <Compile Include="MarkupExtensions\ImageResourceExtension.cs" />
@@ -176,8 +178,10 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PaymentsViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
@@ -190,6 +194,7 @@
     <Compile Include="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\WalkAroundViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

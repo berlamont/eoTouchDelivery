@@ -1,4 +1,5 @@
 ﻿using CoreGraphics;
+using eoTouchDelivery.Core.Controls;
 using eoTouchDelivery.iOS.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;

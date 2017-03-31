@@ -1,41 +1,43 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using eoTouchDelivery.Core.Services;
+using eoTouchDelivery.Core.ViewModels.Base;
+using eoTouchDelivery.ViewModels.Base;
 
 namespace eoTouchDelivery.Core.ViewModels
 {
-	public class ViewModelBase : INotifyPropertyChanged
+	public abstract class ViewModelBase : ExtendedBindableObject
 	{
-		string _title = string.Empty;
-		bool _isBusy;
+		protected readonly IDialogService DialogService;
+		protected readonly INavigationService NavigationService;
 
-		public const string IsBusyPropertyName = "IsBusy";
+		private bool _isBusy;
 
 		public bool IsBusy
 		{
-			get => _isBusy;
-			set => SetPropertyValue(ref _isBusy, value, IsBusyPropertyName);
+			get
+			{
+				return _isBusy;
+			}
+
+			set
+			{
+				_isBusy = value;
+				RaisePropertyChanged(() => IsBusy);
+			}
 		}
 
-		void SetPropertyValue(ref bool isBusy, bool value, string isBusyPropertyName)
+		public ViewModelBase()
 		{
+			DialogService = ViewModelLocator.Instance.Resolve<IDialogService>();
+			NavigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
 		}
 
-		public string Title
+		public virtual Task InitializeAsync(object navigationData)
 		{
-			get => _title;
-			set => SetPropertyValue(ref _title, value);
-		}
-
-		private object SetPropertyValue(ref string title, string value) => throw new NotImplementedException();
-
-		public bool IsInitialized { get; set; }
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			return Task.FromResult(false);
 		}
 	}
 }
-

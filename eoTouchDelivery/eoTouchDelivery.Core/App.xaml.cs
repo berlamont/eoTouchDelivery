@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.Helpers;
 using eoTouchDelivery.Core.Interfaces;
+using eoTouchDelivery.Core.Services;
 using eoTouchDelivery.Core.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
