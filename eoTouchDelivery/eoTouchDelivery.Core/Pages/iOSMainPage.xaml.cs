@@ -86,7 +86,7 @@ namespace eoTouchDelivery.Core.Pages
 		}
 
 
-		private string GetIconForPage(Page page)
+		string GetIconForPage(Page page)
 		{
 			string icon = string.Empty;
 

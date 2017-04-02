@@ -62,7 +62,9 @@
     <Compile Include="Controls\FloatingActionButtonView\FloatingActionButtonView.cs" />
     <Compile Include="Controls\ImageButton\ImageButton.cs" />
     <Compile Include="Controls\ImageButton\ImageOrientation.cs" />
-    <Compile Include="Controls\ItemsControl.cs" />
+    <Compile Include="Controls\LogoutButton.xaml.cs">
+      <DependentUpon>LogoutButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NoBarsScrollViewer.cs" />
     <Compile Include="Controls\StackedList.cs" />
     <Compile Include="Controls\ToggleButton\ToggleButton.cs" />
@@ -410,6 +412,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\LogoutButton.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Page Include="Pages\CheckInTabbedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -430,10 +436,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MasterPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <EmbeddedResource Include="Pages\MasterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </EmbeddedResource>
     <Page Include="Pages\MasterPage2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

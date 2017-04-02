@@ -3,14 +3,14 @@
 	x:Class="eoTouchDelivery.Core.Pages.MasterPage"
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	Title="Personal Organiser"
+	Title="Personal Organizer"
 	Padding="0,40,0,0"
 	Icon="icon.png">
 	<ContentPage.Content>
 		<StackLayout>
 			<StackLayout BackgroundColor="#EEEEEE">
 				<StackLayout
-					x:Name="HeaderStack"
+					x:Name="HeaderStackView"
 					Padding="10,5,5,5"
 					HorizontalOptions="FillAndExpand"
 					Orientation="Horizontal">
@@ -43,7 +43,7 @@
 						WidthRequest="45" />
 				</StackLayout>
 				<StackLayout
-					x:Name="HometextStack"
+					x:Name="HomeTextStackView"
 					Padding="10,5,5,5"
 					HorizontalOptions="FillAndExpand"
 					Orientation="Horizontal">
@@ -54,21 +54,7 @@
 							WinPhone="#EEEEEE"
 							iOS="#EEEEEE" />
 					</StackLayout.BackgroundColor>
-					<!--<Image Source="home.png"
-                 WidthRequest ="30"
-                 HeightRequest ="30"
-                 VerticalOptions="End"
-                 Margin="0,0,0,5"
-                 x:Name="HomeImage"/>
-          <Label Text="Home"
-                 Margin="10,0,0,5"
-                 TextColor="#323232"
-                 VerticalOptions="Center"
-                 HorizontalTextAlignment="Start"
-                 IsVisible="true"
-                 FontSize="Medium"
-                 FontAttributes="Bold"/>-->
-					<ListView x:Name="_homeList" RowHeight="50">
+					<ListView x:Name="HomeListView" RowHeight="50">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<ViewCell>
@@ -110,7 +96,7 @@
 							Text="Start of Day"
 							TextColor="Gray"
 							VerticalOptions="Center" />
-						<ListView x:Name="_StartOfDayList" RowHeight="50">
+						<ListView x:Name="StartOfDayListView" RowHeight="50">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<ViewCell>
@@ -154,7 +140,7 @@
 							Text="My Day"
 							TextColor="Gray"
 							VerticalOptions="Center" />
-						<ListView x:Name="_myDayList" RowHeight="50">
+						<ListView x:Name="MyDayListView" RowHeight="50">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<ViewCell>
@@ -199,7 +185,7 @@
 							Text="End of Day"
 							TextColor="Gray"
 							VerticalOptions="Center" />
-						<ListView x:Name="_EndDayList" RowHeight="50">
+						<ListView x:Name="EndDayListView" RowHeight="50">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<ViewCell>
@@ -227,7 +213,6 @@
 							</ListView.ItemTemplate>
 						</ListView>
 					</StackLayout>
-
 				</StackLayout>
 			</ScrollView>
 		</StackLayout>

@@ -3,7 +3,6 @@
 	x:Class="eoTouchDelivery.Core.Pages.TruckInventoryPage"
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:inventory="clr-namespace:eoTouchDelivery.Core.Pages;assembly=eoTouchDelivery.Core"
 	xmlns:inventory1="clr-namespace:eoTouchDelivery.Core.Pages.Truck.Inventory;assembly=eoTouchDelivery.Core"
 	Title="Truck Inventory">
 	<TabbedPage.ToolbarItems>
@@ -19,7 +18,7 @@
 		</ToolbarItem>
 	</TabbedPage.ToolbarItems>
 	<TabbedPage.Children>
-		<inventory:PreOrderPage />
+		<inventory1:PreOrderPage />
 		<inventory1:CutPage />
 		<inventory1:AddPage />
 		<inventory1:WriteOffPage />

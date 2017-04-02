@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Core.Pages
-{
+namespace eoTouchDelivery.Core.Pages.Truck.Inventory
+{ 
 	public partial class PreOrderPage : ContentPage
 	{
 		public PreOrderPage()

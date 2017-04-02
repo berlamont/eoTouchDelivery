@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Core
+namespace eoTouchDelivery.Core.Pages.Truck
 {
-    public partial class TruckInspectionPage : ContentPage
+    public partial class InspectionPage : ContentPage
     {
-        public TruckInspectionPage()
+        public InspectionPage()
         {
             InitializeComponent();
         }

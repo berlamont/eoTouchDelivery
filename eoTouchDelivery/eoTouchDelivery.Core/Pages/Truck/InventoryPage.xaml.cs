@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 
-namespace eoTouchDelivery.Core.Pages
+namespace eoTouchDelivery.Core.Pages.Truck
 {
     public partial class InventoryPage : ContentPage
     {
