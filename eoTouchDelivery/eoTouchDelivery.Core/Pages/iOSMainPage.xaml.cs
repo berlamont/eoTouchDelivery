@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using eoTouchDelivery.Core.Models;
 using eoTouchDelivery.Core.Utils;
 using eoTouchDelivery.Core.ViewModels.Base;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Pages
 {

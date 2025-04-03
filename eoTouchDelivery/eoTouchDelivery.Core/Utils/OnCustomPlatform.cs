@@ -20,7 +20,8 @@
 
         public static implicit operator T(OnCustomPlatform<T> onPlatform)
         {
-            switch (Xamarin.Forms.Device.OS)
+            // TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
+            switch (Microsoft.Maui.Controls.Device.OS)
             {
                 case Xamarin.Forms.TargetPlatform.Android:
                     return onPlatform.Android;

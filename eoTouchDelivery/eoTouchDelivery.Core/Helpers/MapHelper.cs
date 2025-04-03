@@ -1,6 +1,9 @@
 ﻿using System;
 using eoTouchDelivery.Core.Models;
-using Xamarin.Forms.Maps;
+using Microsoft.Maui.Maps;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.ApplicationModel;
 
 namespace eoTouchDelivery.Core.Helpers
 {
@@ -34,7 +37,7 @@ namespace eoTouchDelivery.Core.Helpers
 
 		public static void CenterMapInDefaultLocation(Map map)
 		{
-			var initialPosition = new Position(DefaultLocation.Latitude, DefaultLocation.Longitude);
+			var initialPosition = new Location(DefaultLocation.Latitude, DefaultLocation.Longitude);
 
 			var mapSpan = MapSpan.FromCenterAndRadius(initialPosition, Distance.FromMiles(1.0));
 

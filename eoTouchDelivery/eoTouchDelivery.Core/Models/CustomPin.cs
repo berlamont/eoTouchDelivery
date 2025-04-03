@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Maps;
+﻿using Microsoft.Maui.Maps;
+using Microsoft.Maui.Controls.Maps;
 
 namespace eoTouchDelivery.Core.Models
 {

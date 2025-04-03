@@ -4,7 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Converters
 {
@@ -15,10 +18,10 @@ namespace eoTouchDelivery.Core.Converters
             if (value != null)
             {
                 if ((bool)value)
-                    return Color.FromHex("1A000000");
+                    return Color.FromArgb("1A000000");
             }
 
-            return Color.Transparent;
+            return Colors.Transparent;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

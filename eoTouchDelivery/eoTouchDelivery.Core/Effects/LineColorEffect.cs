@@ -1,5 +1,7 @@
 ﻿using System.Linq;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Effects
 {
@@ -58,7 +60,7 @@ namespace eoTouchDelivery.Core.Effects
         }
 
         public static readonly BindableProperty LineColorProperty =
-            BindableProperty.CreateAttached("LineColor", typeof(Color), typeof(LineColorEffect), Color.Default);
+            BindableProperty.CreateAttached("LineColor", typeof(Color), typeof(LineColorEffect), null);
 
         public static Color GetLineColor(BindableObject view)
         {

@@ -3,8 +3,12 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using eoTouchDelivery.Droid.Effects;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
+using Microsoft.Maui.Controls.Handlers.Compatibility;
+using Microsoft.Maui.Controls.Platform;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
 [assembly: ExportEffect(typeof(ContentPageTitleFontEffect), "ContentPageTitleFontEffect")]
 namespace eoTouchDelivery.Droid.Effects

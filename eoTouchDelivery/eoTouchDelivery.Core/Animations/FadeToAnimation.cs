@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.Helpers;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Animations
 {
@@ -80,12 +82,12 @@ namespace eoTouchDelivery.Core.Animations
         {
             var animation = new Animation();
 
-            animation.WithConcurrent((f) => Target.Opacity = f, 0, 1, Xamarin.Forms.Easing.CubicOut);
+            animation.WithConcurrent((f) => Target.Opacity = f, 0, 1, Microsoft.Maui.Easing.CubicOut);
 
             animation.WithConcurrent(
                 (f) => Target.TranslationY = f,
                 Target.TranslationY + ((Direction == FadeDirection.Up) ? 50 : -50), Target.TranslationY,
-                Xamarin.Forms.Easing.CubicOut);
+                Microsoft.Maui.Easing.CubicOut);
 
             return animation;
         }

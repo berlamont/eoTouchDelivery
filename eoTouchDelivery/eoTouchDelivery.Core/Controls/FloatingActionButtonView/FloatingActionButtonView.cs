@@ -1,5 +1,8 @@
 ﻿using System;
-using Xamarin.Forms;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Controls
 {
@@ -23,7 +26,7 @@ namespace eoTouchDelivery.Core.Controls
 
         public static readonly BindableProperty ColorNormalProperty =
             BindableProperty.Create(
-                "ColorNormal", typeof(Color), typeof(FloatingActionButtonView), Color.White);
+                "ColorNormal", typeof(Color), typeof(FloatingActionButtonView), Colors.White);
 
         public Color ColorNormal
         {
@@ -33,7 +36,7 @@ namespace eoTouchDelivery.Core.Controls
 
         public static readonly BindableProperty ColorPressedProperty =
             BindableProperty.Create(
-                "ColorPressed", typeof(Color), typeof(FloatingActionButtonView), Color.White);
+                "ColorPressed", typeof(Color), typeof(FloatingActionButtonView), Colors.White);
 
         public Color ColorPressed
         {
@@ -62,7 +65,7 @@ namespace eoTouchDelivery.Core.Controls
 
         public static readonly BindableProperty ColorRippleProperty =
             BindableProperty.Create(
-                "ColorRipple", typeof(Color), typeof(FloatingActionButtonView), Color.White);
+                "ColorRipple", typeof(Color), typeof(FloatingActionButtonView), Colors.White);
 
         public Color ColorRipple
         {

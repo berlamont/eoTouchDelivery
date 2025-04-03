@@ -11,10 +11,15 @@ using eoTouchDelivery.Core.Helpers;
 using eoTouchDelivery.iOS.Renderers;
 using MapKit;
 using UIKit;
-using Xamarin.Forms;
-using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.iOS;
+using Microsoft.Maui.Maps;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.Devices.Sensors;
 
+// TODO Xamarin.Forms.ExportRendererAttribute is not longer supported. For more details see https://github.com/dotnet/maui/wiki/Using-Custom-Renderers-in-.NET-MAUI
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace eoTouchDelivery.iOS.Renderers
 {
@@ -184,7 +189,7 @@ namespace eoTouchDelivery.iOS.Renderers
 
         CustomPin GetCustomPin(MKAnnotation annotation)
         {
-            var position = new Position(annotation.Coordinate.Latitude, annotation.Coordinate.Longitude);
+            var position = new Location(annotation.Coordinate.Latitude, annotation.Coordinate.Longitude);
 
             foreach (var pin in _customPins)
             {
@@ -280,7 +285,7 @@ namespace eoTouchDelivery.iOS.Renderers
                 return;
             }
 
-            var centerPosition = new Position(formsPins.Average(x => x.Position.Latitude), formsPins.Average(x => x.Position.Longitude));
+            var centerPosition = new Location(formsPins.Average(x => x.Position.Latitude), formsPins.Average(x => x.Position.Longitude));
 
             var minLongitude = formsPins.Min(x => x.Position.Longitude);
             var minLatitude = formsPins.Min(x => x.Position.Latitude);

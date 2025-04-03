@@ -1,335 +1,117 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{67F9D3A8-F71E-4428-913F-C37AE82CDB24}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eoTouchDelivery.Core</RootNamespace>
-    <AssemblyName>eoTouchDelivery.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFrameworks>net9.0</TargetFrameworks>
+    <UseMaui>True</UseMaui>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SingleProject>true</SingleProject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;MONO</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Animations\Base\AnimationBase.cs" />
-    <Compile Include="Animations\EasingType.cs" />
-    <Compile Include="Animations\FadeToAnimation.cs" />
-    <Compile Include="Animations\RotateToAnimation.cs" />
-    <Compile Include="Animations\ScaleToAnimation.cs" />
-    <Compile Include="Animations\StoryBoard.cs" />
-    <Compile Include="Animations\TranslateAnimation.cs" />
-    <Compile Include="App.xaml.cs">
+    <Compile Update="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behaviors\Base\BindableBehavior.cs" />
-    <Compile Include="Behaviors\BeginAnimationBehavior.cs" />
-    <Compile Include="Behaviors\ItemTappedCommandListView.cs" />
-    <Compile Include="Behaviors\MaxLengthTextLength.cs" />
-    <Compile Include="Behaviors\TurnValidOnFocusBehavior.cs" />
-    <Compile Include="Behaviors\ValidateOnLostFocusBehavior.cs" />
-    <Compile Include="Behaviors\ValidateOnTextChangedBehavior.cs" />
-    <Compile Include="Constant.cs" />
-    <Compile Include="Controls\BindablePicker\BindablePicker.cs" />
-    <Compile Include="Controls\CircularProgressControl.cs" />
-    <Compile Include="Controls\CustomMap\CustomMap.cs" />
-    <Compile Include="Controls\CustomMap\CustomPin.cs" />
-    <Compile Include="Controls\CustomProgressBar\CustomProgressBar.cs" />
-    <Compile Include="Controls\FloatingActionButtonView\FloatingActionButtonView.cs" />
-    <Compile Include="Controls\ImageButton\ImageButton.cs" />
-    <Compile Include="Controls\ImageButton\ImageOrientation.cs" />
-    <Compile Include="Controls\LogoutButton.xaml.cs">
+    <Compile Update="Controls\LogoutButton.xaml.cs">
       <DependentUpon>LogoutButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NoBarsScrollViewer.cs" />
-    <Compile Include="Controls\StackedList.cs" />
-    <Compile Include="Controls\ToggleButton\ToggleButton.cs" />
-    <Compile Include="Converters\BoolToColorConverter.cs" />
-    <Compile Include="Converters\BoolToObjectConverter.cs" />
-    <Compile Include="Converters\ByteToImageConverter.cs" />
-    <Compile Include="Converters\DateTimeConverter.cs" />
-    <Compile Include="Converters\DebugConverter.cs" />
-    <Compile Include="Converters\EventArgsConverter.cs" />
-    <Compile Include="Converters\ImageConverter.cs" />
-    <Compile Include="Converters\ImageResourceConverter.cs" />
-    <Compile Include="Converters\IntegerToBooleanConverter.cs" />
-    <Compile Include="Converters\InverseBoolConverter.cs" />
-    <Compile Include="Converters\InverseNullToBoolConverter.cs" />
-    <Compile Include="Converters\MapColorConverter.cs" />
-    <Compile Include="Converters\MenuItemTypeConverter.cs" />
-    <Compile Include="Converters\NotBooleanConverter.cs" />
-    <Compile Include="Converters\NullOrEmptyBooleanConverter.cs" />
-    <Compile Include="Converters\NullToBoolConverter.cs" />
-    <Compile Include="Converters\StatusImageConverter.cs" />
-    <Compile Include="Converters\StringToBoolConverter.cs" />
-    <Compile Include="DataServices\AuthenticationService.cs" />
-    <Compile Include="DataServices\Base\IRequestProvider.cs" />
-    <Compile Include="DataServices\Base\RequestProvider.cs" />
-    <Compile Include="DataServices\Base\ServiceAuthenticationException.cs" />
-    <None Include="DataServices\CheckOutData.json" />
-    <Compile Include="DataServices\CheckOutService.cs" />
-    <Compile Include="DataServices\Fake\FakeAuthenticationService.cs" />
-    <Compile Include="DataServices\Fake\FakeProfileService.cs" />
-    <Compile Include="DataServices\Interfaces\IAuthenticationService.cs" />
-    <Compile Include="DataServices\Interfaces\IProfileService.cs" />
-    <Compile Include="DataServices\ProfileService.cs" />
-    <Compile Include="DataServices\StaticDataService.cs" />
-    <Compile Include="DataServices\WebService.cs" />
-    <Compile Include="Effects\ContentPageTitleFontEffect.cs" />
-    <Compile Include="Effects\LineColorEffect.cs" />
-    <Compile Include="Effects\MaxLinesEffect.cs" />
-    <Compile Include="Effects\UnderlineTextEffect.cs" />
-    <Compile Include="Events\IsValidMessageEventArgs.cs" />
-    <Compile Include="Extensions\AnimationExtensions.cs" />
-    <Compile Include="GlobalSettings.cs" />
-    <Compile Include="Helpers\CacheHelper.cs" />
-    <Compile Include="Helpers\ColorHelper.cs" />
-    <Compile Include="Helpers\EasingHelper.cs" />
-    <Compile Include="Helpers\MapHelper.cs" />
-    <Compile Include="Helpers\MathHelper.cs" />
-    <Compile Include="Models\CheckOutModel.cs" />
-    <Compile Include="Models\CustomPin.cs" />
-    <Compile Include="Models\DeliveryModel.cs" />
-    <Compile Include="Models\MasterPageItem.cs" />
-    <Compile Include="Models\MenuItemMode.cs" />
-    <Compile Include="Models\MenuModel.cs" />
-    <Compile Include="Models\ReportRequest.cs" />
-    <Compile Include="Models\RouteModel.cs" />
-    <Compile Include="Models\SettingsModel.cs" />
-    <Compile Include="Models\StoreModel.cs" />
-    <Compile Include="Models\TruckInspectionDetailsModel.cs" />
-    <Compile Include="Models\TruckInspectionModel.cs" />
-    <Compile Include="Models\TruckInventoryModel.cs" />
-    <Compile Include="Models\WalkAround.cs" />
-    <Compile Include="Pages\CheckInTabbedPage.xaml.cs">
+    <Compile Update="Pages\CheckInTabbedPage.xaml.cs">
       <DependentUpon>CheckInTabbedPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CheckOutPage.xaml.cs">
+    <Compile Update="Pages\CheckOutPage.xaml.cs">
       <DependentUpon>CheckOutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ContactsPage.xaml.cs">
+    <Compile Update="Pages\ContactsPage.xaml.cs">
       <DependentUpon>ContactsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CustomNavigationPage.xaml.cs">
+    <Compile Update="Pages\CustomNavigationPage.xaml.cs">
       <DependentUpon>CustomNavigationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\InspectionDetailPage.xaml.cs">
+    <Compile Update="Pages\InspectionDetailPage.xaml.cs">
       <DependentUpon>InspectionDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\IONReports.xaml.cs">
+    <Compile Update="Pages\IONReports.xaml.cs">
       <DependentUpon>IONReports.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\iOSMainPage.xaml.cs">
+    <Compile Update="Pages\iOSMainPage.xaml.cs">
       <DependentUpon>iOSMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\IPageParameters.cs" />
-    <Compile Include="Pages\ItemsPage.xaml.cs">
+    <Compile Update="Pages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LoginPage.xaml.cs">
+    <Compile Update="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPage.xaml.cs">
+    <Compile Update="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MapPage.xaml.cs">
+    <Compile Update="Pages\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MasterPage.xaml.cs">
+    <Compile Update="Pages\MasterPage.xaml.cs">
       <DependentUpon>MasterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MasterPage2.xaml.cs">
+    <Compile Update="Pages\MasterPage2.xaml.cs">
       <DependentUpon>MasterPage2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\OrdersPage.xaml.cs">
+    <Compile Update="Pages\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ProfilePage.xaml.cs">
+    <Compile Update="Pages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ReportsPage.xaml.cs">
+    <Compile Update="Pages\ReportsPage.xaml.cs">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RoutePage.xaml.cs">
+    <Compile Update="Pages\RoutePage.xaml.cs">
       <DependentUpon>RoutePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SettingsPage.xaml.cs">
+    <Compile Update="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TruckInventoryPage.xaml.cs">
+    <Compile Update="Pages\TruckInventoryPage.xaml.cs">
       <DependentUpon>TruckInventoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\InspectionPage.xaml.cs">
+    <Compile Update="Pages\Truck\InspectionPage.xaml.cs">
       <DependentUpon>InspectionPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\InventoryPage.xaml.cs">
+    <Compile Update="Pages\Truck\InventoryPage.xaml.cs">
       <DependentUpon>InventoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\Inventory\AddPage.xaml.cs">
+    <Compile Update="Pages\Truck\Inventory\AddPage.xaml.cs">
       <DependentUpon>AddPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\Inventory\CutPage.xaml.cs">
+    <Compile Update="Pages\Truck\Inventory\CutPage.xaml.cs">
       <DependentUpon>CutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\Inventory\PreOrderPage.xaml.cs">
+    <Compile Update="Pages\Truck\Inventory\PreOrderPage.xaml.cs">
       <DependentUpon>PreOrderPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\Inventory\TruckLevelPage.xaml.cs">
+    <Compile Update="Pages\Truck\Inventory\TruckLevelPage.xaml.cs">
       <DependentUpon>TruckLevelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Truck\Inventory\WriteOffPage.xaml.cs">
+    <Compile Update="Pages\Truck\Inventory\WriteOffPage.xaml.cs">
       <DependentUpon>WriteOffPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UwpProfilePage.xaml.cs">
+    <Compile Update="Pages\UwpProfilePage.xaml.cs">
       <DependentUpon>UwpProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WalkAroundPage.xaml.cs">
+    <Compile Update="Pages\WalkAroundPage.xaml.cs">
       <DependentUpon>WalkAroundPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\INavigationService.cs" />
-    <Compile Include="Services\Interfaces\IDialogService.cs" />
-    <Compile Include="Utils\MessengingCenterAlert.cs" />
-    <Compile Include="Utils\OnCustomPlatform.cs" />
-    <Compile Include="Utils\Settings.cs" />
-    <Compile Include="Interfaces\IAsyncDelegateCommand.cs" />
-    <Compile Include="Interfaces\IDelegateCommand.cs" />
-    <Compile Include="Interfaces\IDependencyService.cs" />
-    <Compile Include="Interfaces\IMessageVisualizerService.cs" />
-    <Compile Include="Interfaces\ISettingService.cs" />
-    <Compile Include="Models\GeoLocation.cs" />
-    <Compile Include="Models\ILocationResponse.cs" />
-    <Compile Include="Models\UnknownLocation.cs" />
-    <Compile Include="Models\Users\AuthenticationRequest.cs" />
-    <Compile Include="Models\Enums\MenuItemType.cs" />
-    <Compile Include="Models\Users\ImageModel.cs" />
-    <Compile Include="Models\MenuItem.cs" />
-    <Compile Include="Models\Users\AuthenticationResponse.cs" />
-    <Compile Include="Models\Users\Tenant.cs" />
-    <Compile Include="Models\Users\User.cs" />
-    <Compile Include="Models\Users\UserAndProfileModel.cs" />
-    <Compile Include="Models\Users\UserProfile.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\Interfaces\ILocationProvider.cs" />
-    <Compile Include="Providers\LocationProvider.cs" />
-    <Compile Include="Renderers\ThemedNavigationPage.cs" />
-    <Compile Include="Services\iOSNavigationService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Triggers\BeginAnimation.cs" />
-    <Compile Include="Utils\ObservableRangeCollection.cs" />
-    <Compile Include="Validations\ActionValidationRule.cs" />
-    <Compile Include="Validations\IsNotNullOrEmptyRule.cs" />
-    <Compile Include="Validations\IValidationRule.cs" />
-    <Compile Include="Validations\IValidity.cs" />
-    <Compile Include="Validations\ValidatableObject.cs" />
-    <Compile Include="ViewModels\CredentialViewModel.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\PaymentsViewModel.cs" />
-    <Compile Include="ViewModels\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\ReportsViewModel.cs" />
-    <Compile Include="ViewModels\ReportViewModel.cs" />
-    <Compile Include="ViewModels\RouteViewModel.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\Base\ExtendedBindableObject.cs" />
-    <Compile Include="ViewModels\Base\MessengerKeys.cs" />
-    <Compile Include="ViewModels\Base\ViewModelLocator.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
-    <Compile Include="Pages\HomePage.xaml.cs">
+    <Compile Update="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MenuPage.xaml.cs">
+    <Compile Update="Pages\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\WalkAroundViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Acr.UserDialogs.6.3.10\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="Acr.UserDialogs.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Acr.UserDialogs.6.3.10\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
-    </Reference>
-    <Reference Include="FFImageLoading, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
-    </Reference>
-    <Reference Include="FFImageLoading.Forms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="FFImageLoading.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="FFImageLoading.Transformations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.FFImageLoading.Transformations.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Transformations.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Unity.4.0.1\lib\portable-net45+wp80+win8+wpa81+MonoAndroid10+MonoTouch10\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Geolocator, Version=3.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xam.Plugin.Geolocator.3.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Geolocator.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Geolocator.Abstractions, Version=3.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xam.Plugin.Geolocator.3.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Geolocator.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings.Abstractions, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Maps, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.Maps.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.193\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\HomePage.xaml">
@@ -489,19 +271,19 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="9.2.1" />
+    <PackageReference Include="CommonServiceLocator" Version="2.0.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Splat" Version="15.3.1" />
+    <PackageReference Include="Unity" Version="5.11.10" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.100" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Microsoft.Maui.Controls.Maps.Map" Alias="Map" />
+  </ItemGroup>
 </Project>

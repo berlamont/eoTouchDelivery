@@ -27,12 +27,18 @@ using Android.Graphics.Drawables;
 using Android.Views;
 using eoTouchDelivery.Core.Controls;
 using eoTouchDelivery.Droid.Renderers;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using Color = Xamarin.Forms.Color;
 using Object = Java.Lang.Object;
 using View = Android.Views.View;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls.Handlers.Compatibility;
+using Microsoft.Maui.Controls.Platform;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
+// TODO Xamarin.Forms.ExportRendererAttribute is not longer supported. For more details see https://github.com/dotnet/maui/wiki/Using-Custom-Renderers-in-.NET-MAUI
 [assembly: ExportRenderer(typeof(ImageButton), typeof(ImageButtonRenderer))]
 namespace eoTouchDelivery.Droid.Renderers
 {
@@ -105,7 +111,7 @@ namespace eoTouchDelivery.Droid.Renderers
                 {
                     var drawable = new BitmapDrawable(bitmap);
                     var tintColor = model.IsEnabled ? model.ImageTintColor : model.DisabledImageTintColor;
-                    if (tintColor != Color.Transparent)
+                    if (tintColor != Colors.Transparent)
                     {
                         drawable.SetTint(tintColor.ToAndroid());
                         drawable.SetTintMode(PorterDuff.Mode.SrcIn);

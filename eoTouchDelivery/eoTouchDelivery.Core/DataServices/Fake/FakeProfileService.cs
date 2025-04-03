@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.DataServices.Interfaces;
 using eoTouchDelivery.Core.Models.Users;
+using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace eoTouchDelivery.Core.DataServices.Fake
 {

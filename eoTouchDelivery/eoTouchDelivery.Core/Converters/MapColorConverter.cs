@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using eoTouchDelivery.Core.Controls;
-using Xamarin.Forms;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Converters
 {
@@ -14,13 +17,13 @@ namespace eoTouchDelivery.Core.Converters
             if (pin != null)
             {
                 if (pin.Type == CustomPin.AnnotationType.From)
-                    return Color.FromHex("3062F5");
+                    return Color.FromArgb("3062F5");
 
                 if (pin.Type == CustomPin.AnnotationType.To)
-                    return Color.FromHex("FF5E4C");
+                    return Color.FromArgb("FF5E4C");
             }
 
-            return Color.Blue;
+            return Colors.Blue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

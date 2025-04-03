@@ -6,8 +6,10 @@ using eoTouchDelivery.Core.Models.Users;
 using eoTouchDelivery.Core.Services;
 using eoTouchDelivery.Core.Utils;
 using eoTouchDelivery.Core.Models.Enums;
-using Xamarin.Forms;
 using MenuItem = eoTouchDelivery.Core.Models.MenuItem;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.ViewModels
 {
@@ -41,6 +43,7 @@ namespace eoTouchDelivery.Core.ViewModels
 
         void InitMenuItems()
         {
+            // TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
             if (Device.OS == TargetPlatform.Windows)
             {
                 MenuItems.Add(new MenuItem
@@ -53,6 +56,7 @@ namespace eoTouchDelivery.Core.ViewModels
 
             }
 
+            // TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
             if (Device.OS == TargetPlatform.Android)
             {
                 MenuItems.Add(new MenuItem

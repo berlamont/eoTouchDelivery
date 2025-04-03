@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using eoTouchDelivery.Core.Helpers;
 using eoTouchDelivery.Core.Services;
 using eoTouchDelivery.Core.ViewModels.Base;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core
 {
@@ -15,6 +17,7 @@ namespace eoTouchDelivery.Core
 
 			AdaptColorsToHexString();
 
+			// TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
 			if (Device.OS == TargetPlatform.Windows)
 			{
 				InitNavigation();
@@ -25,6 +28,7 @@ namespace eoTouchDelivery.Core
 		{
 			base.OnStart();
 
+			// TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
 			if (Device.OS != TargetPlatform.Windows)
 			{
 				await InitNavigation();

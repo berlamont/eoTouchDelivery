@@ -20,7 +20,10 @@
 // 
 
 
-using Xamarin.Forms;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Controls
 {
@@ -77,14 +80,14 @@ namespace eoTouchDelivery.Core.Controls
         /// </summary>
         public static readonly BindableProperty ImageTintColorProperty =
             BindableProperty.Create(
-                "ImageTintColor", typeof(Color), typeof(ImageButton), Color.Transparent);
+                "ImageTintColor", typeof(Color), typeof(ImageButton), Colors.Transparent);
 
         /// <summary>
         /// Backing field for the disbaled tint color property.
         /// </summary>
         public static readonly BindableProperty DisabledImageTintColorProperty =
             BindableProperty.Create(
-                "DisabledImageTintColor", typeof(Color), typeof(ImageButton), Color.Transparent);
+                "DisabledImageTintColor", typeof(Color), typeof(ImageButton), Colors.Transparent);
 
         /// <summary>
         /// Gets or sets the ImageSource to use with the control.

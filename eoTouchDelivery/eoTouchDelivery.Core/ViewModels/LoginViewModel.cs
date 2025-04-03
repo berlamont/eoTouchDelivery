@@ -9,7 +9,9 @@ using eoTouchDelivery.Core.DataServices;
 using eoTouchDelivery.Core.DataServices.Base;
 using eoTouchDelivery.Core.DataServices.Interfaces;
 using eoTouchDelivery.Core.Validations;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.ViewModels
 {

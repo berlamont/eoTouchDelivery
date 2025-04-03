@@ -1,9 +1,13 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
-using Android.Widget;
+﻿using Android.Widget;
 using System.ComponentModel;
 using eoTouchDelivery.Core.Effects;
 using eoTouchDelivery.Droid.Effects;
+using Microsoft.Maui.Controls.Handlers.Compatibility;
+using Microsoft.Maui.Controls.Platform;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
 [assembly: ExportEffect(typeof(MaxLinesEffect), "MaxLinesEffect")]
 namespace eoTouchDelivery.Droid.Effects

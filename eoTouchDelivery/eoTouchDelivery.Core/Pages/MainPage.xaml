@@ -1,6 +1,6 @@
-﻿<MasterDetailPage
+<MasterDetailPage
 	x:Class="eoTouchDelivery.Core.Pages.MainPage"
-	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:pages="clr-namespace:eoTouchDelivery.Core.Pages;assembly=eoTouchDelivery.Core">
 	<MasterDetailPage.Master>

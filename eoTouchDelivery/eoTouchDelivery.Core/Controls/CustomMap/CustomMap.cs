@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
-using Xamarin.Forms;
-using Xamarin.Forms.Maps;
+using Microsoft.Maui.Maps;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
 namespace eoTouchDelivery.Core.Controls
 {

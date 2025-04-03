@@ -1,16 +1,22 @@
 ﻿using eoTouchDelivery.Core.Controls;
-using Xamarin.Forms;
 using Xamarin.Forms.Maps.Android;
 using System.ComponentModel;
 using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using eoTouchDelivery.Core.Helpers;
 using System.Linq;
-using Xamarin.Forms.Maps;
 using System.Collections.Generic;
 using eoTouchDelivery.Droid.Renderers;
+using Microsoft.Maui.Maps;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.ApplicationModel;
 
 
+// TODO Xamarin.Forms.ExportRendererAttribute is not longer supported. For more details see https://github.com/dotnet/maui/wiki/Using-Custom-Renderers-in-.NET-MAUI
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace eoTouchDelivery.Droid.Renderers
 {
@@ -85,7 +91,7 @@ namespace eoTouchDelivery.Droid.Renderers
                 Id = tempMarker.Id,
                 Label = marker.Title,
                 Address = marker.Snippet,
-                Position = new Position(marker.Position.Latitude, marker.Position.Longitude)
+                Location = new Location(marker.Position.Latitude, marker.Position.Longitude)
             };
 
             if (myMap == null)
@@ -234,7 +240,7 @@ namespace eoTouchDelivery.Droid.Renderers
                 return;
             }
 
-            var centerPosition = new Position(customPins.Average(x => x.Position.Latitude), customPins.Average(x => x.Position.Longitude));
+            var centerPosition = new Location(customPins.Average(x => x.Position.Latitude), customPins.Average(x => x.Position.Longitude));
 
             var minLongitude = customPins.Min(x => x.Position.Longitude);
             var minLatitude = customPins.Min(x => x.Position.Latitude);

@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.Models.Enums;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Converters
 {
@@ -18,6 +20,7 @@ namespace eoTouchDelivery.Core.Converters
         {
             var menuItemType = (MenuItemType)value;
 
+            // TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
             var platform = Device.OS == TargetPlatform.Windows;
 
             switch (menuItemType)

@@ -1,6 +1,8 @@
 ﻿using eoTouchDelivery.Core.Helpers;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui.Controls.Xaml;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Pages
 {
@@ -15,6 +17,7 @@ namespace eoTouchDelivery.Core.Pages
 			InitializeComponent();
 			mainScrollView.Scrolled += ScrollView_Scrolled;
 
+			// TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
 			if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.Windows)
 				ToolbarItems.Remove(ShowCustomRideToolbarItem);
 		}

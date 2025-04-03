@@ -1,11 +1,15 @@
 ﻿using Android.Widget;
 using System;
 using System.ComponentModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using System.Diagnostics;
 using eoTouchDelivery.Core.Effects;
 using eoTouchDelivery.Droid.Effects;
+using Microsoft.Maui.Controls.Handlers.Compatibility;
+using Microsoft.Maui.Controls.Platform;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 
 [assembly: ExportEffect(typeof(PickerLineColorEffect), "PickerLineColorEffect")]
 namespace eoTouchDelivery.Droid.Effects

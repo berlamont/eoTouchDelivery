@@ -7,7 +7,9 @@ using eoTouchDelivery.Core.DataServices.Interfaces;
 using eoTouchDelivery.Core.Pages;
 using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Services
 {

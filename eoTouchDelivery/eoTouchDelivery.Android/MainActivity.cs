@@ -4,11 +4,12 @@ using Android.Content.PM;
 using Android.OS;
 using eoTouchDelivery.Core;
 using FFImageLoading.Forms.Droid;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Droid
 {
 	[Activity(Label = "eoTouchDelivery.Android", Icon = "@drawable/icon", Theme = "@style/MainTheme", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : Microsoft.Maui.MauiAppCompatActivity
 	{
 		protected override void OnCreate(Bundle bundle)
 		{

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using eoTouchDelivery.Core.DataServices;
 using eoTouchDelivery.Core.Models;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 /*using Xamarin.Forms.Maps;
 
 namespace eoTouchDelivery.Core.Pages

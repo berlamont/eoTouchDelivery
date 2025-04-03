@@ -6,7 +6,9 @@ using eoTouchDelivery.Core.Models;
 using eoTouchDelivery.Core.Pages;
 using eoTouchDelivery.Core.ViewModels;
 using eoTouchDelivery.Core.ViewModels.Base;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Services
 {
@@ -171,6 +173,7 @@ namespace eoTouchDelivery.Core.Services
 			_mappings.Add(typeof(HomeViewModel), typeof(HomePage));
 			_mappings.Add(typeof(LoginViewModel), typeof(LoginPage));
 
+			// TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
 			if (Device.OS == TargetPlatform.Windows)
 			{
 
@@ -199,6 +202,7 @@ namespace eoTouchDelivery.Core.Services
 
 		private async void GoBackFromReportRequested(ReportRequest issue)
 		{
+			// TODO Xamarin.Forms.Device.OS is no longer supported. Use Microsoft.Maui.Devices.DeviceInfo.Platform instead. For more details see https://learn.microsoft.com/en-us/dotnet/maui/migration/forms-projects#device-changes
 			if (Device.OS != TargetPlatform.iOS)
 			{
 				await NavigateBackAsync();

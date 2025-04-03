@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using eoTouchDelivery.Core.ViewModels;
 using Microsoft.VisualBasic;
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Pages
 {

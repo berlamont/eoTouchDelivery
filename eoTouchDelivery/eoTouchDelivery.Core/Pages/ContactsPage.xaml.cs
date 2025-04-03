@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using Xamarin.Forms;
+using Microsoft.Maui.Controls.Compatibility;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui;
 
 namespace eoTouchDelivery.Core.Pages
 {

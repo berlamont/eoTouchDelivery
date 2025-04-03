@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms.Maps;
+﻿using Microsoft.Maui.Maps;
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace eoTouchDelivery.Core.Controls
 {
@@ -19,7 +21,7 @@ namespace eoTouchDelivery.Core.Controls
 
 		public string PinIcon { get; set; }
 
-		public Position Position { get; set; }
+		public Location Position { get; set; }
 
 		public AnnotationType Type { get; set; }
 
