@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+	x:Class="eoTouchDelivery.Core.Pages.ContactsPage"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	Title="eoTouch Delivery">
+	<ContentPage.Content>
+		<StackLayout
+			x:Name="_Mainlayout"
+			Padding="10,10,10,10"
+			BackgroundColor="#EEEEEE">
+			<Image HorizontalOptions="FillAndExpand" Source="Demoroute.PNG" />
+			<ScrollView>
+				<StackLayout
+					x:Name="_Framelayout"
+					BackgroundColor="#FFFFFF"
+					HorizontalOptions="FillAndExpand"
+					VerticalOptions="FillAndExpand">
+					<StackLayout
+						x:Name="_jackShephardlayout"
+						Padding="10,10,10,10"
+						BackgroundColor="#4cb7db"
+						HorizontalOptions="FillAndExpand"
+						Orientation="Horizontal">
+						<Label
+							x:Name="_jackShephardLabel"
+							FontSize="Medium"
+							HorizontalTextAlignment="Start"
+							Text="Jack Shephard"
+							TextColor="White"
+							VerticalOptions="Center"
+							VerticalTextAlignment="Center" />
+
+						<Label
+							x:Name="_dateLabel"
+							FontSize="Medium"
+							HeightRequest="50"
+							HorizontalOptions="EndAndExpand"
+							HorizontalTextAlignment="End"
+							Text="Tusday Febuary 7,2017"
+							TextColor="White"
+							VerticalOptions="Center"
+							VerticalTextAlignment="Center" />
+					</StackLayout>
+					<StackLayout
+						x:Name="_nextStopStack"
+						Padding="10,10,10,10"
+						HorizontalOptions="FillAndExpand"
+						Orientation="Horizontal">
+						<StackLayout x:Name="_nextStopInnerStack">
+							<Label
+								x:Name="_nextStopLabel"
+								FontSize="Medium"
+								HorizontalOptions="Start"
+								Text="Next Stop"
+								TextColor="#4cb7db" />
+							<Label
+								x:Name="_productLabel"
+								FontAttributes="Bold"
+								FontSize="Medium"
+								HorizontalOptions="Start">
+								Total Wine &amp; More
+							</Label>
+							<Label
+								x:Name="_addressLabel"
+								FontSize="Small"
+								HorizontalOptions="Start"
+								TextColor="Gray">
+								1440 central park Commons Dr.&#10;Eagen, MN 55121
+							</Label>
+						</StackLayout>
+						<StackLayout HorizontalOptions="FillAndExpand">
+							<Button
+								x:Name="_goButton"
+								BackgroundColor="#4cb7db"
+								HorizontalOptions="End"
+								Text="All Stop"
+								TextColor="White"
+								VerticalOptions="Center" />
+							<Button
+								BackgroundColor="#228B22"
+								HorizontalOptions="End"
+								Text="Deliver"
+								TextColor="White"
+								VerticalOptions="Center" />
+						</StackLayout>
+					</StackLayout>
+					<Label
+						x:Name="_nextStopSeparatorLabel"
+						Margin="10,0,10,0"
+						BackgroundColor="#EEEEEE"
+						FontSize="1"
+						HorizontalOptions="FillAndExpand" />
+					<StackLayout
+						x:Name="OnTruckStack"
+						Padding="10,10,10,10"
+						HorizontalOptions="FillAndExpand">
+						<Label
+							FontSize="Medium"
+							HorizontalOptions="Start"
+							Text="On Truck"
+							TextColor="#4cb7db" />
+						<Grid x:Name="OnTruckGrid" HorizontalOptions="Fill">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Label
+								x:Name="_onTruckCasesValueLabel"
+								Grid.Row="0"
+								Grid.Column="0"
+								FontSize="50"
+								HorizontalOptions="Center"
+								Text="97"
+								TextColor="#4cb7db"
+								VerticalOptions="End" />
+							<Label
+								x:Name="_onTruckCasesLabel"
+								Grid.Row="1"
+								Grid.Column="0"
+								FontSize="Small"
+								HorizontalOptions="Center"
+								Text="Cases"
+								TextColor="Gray"
+								VerticalOptions="Start" />
+
+							<Label
+								x:Name="_onTruckKegsValueLabel"
+								Grid.Row="0"
+								Grid.Column="1"
+								FontSize="50"
+								HorizontalOptions="Center"
+								Text="5"
+								TextColor="#4cb7db"
+								VerticalOptions="End" />
+							<Label
+								x:Name="_onTruckKegsLabel"
+								Grid.Row="1"
+								Grid.Column="1"
+								FontSize="Small"
+								HorizontalOptions="Center"
+								Text="Kegs"
+								TextColor="Gray"
+								VerticalOptions="Start" />
+
+							<Label
+								x:Name="_onTruckOthersValueLabel"
+								Grid.Row="0"
+								Grid.Column="2"
+								FontSize="50"
+								HorizontalOptions="Center"
+								Text="195"
+								TextColor="#4cb7db"
+								VerticalOptions="End" />
+							<Label
+								x:Name="_onTruckOtherLabel"
+								Grid.Row="1"
+								Grid.Column="2"
+								FontSize="Small"
+								HorizontalOptions="Center"
+								Text="Others"
+								TextColor="Gray"
+								VerticalOptions="Start" />
+						</Grid>
+					</StackLayout>
+					<Label
+						x:Name="_deliveredSeparatorLabel"
+						Margin="10,0,10,0"
+						BackgroundColor="#EEEEEE"
+						FontSize="1"
+						HorizontalOptions="FillAndExpand" />
+
+					<StackLayout
+						x:Name=" _deliveredStack"
+						Padding="10,10,10,10"
+						HorizontalOptions="FillAndExpand">
+						<Label
+							x:Name="_deliveredHeadderLabel"
+							FontSize="Medium"
+							HorizontalOptions="Start"
+							Text="Delivered"
+							TextColor="#4cb7db" />
+						<Grid x:Name="_deliveredGrid" HorizontalOptions="Fill">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Label
+								x:Name="_deliveredCasesValueLabel"
+								Grid.Row="0"
+								Grid.Column="0"
+								FontSize="50"
+								HorizontalOptions="Center"
+								Text="55"
+								TextColor="#4cb7db"
+								VerticalOptions="End" />
+							<Label
+								x:Name="_deliveredCasesLabel"
+								Grid.Row="1"
+								Grid.Column="0"
+								FontSize="Small"
+								HorizontalOptions="Center"
+								Text="Cases"
+								TextColor="Gray"
+								VerticalOptions="Start" />
+
+							<Label
+								x:Name="_deliveredKegsValueLabel"
+								Grid.Row="0"
+								Grid.Column="1"
+								FontSize="50"
+								HorizontalOptions="Center"
+								Text="0"
+								TextColor="#4cb7db"
+								VerticalOptions="End" />
+							<Label
+								x:Name="_deliveredKegsLabel"
+								Grid.Row="1"
+								Grid.Column="1"
+								FontSize="Small"
+								HorizontalOptions="Center"
+								Text="Kegs"
+								TextColor="Gray"
+								VerticalOptions="Start" />
+
+							<Label
+								x:Name="_deliveredOthersValueLabel"
+								Grid.Row="0"
+								Grid.Column="2"
+								FontSize="50"
+								HorizontalOptions="Center"
+								Text="92"
+								TextColor="#4cb7db"
+								VerticalOptions="End" />
+							<Label
+								x:Name="_deliveredOtherLabel"
+								Grid.Row="1"
+								Grid.Column="2"
+								FontSize="Small"
+								HorizontalOptions="Center"
+								Text="Others"
+								TextColor="Gray"
+								VerticalOptions="Start" />
+						</Grid>
+					</StackLayout>
+					<Label
+						x:Name="_StatusSeparatorLabel"
+						Margin="10,0,10,0"
+						BackgroundColor="#EEEEEE"
+						FontSize="1"
+						HorizontalOptions="FillAndExpand" />
+					<StackLayout
+						x:Name="_progressBarStack"
+						Padding="10,10,10,10"
+						HorizontalOptions="FillAndExpand">
+						<Label
+							x:Name="_deliveresLabel"
+							FontSize="Medium"
+							HorizontalOptions="Start"
+							Text="20 Deliveres"
+							TextColor="#4cb7db" />
+						<Label
+							x:Name="_TruckNumberLabel"
+							FontSize="Medium"
+							HorizontalOptions="Start"
+							HorizontalTextAlignment="Start"
+							Text="8 off Truck"
+							TextColor="Gray" />
+						<StackLayout
+							x:Name="_progressStatusLabelStack"
+							HorizontalOptions="Fill"
+							Orientation="Horizontal">
+							<Label
+								x:Name="CompleatedStopLabel"
+								HorizontalOptions="CenterAndExpand"
+								HorizontalTextAlignment="Center"
+								Text="42 Stops"
+								TextColor="Green" />
+							<Label
+								x:Name="pendingStopLabel"
+								HorizontalOptions="EndAndExpand"
+								Text="67 Stops"
+								TextColor="Gray" />
+						</StackLayout>
+						<ProgressBar x:Name="progress" Progress="0,5" />
+						<Label
+							x:Name="StopRemainingLabel"
+							HorizontalOptions="Start"
+							Text="Stops Remining"
+							TextColor="Gray" />
+					</StackLayout>
+				</StackLayout>
+			</ScrollView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
